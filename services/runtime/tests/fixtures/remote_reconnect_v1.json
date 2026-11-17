@@ -1,0 +1,28 @@
+{
+  "begin": {
+    "protocol_version": 1,
+    "project_id": "project-a",
+    "storage_generation": "11111111-1111-4111-8111-111111111111",
+    "attempt_id": "22222222-2222-4222-8222-222222222222",
+    "observed_revision": "9007199254740993",
+    "unresolved_command_id": null,
+    "confirmation": "reload_remote_working_data"
+  },
+  "abandon": {
+    "protocol_version": 1,
+    "project_id": "project-a",
+    "storage_generation": "11111111-1111-4111-8111-111111111111",
+    "attempt_id": "22222222-2222-4222-8222-222222222222",
+    "confirmation": "leave_remote_working_data_unchanged"
+  },
+  "outcome": {
+    "protocol_version": 1,
+    "project_id": "project-a",
+    "storage_generation": "11111111-1111-4111-8111-111111111111",
+    "attempt_id": "22222222-2222-4222-8222-222222222222",
+    "source_session_id": "session-old",
+    "status": "ready",
+    "result_session_id": "session-new",
+    "error_code": null
+  }
+}

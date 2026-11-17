@@ -1,0 +1,1256 @@
+/* Canon review, provider configuration, and diagnostic markers. Rules remain in the shared stt-app layer and preserve source order. */
+/* P4-007 docks canon review beside authoring so canvas controls remain visible. */
+.workspace-stage.canon-workspace-open > .react-flow,
+.workspace-stage.canon-workspace-open > .story-document-workspace {
+  right: 620px;
+  width: auto;
+}
+
+.canon-workspace {
+  position: absolute;
+  inset: 0 0 0 auto;
+  z-index: 36;
+  display: flex;
+  width: 620px;
+  min-width: 0;
+  flex-direction: column;
+  border-left: 1px solid #cbd5e1;
+  background: #f8fafc;
+  box-shadow: -8px 0 20px rgb(15 23 42 / 8%);
+  color: #0f172a;
+}
+
+.canon-header-control {
+  display: inline-flex;
+  height: 34px;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #fff;
+  padding: 0 7px;
+  color: #334155;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.canon-header-control:hover,
+.canon-header-control:focus-visible,
+.canon-header-control.tool-button-active {
+  border-color: #94a3b8;
+  background: #f1f5f9;
+}
+
+.canon-header-control strong {
+  display: inline-flex;
+  min-width: 19px;
+  height: 19px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #0f172a;
+  font-size: 10px;
+}
+
+/* Analysis shares header space without combining the tools' independent results or statuses. */
+.analysis-split-button {
+  display: inline-flex;
+  position: relative;
+}
+
+.analysis-split-primary {
+  border-radius: 4px 0 0 4px;
+}
+
+.analysis-split-toggle {
+  border-radius: 0 4px 4px 0;
+  height: 34px;
+  margin-left: -1px;
+  width: 25px;
+}
+
+.analysis-split-button > .tooltip-wrapper:first-child {
+  z-index: 1;
+}
+
+.analysis-split-button > .tooltip-wrapper:hover,
+.analysis-split-button > .tooltip-wrapper:focus-within {
+  z-index: 2;
+}
+
+.analysis-split-menu {
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 16%);
+  min-width: 254px;
+  padding: 4px;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 70;
+}
+
+.analysis-split-menu button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  color: #334155;
+  display: grid;
+  font-size: 12px;
+  gap: 8px;
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  min-height: 42px;
+  padding: 6px 8px;
+  text-align: left;
+  width: 100%;
+}
+
+.analysis-split-menu button:hover,
+.analysis-split-menu button:focus-visible,
+.analysis-split-menu button[aria-current="page"] {
+  background: #e0f2fe;
+  color: #0f172a;
+  outline: none;
+}
+
+.analysis-split-menu button > span,
+.analysis-split-menu button strong,
+.analysis-split-menu button small {
+  display: block;
+  min-width: 0;
+}
+
+.analysis-split-menu button strong {
+  font-size: 12px;
+}
+
+.analysis-split-menu button small {
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.analysis-split-menu button b {
+  align-items: center;
+  background: #e2e8f0;
+  border-radius: 50%;
+  display: inline-flex;
+  font-size: 10px;
+  height: 20px;
+  justify-content: center;
+  min-width: 20px;
+}
+
+.canon-workspace-header,
+.canon-command-bar,
+.canon-summary,
+.canon-filters {
+  flex: 0 0 auto;
+  border-bottom: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+.canon-workspace-header {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+}
+
+.canon-workspace-header > div:first-child {
+  min-width: 0;
+}
+
+.canon-workspace-header span,
+.canon-workspace-header strong {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.canon-workspace-header span {
+  color: #475569;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.canon-workspace-header strong {
+  margin-top: 2px;
+  font-size: 13px;
+}
+
+.canon-workspace-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.canon-run-state {
+  min-width: 76px;
+  justify-content: center;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 10px !important;
+  text-transform: none !important;
+}
+
+.canon-run-state[data-status="failed"],
+.canon-run-state[data-status="stale"] {
+  border-color: #fca5a5;
+  color: #991b1b;
+}
+
+.canon-command-bar {
+  display: grid;
+  grid-template-columns: 154px minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 10px;
+  padding: 10px 12px;
+}
+
+/* Canon provider calls are synchronous, so this surface remains visible until reconciliation finishes. */
+.canon-running-indicator {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 9px;
+  overflow: hidden;
+  border-bottom: 1px solid #bfdbfe;
+  background: #eff6ff;
+  padding: 9px 12px 12px;
+  color: #1e3a8a;
+}
+
+.canon-running-indicator div,
+.canon-running-indicator strong,
+.canon-running-indicator div > span {
+  display: block;
+}
+
+.canon-running-indicator strong {
+  font-size: 11px;
+}
+
+.canon-running-indicator div > span {
+  margin-top: 1px;
+  color: #475569;
+  font-size: 10px;
+}
+
+.canon-running-track {
+  position: absolute;
+  inset: auto 0 0;
+  height: 3px;
+  overflow: hidden;
+  background: #dbeafe;
+}
+
+.canon-running-track > span {
+  display: block;
+  width: 35%;
+  height: 100%;
+  background: #2563eb;
+  animation: canon-running-progress 1.15s ease-in-out infinite;
+}
+
+@keyframes canon-running-progress {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(385%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .canon-running-track > span {
+    animation: none;
+    width: 100%;
+  }
+}
+
+.canon-command-bar .canon-remote-consent {
+  grid-column: 1 / -1;
+  display: flex;
+  min-height: 28px;
+  align-items: center;
+  gap: 7px;
+  color: #334155;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.canon-command-bar .canon-remote-consent > span {
+  margin: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+.canon-command-bar label,
+.canon-command-bar label > span {
+  display: block;
+}
+
+.canon-command-bar label > span {
+  margin-bottom: 3px;
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.canon-command-bar select,
+.canon-filters select,
+.canon-filters input {
+  min-width: 0;
+  height: 32px;
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #fff;
+  padding: 0 8px;
+  color: #0f172a;
+  font-size: 11px;
+}
+
+.canon-execution-disclosure {
+  align-self: center;
+  color: #64748b;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.canon-primary-command,
+.canon-secondary-command,
+.canon-review-actions button,
+.canon-inline-actions button {
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 4px;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.canon-primary-command {
+  border: 1px solid #0f172a;
+  background: #0f172a;
+  color: #fff;
+}
+
+.canon-secondary-command,
+.canon-review-actions button,
+.canon-inline-actions button {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #334155;
+}
+
+.canon-primary-command:disabled,
+.canon-secondary-command:disabled,
+.canon-review-actions button:disabled,
+.canon-inline-actions button:disabled {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
+.canon-repair-unavailable {
+  align-self: center;
+  color: #64748b;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.canon-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.canon-summary > div {
+  min-width: 0;
+  padding: 8px 12px;
+  border-right: 1px solid #e2e8f0;
+}
+
+.canon-summary > div:last-child {
+  border-right: 0;
+}
+
+.canon-summary strong,
+.canon-summary span {
+  display: block;
+}
+
+.canon-summary strong {
+  font-size: 16px;
+}
+
+.canon-summary span {
+  overflow: hidden;
+  color: #64748b;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.canon-filters {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  padding: 8px 12px;
+}
+
+.canon-filters input {
+  grid-column: 1 / -1;
+}
+
+.canon-error {
+  flex: 0 0 auto;
+  margin: 0;
+  border-bottom: 1px solid #fecaca;
+  background: #fef2f2;
+  padding: 7px 12px;
+  color: #991b1b;
+  font-size: 11px;
+}
+
+.canon-notice {
+  flex: 0 0 auto;
+  margin: 0;
+  border-bottom: 1px solid #bae6fd;
+  background: #f0f9ff;
+  padding: 7px 12px;
+  color: #075985;
+  font-size: 11px;
+}
+
+.canon-review-layout {
+  display: grid;
+  min-height: 0;
+  flex: 1 1 auto;
+  grid-template-columns: 238px minmax(0, 1fr);
+}
+
+.canon-issue-list,
+.canon-issue-detail {
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.canon-issue-list {
+  border-right: 1px solid #cbd5e1;
+  background: #fff;
+  outline: none;
+}
+
+.canon-issue-list:focus-visible {
+  box-shadow: inset 0 0 0 2px #2563eb;
+}
+
+.canon-issue-row {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: start;
+  gap: 7px;
+  border: 0;
+  border-bottom: 1px solid #e2e8f0;
+  background: #fff;
+  padding: 9px 10px;
+  text-align: left;
+}
+
+.canon-issue-row:hover,
+.canon-issue-row[aria-selected="true"] {
+  background: #eff6ff;
+}
+
+.canon-issue-row[aria-selected="true"] {
+  box-shadow: inset 3px 0 #2563eb;
+}
+
+.canon-issue-row[data-status="resolved"] {
+  background: #f0fdf4;
+  box-shadow: inset 3px 0 #16a34a;
+}
+
+.canon-issue-row[data-status="ignored"] {
+  border-left: 3px dashed #64748b;
+  opacity: .68;
+}
+
+.canon-issue-row strong,
+.canon-issue-row small {
+  display: block;
+}
+
+.canon-issue-row strong {
+  overflow: hidden;
+  color: #1e293b;
+  font-size: 11px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+}
+
+.canon-issue-row small {
+  margin-top: 3px;
+  color: #64748b;
+  font-size: 9px;
+}
+
+.canon-severity-critical {
+  color: #b91c1c;
+}
+
+.canon-severity-warning {
+  color: #a16207;
+}
+
+.canon-severity-info {
+  color: #0369a1;
+}
+
+.canon-issue-detail {
+  background: #f8fafc;
+}
+
+.canon-detail-content {
+  padding: 12px;
+}
+
+.canon-detail-heading {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #cbd5e1;
+}
+
+.canon-detail-heading span,
+.canon-detail-heading code {
+  color: #64748b;
+  font-size: 9px;
+}
+
+.canon-detail-heading h2 {
+  margin: 3px 0;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.canon-detail-section {
+  padding: 10px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.canon-detail-section h3 {
+  margin: 0 0 5px;
+  color: #475569;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.canon-detail-section p,
+.canon-owner-list,
+.canon-evidence-list {
+  margin: 0;
+  color: #334155;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.canon-owner-list,
+.canon-evidence-list {
+  padding: 0;
+  list-style: none;
+}
+
+.canon-owner-list {
+  max-height: 176px;
+  overflow: auto;
+  scrollbar-gutter: stable;
+}
+
+.canon-owner-list li,
+.canon-evidence-list li {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 5px 0;
+}
+
+.canon-owner-list li {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.canon-owner-list li > div:first-child {
+  min-width: 0;
+}
+
+.canon-owner-actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.canon-owner-actions button {
+  display: inline-flex;
+  min-height: 24px;
+  align-items: center;
+  gap: 3px;
+  border: 1px solid #cbd5e1;
+  border-radius: 3px;
+  background: #fff;
+  padding: 0 5px;
+  color: #334155;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.canon-owner-actions button:hover,
+.canon-owner-actions button:focus-visible {
+  border-color: #2563eb;
+  color: #1d4ed8;
+}
+
+.canon-owner-actions button:disabled {
+  border-color: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.canon-suggestion-preview {
+  display: grid;
+  gap: 8px;
+  border-top: 1px solid #cbd5e1;
+  padding-top: 12px;
+}
+
+.canon-suggestion-preview > header,
+.canon-suggestion-preview summary,
+.canon-suggestion-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.canon-suggestion-preview > header span,
+.canon-suggestion-preview > code,
+.canon-suggestion-preview summary span {
+  color: #64748b;
+  font-size: 10px;
+}
+
+.canon-suggestion-operations {
+  display: grid;
+  gap: 6px;
+}
+
+.canon-suggestion-rationale {
+  display: grid;
+  gap: 8px;
+}
+
+.canon-suggestion-rationale section {
+  border-left: 3px solid #2563eb;
+  background: #eff6ff;
+  padding: 8px 10px;
+}
+
+.canon-suggestion-rationale strong,
+.canon-suggestion-technical > summary {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.canon-suggestion-rationale p {
+  margin: 4px 0 0;
+  color: #334155;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.canon-suggestion-technical > summary {
+  cursor: pointer;
+  color: #475569;
+}
+
+.canon-suggestion-technical[open] > summary {
+  margin-bottom: 6px;
+}
+
+.canon-suggestion-operations details {
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.canon-suggestion-operations summary {
+  min-height: 32px;
+  cursor: pointer;
+  padding: 5px 8px;
+  font-size: 11px;
+}
+
+.canon-suggestion-operations pre {
+  max-height: 220px;
+  overflow: auto;
+  border-top: 1px solid #e2e8f0;
+  background: #0f172a;
+  color: #e2e8f0;
+  font-size: 10px;
+  line-height: 1.45;
+  padding: 8px;
+  white-space: pre-wrap;
+}
+
+.canon-suggestion-actions {
+  justify-content: flex-end;
+}
+
+.canon-suggestion-action {
+  display: inline-flex;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #fff;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.canon-suggestion-action:last-child {
+  border-color: #047857;
+  background: #047857;
+  color: #fff;
+}
+
+.canon-suggestion-decision {
+  border-left: 3px solid #64748b;
+  padding: 5px 8px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.canon-suggestion-approved {
+  border-color: #16a34a;
+  color: #166534;
+}
+
+.canon-suggestion-rejected {
+  border-color: #64748b;
+  color: #475569;
+}
+
+.canon-owner-list span,
+.canon-owner-list small,
+.canon-evidence-list span,
+.canon-evidence-list small {
+  overflow-wrap: anywhere;
+  color: #64748b;
+  font-size: 9px;
+}
+
+.canon-evidence-list blockquote {
+  margin: 4px 0;
+  border-left: 2px solid #94a3b8;
+  padding-left: 7px;
+  color: #1e293b;
+  overflow-wrap: anywhere;
+}
+
+.canon-review-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 12px;
+}
+
+.canon-inline-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding-top: 10px;
+}
+
+.canon-inline-status {
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #f8fafc;
+  padding: 4px 6px;
+  color: #475569;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.canon-empty {
+  display: flex;
+  min-height: 150px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  color: #64748b;
+  font-size: 11px;
+  text-align: center;
+}
+
+.canon-rule-settings {
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #f8fafc;
+}
+
+.canon-rule-settings summary {
+  cursor: pointer;
+  padding: 8px 10px;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.canon-rule-settings > div {
+  border-top: 1px solid #e2e8f0;
+}
+
+.canon-rule-setting {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 130px;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.canon-rule-setting:last-child {
+  border-bottom: 0;
+}
+
+.canon-rule-setting label {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 7px;
+  color: #334155;
+  font-size: 11px;
+}
+
+.canon-rule-setting select {
+  height: 30px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #fff;
+  padding: 0 6px;
+  color: #334155;
+  font-size: 10px;
+}
+
+.canon-agent-settings {
+  display: grid;
+  gap: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #f8fafc;
+  padding: 10px;
+}
+
+.canon-provider-selector {
+  min-width: 0;
+}
+
+.canon-profile-management {
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  background: #ffffff;
+  display: grid;
+  gap: 8px;
+  padding: 9px;
+}
+
+.canon-profile-management > p {
+  color: #64748b;
+  font-size: 11px;
+}
+
+.canon-profile-summary {
+  display: flex;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.canon-profile-summary strong {
+  color: #0f172a;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.canon-profile-summary span {
+  color: #475569;
+  font-size: 11px;
+}
+
+.canon-profile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.canon-profile-actions button,
+.canon-profile-delete-confirmation button {
+  align-items: center;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  color: #334155;
+  display: inline-flex;
+  font-size: 11px;
+  font-weight: 700;
+  gap: 5px;
+  min-height: 30px;
+  padding: 4px 8px;
+}
+
+.canon-profile-actions button:hover:not(:disabled),
+.canon-profile-actions button:focus-visible {
+  background: #f1f5f9;
+}
+
+.canon-profile-actions button.danger,
+.canon-profile-delete-confirmation button.danger {
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+.canon-profile-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.canon-profile-delete-confirmation {
+  border: 1px solid #fecaca;
+  border-radius: 4px;
+  background: #fff7f7;
+  color: #7f1d1d;
+  display: grid;
+  font-size: 11px;
+  gap: 8px;
+  padding: 9px;
+}
+
+.canon-profile-delete-confirmation > div {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.canon-provider-form {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) 150px;
+  gap: 8px;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 10px 0;
+}
+
+.canon-provider-form-heading {
+  align-items: center;
+  color: #0f172a;
+  display: flex;
+  font-size: 12px;
+  grid-column: 1 / -1;
+  justify-content: space-between;
+}
+
+.canon-provider-form label {
+  display: grid;
+  gap: 4px;
+  color: #334155;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.canon-provider-form .canon-provider-key {
+  grid-column: 1 / -1;
+}
+
+.canon-provider-form .canon-provider-key span {
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.canon-provider-form input,
+.canon-provider-form select {
+  min-width: 0;
+  height: 34px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #fff;
+  padding: 0 8px;
+  color: #0f172a;
+  font-size: 12px;
+}
+
+.canon-provider-form button {
+  grid-column: 1 / -1;
+  justify-self: end;
+  border-radius: 4px;
+  background: #0f172a;
+  padding: 7px 10px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* Selected Canon targets stay outside existing title and edge-label lanes. */
+.narrative-node-canon {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+}
+
+.narrative-node-canon-critical {
+  outline-color: #dc2626;
+}
+
+.narrative-node-canon-warning {
+  outline-color: #d97706;
+}
+
+.narrative-node-canon-resolved,
+.narrative-node-canon-ignored {
+  outline-style: dashed;
+}
+
+.canon-node-target-indicator {
+  position: absolute;
+  top: 42px;
+  left: -10px;
+  z-index: 12;
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #1d4ed8;
+  color: #fff;
+}
+
+.narrative-node-canon-critical .canon-node-target-indicator {
+  background: #b91c1c;
+}
+
+.narrative-node-canon-warning .canon-node-target-indicator {
+  background: #b45309;
+}
+
+.canon-edge-hover-path {
+  cursor: help;
+  pointer-events: stroke;
+}
+
+.impact-edge-hover-path {
+  cursor: help;
+  pointer-events: stroke;
+}
+
+.narrative-node-impact {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+}
+
+.narrative-node-impact-seed { outline-color: #0f766e; }
+.narrative-node-impact-direct { outline-color: #dc2626; }
+.narrative-node-impact-transitive { outline-color: #2563eb; outline-style: dashed; }
+
+.impact-node-target-indicator {
+  position: absolute;
+  top: 70px;
+  left: -11px;
+  z-index: 13;
+  display: inline-flex;
+  min-width: 22px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  background: #2563eb;
+  color: #fff;
+  cursor: help;
+  font-size: 8px;
+  font-weight: 900;
+  line-height: 1;
+  padding: 0 3px;
+}
+
+.impact-node-target-indicator[data-impact-role="seed"] { background: #0f766e; }
+.impact-node-target-indicator[data-impact-role="direct"] { background: #b91c1c; }
+
+.story-impact-marker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 5px;
+  border-left: 3px solid #2563eb;
+  border-radius: 3px;
+  background: #eff6ff;
+  margin: 0 0 8px;
+  padding: 3px 6px;
+  color: #1e3a8a;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.story-impact-marker[data-impact-role="seed"] { border-left-color: #0f766e; background: #ecfdf5; color: #065f46; }
+.story-impact-marker[data-impact-role="direct"] { border-left-color: #dc2626; background: #fef2f2; color: #991b1b; }
+
+[data-canon-owner-id]:focus {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+}
+
+/* Canon navigation remains visible while the author edits the focused field. */
+.dialogue-canon-issue-target {
+  border-color: #dc2626;
+  background: #fff7ed;
+  box-shadow: inset 0 0 0 2px #dc2626, 0 0 0 3px rgb(254 215 170 / .72);
+}
+
+.dialogue-canon-option-target {
+  border-radius: 4px;
+  margin: 4px -8px 0;
+  padding: 10px 8px 8px;
+}
+
+.dialogue-canon-issue-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: max-content;
+  border: 1px solid #fca5a5;
+  border-radius: 4px;
+  background: #fff;
+  padding: 3px 6px;
+  color: #991b1b;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+/* One reusable marker keeps nested Canon targets visible without another card. */
+.canon-specialized-owner-target {
+  border-color: #f59e0b !important;
+  box-shadow: inset 0 0 0 2px rgb(245 158 11 / 58%), 0 0 0 2px rgb(254 215 170 / 55%);
+}
+
+.canon-owner-diagnostic-marker {
+  position: relative;
+  z-index: 4;
+  display: inline-flex;
+  width: max-content;
+  max-width: 100%;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid #f59e0b;
+  border-radius: 3px;
+  background: #fffbeb;
+  padding: 2px 5px;
+  color: #92400e;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.canon-owner-diagnostic-marker[data-severity="critical"] {
+  border-color: #ef4444;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.canon-owner-diagnostic-marker[data-severity="info"] {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  color: #1e40af;
+}
+
+.canon-owner-diagnostic-control {
+  position: relative;
+  z-index: 5;
+  max-width: min(100%, 440px);
+}
+
+.canon-owner-diagnostic-control > summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.canon-owner-diagnostic-control > summary::-webkit-details-marker {
+  display: none;
+}
+
+.canon-owner-diagnostic-marker > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.canon-inline-detail {
+  margin-top: 6px;
+  border: 1px solid #f59e0b;
+  border-radius: 4px;
+  background: #fff;
+  padding: 8px;
+  color: #334155;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.canon-inline-detail > strong,
+.canon-inline-detail > p {
+  display: block;
+  margin: 0;
+}
+
+.canon-inline-detail > p {
+  margin-top: 4px;
+}
+
+.canon-inline-error { color: #b91c1c; }
+.canon-inline-notice { color: #047857; }
+
+.playback-canon-diagnostic {
+  position: fixed;
+  z-index: 12;
+  top: 68px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dialogue-branch-issues > .issue-details {
+  margin-top: 12px;
+}

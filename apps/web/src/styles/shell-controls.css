@@ -1,0 +1,319 @@
+/* Shared controls, save status, tooltips, filters, and issue chrome. Rules remain in the shared stt-app layer and preserve source order. */
+.icon-button,
+.tool-button {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  color: #334155;
+  display: inline-flex;
+  height: 36px;
+  justify-content: center;
+  width: 36px;
+}
+
+.tool-button:hover,
+.icon-button:hover,
+.tool-button-active {
+  background: #e0f2fe;
+  border-color: #0284c7;
+  color: #0f172a;
+}
+
+.icon-button:disabled,
+.tool-button:disabled {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+@media (max-height: 800px) {
+  /* Keep every authoring tool clear of React Flow controls on the minimum desktop height. */
+  .tool-rail {
+    gap: 4px;
+  }
+
+  .tool-rail .tool-button {
+    height: 32px;
+    width: 32px;
+  }
+}
+
+.save-button-reminder {
+  animation: save-button-reminder 1.8s ease-in-out infinite;
+}
+
+.save-button-error {
+  border-color: #dc2626;
+  color: #b91c1c;
+}
+
+.save-split-button {
+  display: inline-flex;
+  position: relative;
+}
+
+.history-controls {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.save-split-primary {
+  border-radius: 6px 0 0 6px;
+}
+
+.save-split-toggle {
+  border-radius: 0 6px 6px 0;
+  margin-left: -1px;
+  width: 24px;
+}
+
+.save-split-button > .tooltip-wrapper:first-child {
+  z-index: 1;
+}
+
+.save-split-button > .tooltip-wrapper:focus-within,
+.save-split-button > .tooltip-wrapper:hover {
+  z-index: 2;
+}
+
+.save-split-menu {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 16%);
+  min-width: 168px;
+  padding: 4px;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 70;
+}
+
+.save-split-menu button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  color: #334155;
+  display: flex;
+  font-size: 12px;
+  font-weight: 700;
+  gap: 8px;
+  min-height: 32px;
+  padding: 6px 8px;
+  text-align: left;
+  width: 100%;
+}
+
+.save-split-menu button:hover,
+.save-split-menu button:focus-visible {
+  background: #e0f2fe;
+  color: #0f172a;
+  outline: none;
+}
+
+.save-status-indicator {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  bottom: 12px;
+  box-shadow: 0 4px 12px rgb(15 23 42 / 10%);
+  color: #475569;
+  display: flex;
+  font-size: 11px;
+  font-weight: 700;
+  min-height: 28px;
+  padding: 5px 9px;
+  pointer-events: none;
+  position: absolute;
+  right: 12px;
+  z-index: 55;
+}
+
+.save-status-dirty,
+.save-status-saving {
+  border-color: #38bdf8;
+  color: #075985;
+}
+
+.save-status-error {
+  background: #fff1f2;
+  border-color: #fda4af;
+  color: #9f1239;
+}
+
+.react-flow__minimap {
+  bottom: 48px !important;
+}
+
+.bounded-minimap-surface {
+  height: 150px;
+  width: 200px;
+  background: #ffffff;
+  cursor: crosshair;
+  overflow: hidden;
+  position: relative;
+  touch-action: none;
+}
+.bounded-minimap-surface:focus-visible { outline: 2px solid #0f766e; outline-offset: 2px; }
+.bounded-minimap-surface canvas,
+.bounded-minimap-overlay { display: block; height: 150px; width: 200px; }
+.bounded-minimap-overlay { position: absolute; inset: 0; pointer-events: none; }
+.bounded-minimap-viewport { fill: rgb(15 118 110 / 8%); stroke: #0f766e; stroke-width: 1; }
+
+@keyframes save-button-reminder {
+  0%,
+  100% {
+    border-color: #cbd5e1;
+    box-shadow: 0 0 0 0 rgb(14 165 233 / 0%);
+  }
+
+  50% {
+    border-color: #0284c7;
+    box-shadow: 0 0 0 3px rgb(14 165 233 / 18%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .save-button-reminder {
+    animation: none;
+    border-color: #0284c7;
+  }
+}
+
+.tooltip-wrapper {
+  display: inline-flex;
+  position: relative;
+}
+
+.viewport-tooltip {
+  background: #000000;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  max-height: calc(100vh - 16px);
+  max-width: min(320px, calc(100vw - 16px));
+  overflow: hidden auto;
+  overflow-wrap: anywhere;
+  padding: 6px 8px;
+  pointer-events: none;
+  position: fixed;
+  transition: none;
+  white-space: normal;
+  width: max-content;
+  z-index: 2147483647;
+}
+
+.tool-button[style*="--tool-color"] {
+  border-color: color-mix(in srgb, var(--tool-color) 55%, #cbd5e1);
+  color: var(--tool-color);
+}
+
+.tool-button[style*="--tool-color"]:hover,
+.tool-button[style*="--tool-color"].tool-button-active {
+  background: color-mix(in srgb, var(--tool-color) 14%, #ffffff);
+  border-color: var(--tool-color);
+  box-shadow: inset 3px 0 0 var(--tool-color);
+}
+
+.kind-filter {
+  align-items: center;
+  border: 1px solid color-mix(in srgb, var(--kind-color) 45%, #cbd5e1);
+  border-radius: 6px;
+  color: #334155;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 600;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 8px;
+}
+
+.kind-filter:has(input:checked) {
+  background: color-mix(in srgb, var(--kind-color) 12%, #ffffff);
+  border-color: var(--kind-color);
+  color: var(--kind-color);
+}
+
+.kind-filter input {
+  accent-color: var(--kind-color);
+}
+
+.status-filter {
+  align-items: center;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  color: #475569;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 600;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 8px;
+}
+
+.status-filter:has(input:checked) {
+  background: #f8fafc;
+  border-color: #64748b;
+  color: #0f172a;
+}
+
+.issue-badge {
+  align-items: center;
+  background: var(--issue-color);
+  border: 1px solid #ffffff;
+  border-radius: 999px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 11px;
+  font-weight: 800;
+  flex: 0 0 20px;
+  height: 20px;
+  justify-content: center;
+  position: relative;
+  width: 20px;
+  z-index: 4;
+}
+
+.issue-details {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  padding: 12px;
+}
+
+.issue-detail-row {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid var(--issue-color);
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.issue-severity-pill {
+  background: color-mix(in srgb, var(--issue-color) 12%, #ffffff);
+  border: 1px solid var(--issue-color);
+  border-radius: 999px;
+  color: var(--issue-color);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 8px;
+}
+
+/* Keep pending Open feedback local to one card, without shifting its metadata. */
+.project-open-card { position: relative; overflow: hidden; }
+.project-open-card[aria-busy="true"] { border-color: #38bdf8; background: #f0f9ff; }
+.project-open-progress { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: #e0f2fe; }
+.project-open-progress > span { display: block; width: 30%; height: 100%; background: #0284c7; animation: project-open-progress 1.2s linear infinite; }
+@keyframes project-open-progress { from { transform: translateX(-100%); } to { transform: translateX(340%); } }
+@media (prefers-reduced-motion: reduce) {
+  .project-open-progress > span { animation: none; width: 100%; opacity: 0.65; }
+}

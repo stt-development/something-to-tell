@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Something To Tell Engine branching dialogue icon">
+  <path fill="#111827" d="M112 56h288a80 80 0 0 1 80 80v176a80 80 0 0 1-80 80H212L96 464l24-72h-8a80 80 0 0 1-80-80V136a80 80 0 0 1 80-80Z"/>
+  <path fill="none" stroke="#fff" stroke-linecap="round" stroke-width="20" d="M174 224h46c56 0 54-68 112-68M220 224c56 0 54 76 112 76"/>
+  <circle cx="150" cy="224" r="24" fill="#fff"/>
+  <circle cx="356" cy="156" r="24" fill="#fff"/>
+  <circle cx="356" cy="300" r="24" fill="#fff"/>
+</svg>

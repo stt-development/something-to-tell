@@ -1,0 +1,28 @@
+{
+  "name": "@something-to-tell/contracts",
+  "version": "0.1.0",
+  "license": "GPL-3.0-or-later",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./desktop-runtime": "./src/desktopRuntime.ts",
+    "./agent-memory": "./src/agentMemory.ts",
+    "./canon-agent": "./src/canonAgent.ts",
+    "./canon-check": "./src/canonCheck.ts",
+    "./composable-story-flow": "./src/composableStoryFlow.ts",
+    "./impact-analysis": "./src/impactAnalysis.ts",
+    "./impact-resolution": "./src/impactResolution.ts",
+    "./narrative-state": "./src/narrativeState.ts",
+    "./project-document": "./src/projectDocument.ts",
+    "./project-history": "./src/projectHistory.ts",
+    "./project-patch": "./src/projectPatch.ts",
+    "./project-manifest": "./src/projectManifest.ts",
+    "./project-session": "./src/projectSession.ts",
+    "./storage": "./src/storage.ts",
+    "./remote-storage": "./src/remoteStorage.ts",
+    "./style-system": "./src/styleSystem.ts",
+    "./style-rewrite": "./src/styleRewrite.ts",
+    "./engine-tags": "./src/engineTags.ts",
+    "./export": "./src/export.ts"
+  }
+}

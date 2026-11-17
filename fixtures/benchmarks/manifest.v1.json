@@ -1,0 +1,62 @@
+{
+  "fixture_set_version": 1,
+  "projects": {
+    "1000": {
+      "counts": {
+        "agent_memory_count": 80,
+        "canonical_node_count": 1000,
+        "dialogue_count": 62,
+        "edge_count": 682,
+        "engine_tag_binding_count": 72,
+        "engine_tag_definition_count": 72,
+        "flow_exit_binding_count": 248,
+        "flow_exit_count": 248,
+        "flow_initial_state_count": 186,
+        "flow_invocation_count": 124,
+        "issue_count": 186,
+        "legacy_engine_tag_count": 0,
+        "narrative_effect_binding_count": 248,
+        "narrative_effect_count": 248,
+        "placement_count": 1116,
+        "quest_count": 62,
+        "scene_style_assignment_count": 62,
+        "story_flow_count": 186,
+        "style_profile_count": 186
+      },
+      "document_checksum": "c17bc1a7cbe1c0e6d46693047e5537cff2f825e212db4b0bd8d79a70cc20fa43",
+      "file": "storage-scale-1000.v1.json.gz",
+      "gzip_sha256": "c7695e41edb1ba2eab2aa3dfaac320b1ddf7a8df0796d2f50c65c3f6b5df2d7d",
+      "json_sha256": "0a877541b29d7568cc0e21084de2f7d104785408d8c7088a2e4db8163ea7d7a6",
+      "node_count": 1000
+    },
+    "10000": {
+      "counts": {
+        "agent_memory_count": 790,
+        "canonical_node_count": 10000,
+        "dialogue_count": 625,
+        "edge_count": 6875,
+        "engine_tag_binding_count": 711,
+        "engine_tag_definition_count": 711,
+        "flow_exit_binding_count": 2500,
+        "flow_exit_count": 2500,
+        "flow_initial_state_count": 1875,
+        "flow_invocation_count": 1250,
+        "issue_count": 1875,
+        "legacy_engine_tag_count": 0,
+        "narrative_effect_binding_count": 2500,
+        "narrative_effect_count": 2500,
+        "placement_count": 11250,
+        "quest_count": 625,
+        "scene_style_assignment_count": 625,
+        "story_flow_count": 1875,
+        "style_profile_count": 1875
+      },
+      "document_checksum": "8af416e23ce8946acaa645103433c9c94d6bdc2365948640d21421d5b9cc4b38",
+      "file": "storage-scale-10000.v1.json.gz",
+      "gzip_sha256": "72aea4e475b159b4e1c5b526601f2f822fd5e8238724848f999f115f48ed6b56",
+      "json_sha256": "8f3e56501687c36c4fd992a8e28b83717973dfa3b107e63fa4800924d025ccbd",
+      "node_count": 10000
+    }
+  },
+  "seed_sha256": "af99a9989af4ec95f75981cea3d3afd9afec0e58d5bb4ed35ff6c5843c71ce54"
+}

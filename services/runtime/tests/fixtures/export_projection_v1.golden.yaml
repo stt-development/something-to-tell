@@ -1,0 +1,53 @@
+"projection_version": 1
+"manifest":
+  "schema_version": 1
+  "kind": "narrative_export"
+  "source":
+    "identity_version": 1
+    "project_id": "golden-project"
+    "project_name": "Bilingual Golden Project"
+    "content_locale": "ru"
+    "document_version": 6
+    "source_checksum": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  "scope": "whole_project"
+  "story_flow_ids": []
+  "engine_tag_target": "generic"
+"project":
+  "project_version": 1
+  "id": "golden-project"
+  "name": "Bilingual Golden Project"
+  "description": |-
+    English opening line.
+    Русская строка сохраняет Unicode. This intentionally long authored paragraph verifies that contract fixtures do not truncate ordinary content: the harbor remains closed, the signal lamps repeat their warning, and every named route remains available to deterministic downstream adapters without inheriting project storage, UI state, provider configuration, analysis results, or machine-specific paths.
+  "content_locale": "ru"
+  "extensions":
+    "extension_version": 1
+    "values":
+      "x-studio-note": "Portable unknown metadata"
+"nodes": []
+"relationships": []
+"dialogues": []
+"quests": []
+"story_flows":
+  "story_flows_version": 1
+  "definitions": []
+  "memberships": []
+  "transitions": []
+  "scene_boundaries": []
+  "invocations": []
+  "exits": []
+  "exit_bindings": []
+"narrative_state":
+  "narrative_state_version": 1
+  "initial_states": []
+  "effects": []
+  "bindings": []
+"engine_tags":
+  "engine_tags_version": 1
+  "project_id": "golden-project"
+  "source_checksum": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  "target": "generic"
+  "entries": []
+  "omitted": []
+  "diagnostics": []
+"diagnostics": []

@@ -1,0 +1,120 @@
+name: Linux candidate (manual, not a release)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  linux-candidate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      STT_RUNTIME_STORAGE_PROFILES_FILE: ${{ runner.temp }}/owned-storage.json
+      STT_RUNTIME_STORAGE_MASTER_KEY_FILE: ${{ runner.temp }}/owned-storage-key
+      STT_RUNTIME_CANON_PROVIDER_PROFILES_FILE: ${{ runner.temp }}/owned-providers.enc
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@v6
+      - name: Assert native architecture and record tools
+        run: |
+          test "$(uname -m)" = x86_64
+          cat /etc/os-release
+          printf 'Runner image %s %s\n' "$ImageOS" "$ImageVersion"
+          printf 'STT_GLIBC=%s\n' "$(getconf GNU_LIBC_VERSION)" >> "$GITHUB_ENV"
+          rustc --version --verbose
+          cargo --version
+          node --version
+          python --version
+          uv --version
+      - name: Install native and locked workspace dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev librsvg2-dev libayatana-appindicator3-dev patchelf libfuse2t64
+          npm install --global pnpm@10.15.0
+          pnpm install --frozen-lockfile
+          uv sync --all-extras --group build --locked
+      - name: Build and verify native runtime resources
+        run: |
+          uv run --group build python -m services.runtime.scripts.build_desktop_runtime > "$RUNNER_TEMP/runtime-build.json"
+          raw=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).candidate' "$RUNNER_TEMP/runtime-build.json")
+          node tools/desktop-runtime-resources.mjs "$raw" > "$RUNNER_TEMP/runtime-stage.json"
+          staged=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).manifest' "$RUNNER_TEMP/runtime-stage.json")
+          configuration=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).configuration' "$RUNNER_TEMP/runtime-stage.json")
+          printf 'STT_TEST_DESKTOP_RUNTIME_EXECUTABLE=%s\nSTT_STAGED_MANIFEST=%s\nSTT_RUNTIME_CONFIGURATION=%s\n' "$raw/stt-runtime" "$staged" "$configuration" >> "$GITHUB_ENV"
+      - name: Probe frozen runtime and native owner
+        run: |
+          env PATH=/nonexistent "$STT_TEST_DESKTOP_RUNTIME_EXECUTABLE" --self-check
+          uv run pytest services/runtime/tests/test_desktop_runtime.py services/runtime/tests/test_desktop_lifecycle.py -ra --junitxml="$RUNNER_TEMP/frozen.xml"
+          uv run python tools/check-ci-test-report.py "$RUNNER_TEMP/frozen.xml" --no-skips
+          pnpm desktop:config:test
+          cargo test --locked --manifest-path apps/desktop/src-tauri/Cargo.toml
+          cargo test --locked --manifest-path apps/desktop/src-tauri/Cargo.toml runtime_supervisor::tests::real_frozen_child_handshake -- --ignored --exact
+      - name: Build AppImage and deb candidates
+        env:
+          APPIMAGE_EXTRACT_AND_RUN: "1"
+        run: pnpm --dir apps/desktop exec tauri build --bundles appimage deb --config "$STT_RUNTIME_CONFIGURATION" -- --locked
+      - name: Verify both extracted payloads before artifact collection
+        run: |
+          mapfile -d '' images < <(find apps/desktop/src-tauri/target/release/bundle/appimage -maxdepth 1 -type f -name '*.AppImage' -print0)
+          mapfile -d '' packages < <(find apps/desktop/src-tauri/target/release/bundle/deb -maxdepth 1 -type f -name '*.deb' -print0)
+          test "${#images[@]}" = 1
+          test "${#packages[@]}" = 1
+          image=$(realpath "${images[0]}")
+          package=$(realpath "${packages[0]}")
+          mkdir -p "$RUNNER_TEMP/appimage-extracted" "$RUNNER_TEMP/deb-extracted"
+          chmod +x "$image"
+          (cd "$RUNNER_TEMP/appimage-extracted" && "$image" --appimage-extract > /dev/null)
+          dpkg-deb --extract "$package" "$RUNNER_TEMP/deb-extracted"
+          dpkg-deb --field "$package" Depends
+          probe() {
+            label=$1
+            root=$2
+            mapfile -d '' runtimes < <(find "$root" -type f -path '*/runtime/stt-runtime' -print0)
+            test "${#runtimes[@]}" = 1
+            runtime="${runtimes[0]}"
+            test -x "$runtime"
+            node --input-type=module -e 'import fs from "node:fs"; import {verifyCandidate} from "./tools/desktop-runtime-resources.mjs"; verifyCandidate(process.argv[1], JSON.parse(fs.readFileSync(process.argv[2])));' "$(dirname "$runtime")" "$STT_STAGED_MANIFEST"
+            ldd "$runtime" > "$RUNNER_TEMP/$label-ldd.txt"
+            if grep -q 'not found' "$RUNNER_TEMP/$label-ldd.txt"; then
+              cat "$RUNNER_TEMP/$label-ldd.txt"
+              return 1
+            fi
+            env PATH=/nonexistent "$runtime" --self-check
+          }
+          probe appimage "$RUNNER_TEMP/appimage-extracted/squashfs-root"
+          probe deb "$RUNNER_TEMP/deb-extracted"
+          destination="$GITHUB_WORKSPACE/dist/linux-candidate"
+          mkdir -p "$destination"
+          # No placeholder notice file: actual audited component texts are required.
+          test -s THIRD_PARTY_NOTICES.md
+          cp "$image" "$destination/candidate-x86_64.AppImage"
+          cp "$package" "$destination/candidate-x86_64.deb"
+          cp LICENSE "$destination/"
+          cp THIRD_PARTY_NOTICES.md "$destination/"
+          cp "$STT_STAGED_MANIFEST" "$destination/runtime-manifest.json"
+          original=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).manifest' "$RUNNER_TEMP/runtime-build.json")
+          cp "$original" "$destination/input-runtime-manifest.json"
+          node -e 'require("fs").writeFileSync(process.argv[1],JSON.stringify({schema_version:1,source_commit:process.env.GITHUB_SHA,runner_image:process.env.ImageVersion,architecture:"x86_64",libc:process.env.STT_GLIBC,ubuntu_installed_acceptance:"pending",steamos_acceptance:"pending"},null,2));' "$destination/candidate.json"
+          (cd "$destination" && sha256sum candidate-x86_64.AppImage candidate-x86_64.deb LICENSE THIRD_PARTY_NOTICES.md runtime-manifest.json input-runtime-manifest.json candidate.json > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-x64-candidate-${{ github.sha }}
+          path: dist/linux-candidate
+          if-no-files-found: error
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: linux-runtime-tests-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/frozen.xml
+            ${{ runner.temp }}/*-ldd.txt
+          retention-days: 7

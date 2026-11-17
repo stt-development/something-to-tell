@@ -1,0 +1,7 @@
+Scene: Harbor Inspection - Guild agents search the vessel.
+Character: Mara Vale - Smuggler captain carrying the sealed ledger.
+Location: Glass Harbor - Neutral port under embargo patrol.
+Item: Sealed Ledger - Evidence that can reopen the route.
+Dialogue: Dockmaster Warning - No legal passage without guild papers.
+Relationship: Mara Vale located_in Glass Harbor - Mara reaches the harbor at dusk.
+Relationship: Sealed Ledger reveals Dockmaster Warning - The ledger proves the warning is political.

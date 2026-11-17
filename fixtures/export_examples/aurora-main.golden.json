@@ -1,0 +1,1411 @@
+{
+  "projection_version": 1,
+  "manifest": {
+    "schema_version": 1,
+    "kind": "narrative_export",
+    "source": {
+      "identity_version": 1,
+      "project_id": "project-aurora-export",
+      "project_name": "Project Aurora Export",
+      "content_locale": "en",
+      "document_version": 5,
+      "source_checksum": "76faf2e98d181f69c5c98857f4c0e0ebfef0487fd6b4b98e8e37c1b6c061136b"
+    },
+    "scope": "story_flows",
+    "story_flow_ids": [
+      "flow-main-story"
+    ],
+    "engine_tag_target": "generic"
+  },
+  "project": {
+    "project_version": 1,
+    "id": "project-aurora-export",
+    "name": "Project Aurora Export",
+    "description": "Reviewed export example; original Canon diagnostic fixture is unchanged.",
+    "content_locale": "en",
+    "extensions": {
+      "extension_version": 1,
+      "values": {}
+    }
+  },
+  "nodes": [
+    {
+      "node_version": 1,
+      "id": "node-customs-office",
+      "type": "Location",
+      "title": "Customs Office",
+      "summary": "Inspection office nested inside Glass Harbor.",
+      "body": "Inspection office nested inside Glass Harbor.",
+      "status": "canon",
+      "tags": [
+        "harbor",
+        "inspection"
+      ],
+      "container_node_ids": [
+        "node-harbor"
+      ],
+      "attributes": {
+        "attributes_version": 1,
+        "character_role": null,
+        "item_purpose": null,
+        "requirement": null,
+        "outcome": null
+      },
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "node_version": 1,
+      "id": "node-dock-dialogue",
+      "type": "Dialogue",
+      "title": "Dockmaster Warning",
+      "summary": "Dialogue beat where the player learns why legal passage is blocked.",
+      "body": "Dialogue beat where the player learns why legal passage is blocked.",
+      "status": "canon",
+      "tags": [
+        "dialogue",
+        "intro"
+      ],
+      "container_node_ids": [
+        "node-opening"
+      ],
+      "attributes": {
+        "attributes_version": 1,
+        "character_role": null,
+        "item_purpose": null,
+        "requirement": null,
+        "outcome": null
+      },
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "node_version": 1,
+      "id": "node-dockmaster",
+      "type": "Character",
+      "title": "Ilya Voss",
+      "summary": "Glass Harbor dockmaster ordered to enforce the silver embargo.",
+      "body": "Glass Harbor dockmaster ordered to enforce the silver embargo.",
+      "status": "canon",
+      "tags": [
+        "authority",
+        "harbor"
+      ],
+      "container_node_ids": [
+        "node-opening"
+      ],
+      "attributes": {
+        "attributes_version": 1,
+        "character_role": "Harbor authority and reluctant gatekeeper",
+        "item_purpose": null,
+        "requirement": null,
+        "outcome": null
+      },
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "node_version": 1,
+      "id": "node-embargo",
+      "type": "Lore",
+      "title": "Silver Embargo",
+      "summary": "Trade rule that blocks the player faction from legal travel.",
+      "body": "Trade rule that blocks the player faction from legal travel.",
+      "status": "canon",
+      "tags": [
+        "constraint",
+        "economy"
+      ],
+      "container_node_ids": [
+        "node-opening"
+      ],
+      "attributes": {
+        "attributes_version": 1,
+        "character_role": null,
+        "item_purpose": null,
+        "requirement": null,
+        "outcome": null
+      },
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "node_version": 1,
+      "id": "node-harbor",
+      "type": "Location",
+      "title": "Glass Harbor",
+      "summary": "Neutral port where the embargo enforcement is easiest to inspect.",
+      "body": "Neutral port where the embargo enforcement is easiest to inspect.",
+      "status": "canon",
+      "tags": [
+        "port",
+        "travel"
+      ],
+      "container_node_ids": [
+        "node-opening"
+      ],
+      "attributes": {
+        "attributes_version": 1,
+        "character_role": null,
+        "item_purpose": null,
+        "requirement": null,
+        "outcome": null
+      },
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "node_version": 1,
+      "id": "node-hero",
+      "type": "Character",
+      "title": "Mara Vale",
+      "summary": "Smuggler captain carrying the opening contradiction.",
+      "body": "Smuggler captain carrying the opening contradiction.",
+      "status": "canon",
+      "tags": [
+        "crew",
+        "voice"
+      ],
+      "container_node_ids": [],
+      "attributes": {
+        "attributes_version": 1,
+        "character_role": "Protagonist and smuggler captain",
+        "item_purpose": null,
+        "requirement": null,
+        "outcome": null
+      },
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "node_version": 1,
+      "id": "node-inspection",
+      "type": "Event",
+      "title": "Harbor Inspection",
+      "summary": "Event where guild agents search outbound vessels.",
+      "body": "Event where guild agents search outbound vessels.",
+      "status": "canon",
+      "tags": [
+        "checkpoint"
+      ],
+      "container_node_ids": [],
+      "attributes": {
+        "attributes_version": 1,
+        "character_role": null,
+        "item_purpose": null,
+        "requirement": null,
+        "outcome": null
+      },
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "node_version": 1,
+      "id": "node-ledger-condition",
+      "type": "Condition",
+      "title": "Ledger Acquired",
+      "summary": "Condition that unlocks the route negotiation branch.",
+      "body": "Condition that unlocks the route negotiation branch.",
+      "status": "canon",
+      "tags": [
+        "gate"
+      ],
+      "container_node_ids": [],
+      "attributes": {
+        "attributes_version": 1,
+        "character_role": null,
+        "item_purpose": null,
+        "requirement": {
+          "subject": "Mara Vale",
+          "predicate": "has acquired the Sealed Ledger",
+          "expression": "inventory.has('sealed-ledger')"
+        },
+        "outcome": null
+      },
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "node_version": 1,
+      "id": "node-mara-runs-blockade",
+      "type": "Event",
+      "title": "Mara Runs the Blockade",
+      "summary": "Mara orders her crew to launch and evade the harbor inspection boats.",
+      "body": "Mara orders her crew to launch and evade the harbor inspection boats.",
+      "status": "canon",
+      "tags": [
+        "action",
+        "dialogue-outcome"
+      ],
+      "container_node_ids": [
+        "node-opening"
+      ],
+      "attributes": {
+        "attributes_version": 1,
+        "character_role": null,
+        "item_purpose": null,
+        "requirement": null,
+        "outcome": null
+      },
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "node_version": 1,
+      "id": "node-opening",
+      "type": "Scene",
+      "title": "Opening Dock",
+      "summary": "First playable scene where the embargo is revealed.",
+      "body": "First playable scene where the embargo is revealed.",
+      "status": "canon",
+      "tags": [
+        "intro"
+      ],
+      "container_node_ids": [],
+      "attributes": {
+        "attributes_version": 1,
+        "character_role": null,
+        "item_purpose": null,
+        "requirement": null,
+        "outcome": null
+      },
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "node_version": 1,
+      "id": "node-route-compromised",
+      "type": "Consequence",
+      "title": "Route Compromised",
+      "summary": "The patrol identifies Mara's ship and closes the covert harbor route.",
+      "body": "The patrol identifies Mara's ship and closes the covert harbor route.",
+      "status": "canon",
+      "tags": [
+        "failure",
+        "outcome"
+      ],
+      "container_node_ids": [],
+      "attributes": {
+        "attributes_version": 1,
+        "character_role": null,
+        "item_purpose": null,
+        "requirement": null,
+        "outcome": {
+          "effect": "The covert departure route is no longer safe to use.",
+          "target_node_ids": [
+            "node-harbor",
+            "node-smuggler-route"
+          ]
+        }
+      },
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "node_version": 1,
+      "id": "node-route-consequence",
+      "type": "Consequence",
+      "title": "Route Reopened",
+      "summary": "Consequence of proving the embargo enforcement is corrupt.",
+      "body": "Consequence of proving the embargo enforcement is corrupt.",
+      "status": "canon",
+      "tags": [
+        "outcome"
+      ],
+      "container_node_ids": [],
+      "attributes": {
+        "attributes_version": 1,
+        "character_role": null,
+        "item_purpose": null,
+        "requirement": null,
+        "outcome": {
+          "effect": "The legal departure route through Glass Harbor becomes available.",
+          "target_node_ids": [
+            "node-harbor",
+            "node-smuggler-route"
+          ]
+        }
+      },
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "node_version": 1,
+      "id": "node-sealed-ledger",
+      "type": "Item",
+      "title": "Sealed Ledger",
+      "summary": "Evidence item that can prove the embargo was manipulated.",
+      "body": "Evidence item that can prove the embargo was manipulated.",
+      "status": "canon",
+      "tags": [
+        "evidence"
+      ],
+      "container_node_ids": [
+        "node-opening"
+      ],
+      "attributes": {
+        "attributes_version": 1,
+        "character_role": null,
+        "item_purpose": "Proof that the embargo order was manipulated",
+        "requirement": null,
+        "outcome": null
+      },
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "node_version": 1,
+      "id": "node-smuggler-route",
+      "type": "Quest",
+      "title": "Smuggler Route",
+      "summary": "Quest branch where the player can bypass the legal harbor route.",
+      "body": "Quest branch where the player can bypass the legal harbor route.",
+      "status": "canon",
+      "tags": [
+        "branch",
+        "travel"
+      ],
+      "container_node_ids": [],
+      "attributes": {
+        "attributes_version": 1,
+        "character_role": null,
+        "item_purpose": null,
+        "requirement": null,
+        "outcome": null
+      },
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "node_version": 1,
+      "id": "node-smuggling-abandoned",
+      "type": "Consequence",
+      "title": "Smuggling Run Abandoned",
+      "summary": "Mara abandons the covert departure before committing the crew to the blockade.",
+      "body": "Mara abandons the covert departure before committing the crew to the blockade.",
+      "status": "canon",
+      "tags": [
+        "abandoned",
+        "outcome"
+      ],
+      "container_node_ids": [],
+      "attributes": {
+        "attributes_version": 1,
+        "character_role": null,
+        "item_purpose": null,
+        "requirement": null,
+        "outcome": {
+          "effect": "The crew returns to the legal harbor plan without resolving the covert route.",
+          "target_node_ids": [
+            "node-harbor",
+            "node-smuggler-route"
+          ]
+        }
+      },
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_version": 1,
+      "id": "edge-condition-inspection",
+      "source_node_id": "node-ledger-condition",
+      "target_node_id": "node-inspection",
+      "type": "requires",
+      "label": "enables inspection",
+      "condition": "",
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "relationship_version": 1,
+      "id": "edge-dialogue-blockade",
+      "source_node_id": "node-dock-dialogue",
+      "target_node_id": "node-mara-runs-blockade",
+      "type": "leads_to",
+      "label": "Mara runs the blockade",
+      "condition": "",
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "relationship_version": 1,
+      "id": "edge-harbor-dialogue",
+      "source_node_id": "node-harbor",
+      "target_node_id": "node-dock-dialogue",
+      "type": "mentions",
+      "label": "sets context",
+      "condition": "",
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "relationship_version": 1,
+      "id": "edge-hero-opening",
+      "source_node_id": "node-hero",
+      "target_node_id": "node-opening",
+      "type": "appears_in",
+      "label": "appears in",
+      "condition": "",
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "relationship_version": 1,
+      "id": "edge-inspection-consequence",
+      "source_node_id": "node-inspection",
+      "target_node_id": "node-route-consequence",
+      "type": "causes",
+      "label": "reopens route",
+      "condition": "",
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "relationship_version": 1,
+      "id": "edge-opening-embargo",
+      "source_node_id": "node-opening",
+      "target_node_id": "node-embargo",
+      "type": "reveals",
+      "label": "reveals",
+      "condition": "",
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "relationship_version": 1,
+      "id": "edge-opening-harbor",
+      "source_node_id": "node-opening",
+      "target_node_id": "node-harbor",
+      "type": "located_in",
+      "label": "located in",
+      "condition": "",
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "relationship_version": 1,
+      "id": "edge-quest-blockade-route",
+      "source_node_id": "node-smuggler-route",
+      "target_node_id": "node-mara-runs-blockade",
+      "type": "leads_to",
+      "label": "starts the blockade run",
+      "condition": "",
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    },
+    {
+      "relationship_version": 1,
+      "id": "edge-quest-legal-route",
+      "source_node_id": "node-smuggler-route",
+      "target_node_id": "node-route-consequence",
+      "type": "leads_to",
+      "label": "reopens the legal route",
+      "condition": "",
+      "extensions": {
+        "extension_version": 1,
+        "values": {}
+      }
+    }
+  ],
+  "dialogues": [
+    {
+      "aggregate_version": 1,
+      "node_id": "node-dock-dialogue",
+      "document": {
+        "dialogue_version": 1,
+        "entry_element_id": "line-dockmaster-warning",
+        "participants": [
+          "node-dockmaster",
+          "node-hero"
+        ],
+        "elements": [
+          {
+            "id": "line-dockmaster-warning",
+            "kind": "line",
+            "speaker_node_id": "node-dockmaster",
+            "text": "No vessel leaves Glass Harbor while the silver embargo is in force.",
+            "next_element_id": "line-mara-challenge"
+          },
+          {
+            "id": "line-mara-challenge",
+            "kind": "line",
+            "speaker_node_id": "node-hero",
+            "text": "Your guild forged that order. I can prove it or sail through it.",
+            "next_element_id": "choice-mara-response"
+          },
+          {
+            "id": "choice-mara-response",
+            "kind": "choice",
+            "prompt": "How does Mara answer the dockmaster?",
+            "options": [
+              {
+                "id": "answer-show-ledger",
+                "text": "Show Ilya the sealed ledger.",
+                "condition": "items.node-sealed-ledger.holder.node_id == \"node-dockmaster\"",
+                "next_element_id": "line-ilya-concedes"
+              },
+              {
+                "id": "answer-run-blockade",
+                "text": "Order the crew to run the blockade.",
+                "condition": "",
+                "next_element_id": "line-mara-orders-run"
+              }
+            ]
+          },
+          {
+            "id": "line-ilya-concedes",
+            "kind": "line",
+            "speaker_node_id": "node-dockmaster",
+            "text": "Those seals are genuine. I will delay the patrol while you depart.",
+            "next_element_id": null
+          },
+          {
+            "id": "line-mara-orders-run",
+            "kind": "line",
+            "speaker_node_id": "node-hero",
+            "text": "Cast off. Full power, and keep the inspection boats in our wake.",
+            "next_element_id": null
+          }
+        ]
+      }
+    }
+  ],
+  "quests": [
+    {
+      "aggregate_version": 1,
+      "node_id": "node-smuggler-route",
+      "document": {
+        "quest_version": 1,
+        "objective": "Secure proof of the forged embargo and open a route out of Glass Harbor.",
+        "quest_giver_node_id": "node-dockmaster",
+        "entry_stage_id": "stage-secure-ledger",
+        "prerequisite_node_ids": [
+          "node-ledger-condition"
+        ],
+        "reward_node_ids": [
+          "node-sealed-ledger"
+        ],
+        "stages": [
+          {
+            "id": "stage-secure-ledger",
+            "title": "Secure the sealed ledger",
+            "description": "Recover evidence that the Trade Guild forged the embargo order.",
+            "branches": [
+              {
+                "id": "branch-present-ledger",
+                "label": "Present the ledger",
+                "condition": "items.node-sealed-ledger.holder.node_id == \"node-hero\"",
+                "target_stage_id": "stage-choose-route"
+              }
+            ]
+          },
+          {
+            "id": "stage-choose-route",
+            "title": "Choose the harbor route",
+            "description": "Use the evidence or force a passage through the blockade.",
+            "branches": [
+              {
+                "id": "branch-legal-route",
+                "label": "Convince the dockmaster",
+                "condition": "items.node-sealed-ledger.holder.node_id == \"node-hero\"",
+                "target_stage_id": null
+              },
+              {
+                "id": "branch-blockade-route",
+                "label": "Run the blockade",
+                "condition": "",
+                "target_stage_id": null
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "story_flows": {
+    "story_flows_version": 1,
+    "definitions": [
+      {
+        "id": "flow-main-story",
+        "name": "Main Story",
+        "description": "Primary playable route through the harbor inspection.",
+        "kind": "main",
+        "status": "active",
+        "entry_node_id": "node-opening"
+      },
+      {
+        "id": "flow-smuggler-route",
+        "name": "Smuggler Route",
+        "description": "Optional smuggler route through the blockade.",
+        "kind": "side",
+        "status": "active",
+        "entry_node_id": "node-smuggler-route"
+      },
+      {
+        "id": "flow-z-blockade-outcome",
+        "name": "Blockade Outcome",
+        "description": "Dialogue outcome composed as a reusable side flow call.",
+        "kind": "side",
+        "status": "active",
+        "entry_node_id": "node-mara-runs-blockade"
+      }
+    ],
+    "memberships": [
+      {
+        "id": "flow-main-story:member:node-dock-dialogue",
+        "flow_id": "flow-main-story",
+        "node_id": "node-dock-dialogue",
+        "presentation_order": 1
+      },
+      {
+        "id": "flow-main-story:member:node-inspection",
+        "flow_id": "flow-main-story",
+        "node_id": "node-inspection",
+        "presentation_order": 2
+      },
+      {
+        "id": "flow-main-story:member:node-opening",
+        "flow_id": "flow-main-story",
+        "node_id": "node-opening",
+        "presentation_order": 0
+      },
+      {
+        "id": "flow-main-story:member:node-route-consequence",
+        "flow_id": "flow-main-story",
+        "node_id": "node-route-consequence",
+        "presentation_order": 3
+      },
+      {
+        "id": "flow-main-story:member:node-sealed-ledger",
+        "flow_id": "flow-main-story",
+        "node_id": "node-sealed-ledger",
+        "presentation_order": 5
+      },
+      {
+        "id": "flow-smuggler-route:member:node-mara-runs-blockade",
+        "flow_id": "flow-smuggler-route",
+        "node_id": "node-mara-runs-blockade",
+        "presentation_order": 1
+      },
+      {
+        "id": "flow-smuggler-route:member:node-route-compromised",
+        "flow_id": "flow-smuggler-route",
+        "node_id": "node-route-compromised",
+        "presentation_order": 2
+      },
+      {
+        "id": "flow-smuggler-route:member:node-route-consequence",
+        "flow_id": "flow-smuggler-route",
+        "node_id": "node-route-consequence",
+        "presentation_order": 3
+      },
+      {
+        "id": "flow-smuggler-route:member:node-smuggler-route",
+        "flow_id": "flow-smuggler-route",
+        "node_id": "node-smuggler-route",
+        "presentation_order": 0
+      },
+      {
+        "id": "flow-smuggler-route:member:node-smuggling-abandoned",
+        "flow_id": "flow-smuggler-route",
+        "node_id": "node-smuggling-abandoned",
+        "presentation_order": 4
+      },
+      {
+        "id": "flow-z-blockade-outcome:member:node-mara-runs-blockade",
+        "flow_id": "flow-z-blockade-outcome",
+        "node_id": "node-mara-runs-blockade",
+        "presentation_order": 0
+      }
+    ],
+    "transitions": [
+      {
+        "id": "flow-transition-blockade-cycle",
+        "flow_id": "flow-smuggler-route",
+        "source_node_id": "node-mara-runs-blockade",
+        "target_node_id": "node-smuggler-route",
+        "priority": 1,
+        "kind": "return",
+        "label": "Circle back past the patrol",
+        "condition": "",
+        "is_default": false,
+        "dialogue_element_id": null,
+        "quest_branch_id": null
+      },
+      {
+        "id": "flow-transition-blockade-failure",
+        "flow_id": "flow-smuggler-route",
+        "source_node_id": "node-mara-runs-blockade",
+        "target_node_id": "node-route-compromised",
+        "priority": 2,
+        "kind": "optional",
+        "label": "Patrol identifies the ship",
+        "condition": "",
+        "is_default": false,
+        "dialogue_element_id": null,
+        "quest_branch_id": null
+      },
+      {
+        "id": "flow-transition-blockade-return",
+        "flow_id": "flow-smuggler-route",
+        "source_node_id": "node-mara-runs-blockade",
+        "target_node_id": "node-route-consequence",
+        "priority": 0,
+        "kind": "return",
+        "label": "Rejoin the harbor outcome",
+        "condition": "",
+        "is_default": false,
+        "dialogue_element_id": null,
+        "quest_branch_id": null
+      },
+      {
+        "id": "flow-transition-dialogue-inspection",
+        "flow_id": "flow-main-story",
+        "source_node_id": "node-dock-dialogue",
+        "target_node_id": "node-inspection",
+        "priority": 0,
+        "kind": "branch",
+        "label": "Present the ledger",
+        "condition": "items.node-sealed-ledger.holder.node_id == \"node-hero\"",
+        "is_default": false,
+        "dialogue_element_id": "line-ilya-concedes",
+        "quest_branch_id": null
+      },
+      {
+        "id": "flow-transition-inspection-route",
+        "flow_id": "flow-main-story",
+        "source_node_id": "node-inspection",
+        "target_node_id": "node-route-consequence",
+        "priority": 0,
+        "kind": "next",
+        "label": "Embargo disproved",
+        "condition": "",
+        "is_default": false,
+        "dialogue_element_id": null,
+        "quest_branch_id": null
+      },
+      {
+        "id": "flow-transition-opening-dialogue",
+        "flow_id": "flow-main-story",
+        "source_node_id": "node-opening",
+        "target_node_id": "node-dock-dialogue",
+        "priority": 0,
+        "kind": "next",
+        "label": "Begin inspection",
+        "condition": "",
+        "is_default": false,
+        "dialogue_element_id": null,
+        "quest_branch_id": null
+      },
+      {
+        "id": "flow-transition-quest-abandoned",
+        "flow_id": "flow-smuggler-route",
+        "source_node_id": "node-smuggler-route",
+        "target_node_id": "node-smuggling-abandoned",
+        "priority": 1,
+        "kind": "optional",
+        "label": "Abandon the covert route",
+        "condition": "",
+        "is_default": false,
+        "dialogue_element_id": null,
+        "quest_branch_id": null
+      },
+      {
+        "id": "flow-transition-quest-blockade",
+        "flow_id": "flow-smuggler-route",
+        "source_node_id": "node-smuggler-route",
+        "target_node_id": "node-mara-runs-blockade",
+        "priority": 0,
+        "kind": "optional",
+        "label": "Take the covert route",
+        "condition": "",
+        "is_default": false,
+        "dialogue_element_id": null,
+        "quest_branch_id": "branch-blockade-route"
+      }
+    ],
+    "scene_boundaries": [
+      {
+        "id": "flow-main-story:boundary:node-opening",
+        "flow_id": "flow-main-story",
+        "scene_node_id": "node-opening",
+        "entry_node_id": "node-dock-dialogue",
+        "exit_node_ids": [
+          "node-dock-dialogue"
+        ]
+      }
+    ],
+    "invocations": [
+      {
+        "id": "flow-invocation-dialogue-smuggler-route",
+        "source_flow_id": "flow-main-story",
+        "source_node_id": "node-dock-dialogue",
+        "target_flow_id": "flow-z-blockade-outcome",
+        "label": "Mara runs the blockade",
+        "condition": "",
+        "priority": 1,
+        "is_default": true
+      },
+      {
+        "id": "flow-invocation-inspection-smuggler-route",
+        "source_flow_id": "flow-main-story",
+        "source_node_id": "node-inspection",
+        "target_flow_id": "flow-smuggler-route",
+        "label": "Call the covert harbor route",
+        "condition": "",
+        "priority": 1,
+        "is_default": false
+      }
+    ],
+    "exits": [
+      {
+        "id": "flow-exit-blockade-completed",
+        "flow_id": "flow-z-blockade-outcome",
+        "key": "completed",
+        "label": "Blockade run completed",
+        "source_node_id": "node-mara-runs-blockade"
+      },
+      {
+        "id": "flow-exit-smuggler-abandoned",
+        "flow_id": "flow-smuggler-route",
+        "key": "abandoned",
+        "label": "Covert route abandoned",
+        "source_node_id": "node-smuggling-abandoned"
+      },
+      {
+        "id": "flow-exit-smuggler-failure",
+        "flow_id": "flow-smuggler-route",
+        "key": "failure",
+        "label": "Patrol exposes the route",
+        "source_node_id": "node-route-compromised"
+      },
+      {
+        "id": "flow-exit-smuggler-success",
+        "flow_id": "flow-smuggler-route",
+        "key": "success",
+        "label": "Patrol evaded",
+        "source_node_id": "node-route-consequence"
+      }
+    ],
+    "exit_bindings": [
+      {
+        "id": "flow-binding-blockade-completed-main",
+        "invocation_id": "flow-invocation-dialogue-smuggler-route",
+        "exit_id": "flow-exit-blockade-completed",
+        "target_node_id": "node-route-consequence"
+      },
+      {
+        "id": "flow-binding-smuggler-abandoned-main",
+        "invocation_id": "flow-invocation-inspection-smuggler-route",
+        "exit_id": "flow-exit-smuggler-abandoned",
+        "target_node_id": "node-dock-dialogue"
+      },
+      {
+        "id": "flow-binding-smuggler-failure-main",
+        "invocation_id": "flow-invocation-inspection-smuggler-route",
+        "exit_id": "flow-exit-smuggler-failure",
+        "target_node_id": "node-sealed-ledger"
+      },
+      {
+        "id": "flow-binding-smuggler-success-main",
+        "invocation_id": "flow-invocation-inspection-smuggler-route",
+        "exit_id": "flow-exit-smuggler-success",
+        "target_node_id": "node-route-consequence"
+      }
+    ]
+  },
+  "narrative_state": {
+    "narrative_state_version": 1,
+    "initial_states": [
+      {
+        "state_version": 1,
+        "id": "state-blockade-ledger",
+        "flow_id": "flow-z-blockade-outcome",
+        "flags": {},
+        "item_custody": [
+          {
+            "custody_version": 1,
+            "item_node_id": "node-sealed-ledger",
+            "holder": {
+              "holder_version": 1,
+              "kind": "character",
+              "node_id": "node-hero"
+            }
+          }
+        ],
+        "quest_statuses": {
+          "node-smuggler-route": "active"
+        }
+      },
+      {
+        "state_version": 1,
+        "id": "state-main-ledger",
+        "flow_id": "flow-main-story",
+        "flags": {},
+        "item_custody": [
+          {
+            "custody_version": 1,
+            "item_node_id": "node-sealed-ledger",
+            "holder": {
+              "holder_version": 1,
+              "kind": "character",
+              "node_id": "node-dockmaster"
+            }
+          }
+        ],
+        "quest_statuses": {
+          "node-smuggler-route": "active"
+        }
+      },
+      {
+        "state_version": 1,
+        "id": "state-side-ledger",
+        "flow_id": "flow-smuggler-route",
+        "flags": {},
+        "item_custody": [
+          {
+            "custody_version": 1,
+            "item_node_id": "node-sealed-ledger",
+            "holder": {
+              "holder_version": 1,
+              "kind": "character",
+              "node_id": "node-hero"
+            }
+          }
+        ],
+        "quest_statuses": {
+          "node-smuggler-route": "active"
+        }
+      }
+    ],
+    "effects": [
+      {
+        "effect_version": 1,
+        "id": "effect-01-ledger-ilya-to-mara",
+        "repeat_policy": "once",
+        "explanation": "Ilya returns the Sealed Ledger to Mara after accepting its proof.",
+        "operation": "transfer_item",
+        "payload": {
+          "item_node_id": "node-sealed-ledger",
+          "from_holder": {
+            "holder_version": 1,
+            "kind": "character",
+            "node_id": "node-dockmaster"
+          },
+          "to_holder": {
+            "holder_version": 1,
+            "kind": "character",
+            "node_id": "node-hero"
+          }
+        }
+      },
+      {
+        "effect_version": 1,
+        "id": "effect-02-quest-route-completed",
+        "repeat_policy": "once",
+        "explanation": "Choosing the blockade outcome completes the Smuggler Route quest.",
+        "operation": "set_quest_status",
+        "payload": {
+          "quest_node_id": "node-smuggler-route",
+          "status": "completed"
+        }
+      },
+      {
+        "effect_version": 1,
+        "id": "effect-03-quest-reward-to-party",
+        "repeat_policy": "once",
+        "explanation": "The Sealed Ledger becomes a party quest reward.",
+        "operation": "transfer_item",
+        "payload": {
+          "item_node_id": "node-sealed-ledger",
+          "from_holder": {
+            "holder_version": 1,
+            "kind": "character",
+            "node_id": "node-hero"
+          },
+          "to_holder": {
+            "holder_version": 1,
+            "kind": "party",
+            "node_id": null
+          }
+        }
+      },
+      {
+        "effect_version": 1,
+        "id": "effect-04-exit-ledger-to-player",
+        "repeat_policy": "once",
+        "explanation": "The party hands the Ledger to the player before returning to Main Story.",
+        "operation": "transfer_item",
+        "payload": {
+          "item_node_id": "node-sealed-ledger",
+          "from_holder": {
+            "holder_version": 1,
+            "kind": "party",
+            "node_id": null
+          },
+          "to_holder": {
+            "holder_version": 1,
+            "kind": "player",
+            "node_id": null
+          }
+        }
+      }
+    ],
+    "bindings": [
+      {
+        "binding_version": 1,
+        "id": "binding-01-dialogue-ledger-to-mara",
+        "effect_id": "effect-01-ledger-ilya-to-mara",
+        "owner_kind": "dialogue_element",
+        "owner_id": "line-ilya-concedes",
+        "context_node_id": "node-dock-dialogue",
+        "application_order": 0
+      },
+      {
+        "binding_version": 1,
+        "id": "binding-02-quest-complete",
+        "effect_id": "effect-02-quest-route-completed",
+        "owner_kind": "quest_outcome",
+        "owner_id": "branch-blockade-route",
+        "context_node_id": "node-smuggler-route",
+        "application_order": 0
+      },
+      {
+        "binding_version": 1,
+        "id": "binding-03-quest-reward",
+        "effect_id": "effect-03-quest-reward-to-party",
+        "owner_kind": "quest_outcome",
+        "owner_id": "branch-blockade-route",
+        "context_node_id": "node-smuggler-route",
+        "application_order": 1
+      },
+      {
+        "binding_version": 1,
+        "id": "binding-04-exit-ledger-to-player",
+        "effect_id": "effect-04-exit-ledger-to-player",
+        "owner_kind": "flow_exit",
+        "owner_id": "flow-exit-smuggler-success",
+        "context_node_id": null,
+        "application_order": 0
+      }
+    ]
+  },
+  "engine_tags": {
+    "engine_tags_version": 1,
+    "project_id": "project-aurora-export",
+    "source_checksum": "76faf2e98d181f69c5c98857f4c0e0ebfef0487fd6b4b98e8e37c1b6c061136b",
+    "target": "generic",
+    "entries": [
+      {
+        "definition_id": "tagdef-aurora-character-mara",
+        "normalized_key": "character.maravale",
+        "owner": {
+          "kind": "node",
+          "project_id": "project-aurora-export",
+          "node_id": "node-hero",
+          "edge_id": null,
+          "dialogue_node_id": null,
+          "line_id": null,
+          "choice_id": null,
+          "option_id": null,
+          "quest_node_id": null,
+          "stage_id": null,
+          "branch_id": null,
+          "flow_id": null,
+          "transition_id": null,
+          "invocation_id": null,
+          "exit_id": null,
+          "effect_id": null
+        },
+        "identifier": "character.maravale"
+      },
+      {
+        "definition_id": "tagdef-aurora-dialogue-warning",
+        "normalized_key": "dialogue.dockmasterwarning",
+        "owner": {
+          "kind": "dialogue_line",
+          "project_id": "project-aurora-export",
+          "node_id": null,
+          "edge_id": null,
+          "dialogue_node_id": "node-dock-dialogue",
+          "line_id": "line-dockmaster-warning",
+          "choice_id": null,
+          "option_id": null,
+          "quest_node_id": null,
+          "stage_id": null,
+          "branch_id": null,
+          "flow_id": null,
+          "transition_id": null,
+          "invocation_id": null,
+          "exit_id": null,
+          "effect_id": null
+        },
+        "identifier": "dialogue.dockmasterwarning"
+      },
+      {
+        "definition_id": "tagdef-aurora-quest-legal-branch",
+        "normalized_key": "quest.smugglerroute.legalbranch",
+        "owner": {
+          "kind": "quest_branch",
+          "project_id": "project-aurora-export",
+          "node_id": null,
+          "edge_id": null,
+          "dialogue_node_id": null,
+          "line_id": null,
+          "choice_id": null,
+          "option_id": null,
+          "quest_node_id": "node-smuggler-route",
+          "stage_id": "stage-choose-route",
+          "branch_id": "branch-legal-route",
+          "flow_id": null,
+          "transition_id": null,
+          "invocation_id": null,
+          "exit_id": null,
+          "effect_id": null
+        },
+        "identifier": "quest.smugglerroute.legalbranch"
+      },
+      {
+        "definition_id": "tagdef-aurora-effect-ledger-transfer",
+        "normalized_key": "state.transferledgertomara",
+        "owner": {
+          "kind": "narrative_effect",
+          "project_id": "project-aurora-export",
+          "node_id": null,
+          "edge_id": null,
+          "dialogue_node_id": null,
+          "line_id": null,
+          "choice_id": null,
+          "option_id": null,
+          "quest_node_id": null,
+          "stage_id": null,
+          "branch_id": null,
+          "flow_id": null,
+          "transition_id": null,
+          "invocation_id": null,
+          "exit_id": null,
+          "effect_id": "effect-01-ledger-ilya-to-mara"
+        },
+        "identifier": "state.transferledgertomara"
+      },
+      {
+        "definition_id": "tagdef-aurora-flow-main",
+        "normalized_key": "storyflow.main",
+        "owner": {
+          "kind": "story_flow",
+          "project_id": "project-aurora-export",
+          "node_id": null,
+          "edge_id": null,
+          "dialogue_node_id": null,
+          "line_id": null,
+          "choice_id": null,
+          "option_id": null,
+          "quest_node_id": null,
+          "stage_id": null,
+          "branch_id": null,
+          "flow_id": "flow-main-story",
+          "transition_id": null,
+          "invocation_id": null,
+          "exit_id": null,
+          "effect_id": null
+        },
+        "identifier": "storyflow.main"
+      },
+      {
+        "definition_id": "tagdef-aurora-transition-opening",
+        "normalized_key": "storyflow.main.begininspection",
+        "owner": {
+          "kind": "flow_transition",
+          "project_id": "project-aurora-export",
+          "node_id": null,
+          "edge_id": null,
+          "dialogue_node_id": null,
+          "line_id": null,
+          "choice_id": null,
+          "option_id": null,
+          "quest_node_id": null,
+          "stage_id": null,
+          "branch_id": null,
+          "flow_id": null,
+          "transition_id": "flow-transition-opening-dialogue",
+          "invocation_id": null,
+          "exit_id": null,
+          "effect_id": null
+        },
+        "identifier": "storyflow.main.begininspection"
+      },
+      {
+        "definition_id": "tagdef-aurora-invocation-smuggler",
+        "normalized_key": "storyflow.main.invokesmugglerroute",
+        "owner": {
+          "kind": "flow_invocation",
+          "project_id": "project-aurora-export",
+          "node_id": null,
+          "edge_id": null,
+          "dialogue_node_id": null,
+          "line_id": null,
+          "choice_id": null,
+          "option_id": null,
+          "quest_node_id": null,
+          "stage_id": null,
+          "branch_id": null,
+          "flow_id": null,
+          "transition_id": null,
+          "invocation_id": "flow-invocation-inspection-smuggler-route",
+          "exit_id": null,
+          "effect_id": null
+        },
+        "identifier": "storyflow.main.invokesmugglerroute"
+      },
+      {
+        "definition_id": "tagdef-aurora-exit-success",
+        "normalized_key": "storyflow.smugglerroute.success",
+        "owner": {
+          "kind": "flow_exit",
+          "project_id": "project-aurora-export",
+          "node_id": null,
+          "edge_id": null,
+          "dialogue_node_id": null,
+          "line_id": null,
+          "choice_id": null,
+          "option_id": null,
+          "quest_node_id": null,
+          "stage_id": null,
+          "branch_id": null,
+          "flow_id": null,
+          "transition_id": null,
+          "invocation_id": null,
+          "exit_id": "flow-exit-smuggler-success",
+          "effect_id": null
+        },
+        "identifier": "storyflow.smugglerroute.success"
+      }
+    ],
+    "omitted": [
+      {
+        "definition_id": "tagdef-aurora-relationship-guild-ledger",
+        "binding_id": "tagbind-aurora-relationship-guild-ledger",
+        "owner": {
+          "kind": "relationship",
+          "project_id": "project-aurora-export",
+          "node_id": null,
+          "edge_id": "edge-guild-ledger",
+          "dialogue_node_id": null,
+          "line_id": null,
+          "choice_id": null,
+          "option_id": null,
+          "quest_node_id": null,
+          "stage_id": null,
+          "branch_id": null,
+          "flow_id": null,
+          "transition_id": null,
+          "invocation_id": null,
+          "exit_id": null,
+          "effect_id": null
+        },
+        "code": "out_of_scope",
+        "details": {
+          "target": "generic"
+        }
+      }
+    ],
+    "diagnostics": []
+  },
+  "diagnostics": [
+    {
+      "diagnostic_version": 1,
+      "code": "export.scope.relationship-omitted",
+      "severity": "info",
+      "message_key": "export.diagnostic.relationship-omitted",
+      "owner": {
+        "owner_version": 1,
+        "kind": "relationship",
+        "id": "edge-guild-ledger",
+        "context_id": null
+      },
+      "parameters": {
+        "reason": "endpoint_out_of_scope"
+      }
+    },
+    {
+      "diagnostic_version": 1,
+      "code": "export.scope.relationship-omitted",
+      "severity": "info",
+      "message_key": "export.diagnostic.relationship-omitted",
+      "owner": {
+        "owner_version": 1,
+        "kind": "relationship",
+        "id": "edge-mara-trade-guild-membership",
+        "context_id": null
+      },
+      "parameters": {
+        "reason": "endpoint_out_of_scope"
+      }
+    },
+    {
+      "diagnostic_version": 1,
+      "code": "export.engine-tags.out-of-scope",
+      "severity": "warning",
+      "message_key": "export.diagnostic.engine-tags-out-of-scope",
+      "owner": {
+        "owner_version": 1,
+        "kind": "relationship",
+        "id": "edge-guild-ledger",
+        "context_id": null
+      },
+      "parameters": {
+        "definition_id": "tagdef-aurora-relationship-guild-ledger",
+        "binding_id": "tagbind-aurora-relationship-guild-ledger",
+        "target": "generic"
+      }
+    }
+  ]
+}

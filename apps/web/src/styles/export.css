@@ -1,0 +1,60 @@
+/* Export is one restrained work surface, not a separate authoring authority. */
+.export-overlay { position: fixed; inset: 0; z-index: 70; display: grid; place-items: center; padding: 20px; background: #17171733; }
+.export-workspace { display: flex; flex-direction: column; width: min(1200px, 100%); height: min(850px, calc(100dvh - 40px)); min-width: 0; overflow: hidden; border: 1px solid #d4d4d8; border-radius: 6px; background: #fff; color: #27272a; box-shadow: 0 12px 42px #18181b26; font-size: 13px; }
+.export-header { display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; padding: 12px 16px; border-bottom: 1px solid #e4e4e7; }
+.export-header > div { min-width: 0; }
+.export-header > button { flex-shrink: 0; margin-left: 12px; }
+.export-header h2 { font-size: 17px; font-weight: 650; }
+.export-header p { overflow-wrap: anywhere; color: #71717a; }
+.export-body { display: grid; grid-template-columns: minmax(240px, 300px) minmax(0, 1fr); flex: 1; min-height: 0; }
+.export-options { overflow-y: auto; padding: 16px; border-right: 1px solid #e4e4e7; }
+.export-options > label { display: grid; gap: 4px; margin-bottom: 12px; font-weight: 600; }
+.export-workspace select, .export-workspace input[type=search] { min-width: 0; width: 100%; height: 34px; padding: 4px 8px; border: 1px solid #d4d4d8; border-radius: 4px; background: white; color: #27272a; font-size: 13px; }
+.export-workspace select:disabled { color: #52525b; background: #f4f4f5; }
+.export-flow-picker { min-width: 0; margin: 10px 0 14px; }
+.export-flow-picker legend { font-weight: 600; padding-bottom: 8px; }
+.export-flow-list { max-height: 170px; overflow-y: auto; padding: 6px 0; }
+.export-flow-list label { display: flex; align-items: start; gap: 8px; padding: 6px 0; }
+.export-flow-list input { margin-top: 3px; flex-shrink: 0; }
+.export-flow-list span { min-width: 0; overflow-wrap: anywhere; }
+.export-command { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 34px; padding: 6px 10px; border: 1px solid #d4d4d8; border-radius: 4px; background: #fff; color: #3f3f46; font-size: 13px; font-weight: 600; }
+.export-command svg { flex-shrink: 0; }
+.export-command:disabled { opacity: .45; cursor: not-allowed; }
+.export-primary { background: #166534; color: #fff; border-color: #166534; }
+.export-workspace h3 { font-size: 13px; font-weight: 650; }
+.export-inventory, .export-diagnostics { margin-top: 16px; padding-top: 12px; border-top: 1px solid #e4e4e7; }
+.export-inventory dl { margin-top: 6px; }
+.export-inventory dl > div { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 2px 0; }
+.export-inventory dt { color: #71717a; }
+.export-inventory dd { font-variant-numeric: tabular-nums; }
+.export-resolved { margin-top: 8px; color: #71717a; }
+.export-section-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.export-section-heading select { width: auto; max-width: 100%; }
+.export-section-heading > span { overflow-wrap: anywhere; color: #71717a; }
+.export-diagnostic { padding: 10px 0 10px 8px; border-bottom: 1px solid #e4e4e7; border-left: 3px solid #a1a1aa; overflow-wrap: anywhere; }
+.export-diagnostic p { margin: 4px 0; }
+.export-error { color: #b91c1c; }
+.export-diagnostic.export-error { border-left-color: #dc2626; }
+.export-warning { border-left-color: #ca8a04; }
+.export-owner { display: grid; font-size: 11px; color: #71717a; }
+.export-diagnostic details { color: #71717a; font-size: 11px; }
+.export-diagnostic pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.export-preview { display: flex; flex-direction: column; min-width: 0; min-height: 0; padding: 16px; gap: 10px; }
+.export-preview > pre { min-height: 0; flex: 1; overflow: auto; padding: 12px; background: #fafafa; border: 1px solid #e4e4e7; border-radius: 4px; font: 12px/1.6 ui-monospace, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+.export-notice { color: #854d0e; background: #fefce8; padding: 8px; }
+.export-progress { display: flex; align-items: center; gap: 8px; }
+.export-footer { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; padding: 12px 16px; border-top: 1px solid #e4e4e7; flex-shrink: 0; }
+.export-destination { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1 1 260px; }
+.export-destination code { min-width: 0; overflow-wrap: anywhere; font-size: 11px; }
+.export-footer-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.export-overwrite { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.export-completion { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; width: 100%; color: #166534; overflow-wrap: anywhere; }
+@media (max-width: 700px) {
+  .export-overlay { padding: 8px; }
+  .export-workspace { height: calc(100dvh - 16px); }
+  .export-body { grid-template-columns: minmax(0, 1fr); overflow-y: auto; display: block; }
+  .export-options { overflow: visible; border-right: 0; border-bottom: 1px solid #e4e4e7; }
+  .export-preview { min-height: 260px; }
+  .export-preview > pre { max-height: 400px; }
+  .export-footer { max-height: 40dvh; overflow-y: auto; padding: 8px; }
+}

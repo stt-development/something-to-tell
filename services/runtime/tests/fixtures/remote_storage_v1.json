@@ -1,0 +1,90 @@
+{
+  "constants": {
+    "REMOTE_STORAGE_VERSION": 1,
+    "REMOTE_COUNTER_MAX": "9223372036854775807",
+    "REMOTE_SUPPORTED_POSTGRES_MAJORS": [17],
+    "REMOTE_LEASE_TTL_SECONDS": 60,
+    "REMOTE_LEASE_RENEW_SECONDS": 15,
+    "REMOTE_TRANSACTION_TIMEOUT_SECONDS": 20,
+    "REMOTE_CONNECT_TIMEOUT_SECONDS": 5,
+    "REMOTE_POOL_TIMEOUT_SECONDS": 5,
+    "REMOTE_STATEMENT_TIMEOUT_SECONDS": 10,
+    "REMOTE_LOCK_TIMEOUT_SECONDS": 3,
+    "REMOTE_SCHEMA_PLAN_TTL_SECONDS": 300
+  },
+  "head": {
+    "protocol_version": 1,
+    "project_id": "project-a",
+    "storage_generation": "11111111-1111-4111-8111-111111111111",
+    "authoring_revision": "9007199254740993",
+    "saved_authoring_revision": "9007199254740992",
+    "saved_revision": "4",
+    "document_checksum": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "writer_epoch": "2",
+    "state": "ready"
+  },
+  "guard": {
+    "protocol_version": 1,
+    "project_id": "project-a",
+    "storage_generation": "11111111-1111-4111-8111-111111111111",
+    "command_id": "22222222-2222-4222-8222-222222222222",
+    "writer_epoch": "2",
+    "expected_revision": "9007199254740992"
+  },
+  "schema_plan": {
+    "protocol_version": 1,
+    "plan_id": "44444444-4444-4444-8444-444444444444",
+    "plan_fingerprint": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "action": "upgrade",
+    "source_schema_revision": "20261022_0011",
+    "target_schema_revision": "20261022_0012",
+    "migration_revisions": ["20261022_0012"],
+    "expires_at": "2026-10-23T12:05:00Z",
+    "backup_required": true
+  },
+  "schema_backup_request": {
+    "protocol_version": 1,
+    "project_path": "/stories/Example.narrative",
+    "profile_id": "admin-profile",
+    "plan_id": "44444444-4444-4444-8444-444444444444",
+    "plan_fingerprint": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "confirmation": "backup_and_restore_verified"
+  },
+  "schema_backup_attestation": {
+    "protocol_version": 1,
+    "backup_attestation_id": "33333333-3333-4333-8333-333333333333",
+    "plan_id": "44444444-4444-4444-8444-444444444444",
+    "plan_fingerprint": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "expires_at": "2026-10-23T12:05:00Z"
+  },
+  "schema_execution": {
+    "protocol_version": 1,
+    "plan_id": "44444444-4444-4444-8444-444444444444",
+    "action": "provision",
+    "schema_revision": "20261022_0012",
+    "status": "completed"
+  },
+  "release_request": {
+    "protocol_version": 1,
+    "storage_generation": "11111111-1111-4111-8111-111111111111",
+    "confirmation": "leave_remote_working_data_unchanged"
+  },
+  "release_result": {
+    "protocol_version": 1,
+    "session_id": "session-a",
+    "project_id": "project-a",
+    "storage_generation": "11111111-1111-4111-8111-111111111111",
+    "status": "local_session_released"
+  },
+  "receipt": {
+    "protocol_version": 1,
+    "project_id": "project-a",
+    "storage_generation": "11111111-1111-4111-8111-111111111111",
+    "command_id": "22222222-2222-4222-8222-222222222222",
+    "request_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "base_revision": "9007199254740992",
+    "result_revision": "9007199254740993",
+    "document_checksum": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "result": "changed"
+  }
+}

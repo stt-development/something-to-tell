@@ -1,0 +1,231 @@
+/* Global document, clean start, React Flow defaults, and workspace foundation. Rules remain in the shared stt-app layer and preserve source order. */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  color: #0f172a;
+  background: #f8fafc;
+}
+
+.clean-start-stage {
+  isolation: isolate;
+  position: relative;
+}
+
+.clean-start-graph {
+  height: 100%;
+  inset: 0;
+  opacity: 0.28;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  z-index: 0;
+}
+
+.clean-start-content {
+  position: relative;
+  text-shadow: 0 1px 0 #ffffff;
+  z-index: 1;
+}
+
+.react-flow__node {
+  border: 0;
+  border-radius: 8px;
+  color: #0f172a;
+  font-size: 12px;
+  min-width: 220px;
+  overflow: visible;
+}
+
+/* Canvas action tooltips must remain above floating Flow overlays. */
+.react-flow__node:not(:has(> .narrative-node-frame)):focus-within,
+.react-flow__node:not(:has(> .narrative-node-frame)):hover {
+  z-index: 1000 !important;
+}
+
+.react-flow__node.issue-tooltip-active {
+  z-index: 10000 !important;
+}
+
+.react-flow__edge-text {
+  fill: #334155;
+  font-size: 11px;
+}
+
+.react-flow__edge-path {
+  stroke-width: 3;
+}
+
+.react-flow__edge-interaction {
+  stroke-width: 18;
+}
+
+.light-canvas.project-rail-open {
+  box-sizing: border-box;
+  margin-left: 256px;
+  max-width: calc(100vw - 256px);
+  width: calc(100% - 256px);
+}
+
+.light-canvas.flow-canvas {
+  bottom: auto;
+  height: 100%;
+  left: 0;
+  max-height: 100%;
+  position: absolute;
+  top: 0;
+  transform: none;
+}
+
+.flow-canvas .react-flow__node {
+  min-width: 200px;
+}
+
+.project-rail-open .react-flow__controls {
+  left: 12px;
+}
+
+.project-tree-row {
+  align-items: center;
+  display: flex;
+  min-width: 0;
+  padding-left: calc(min(var(--tree-depth), 6) * 12px);
+}
+
+.project-navigation-scroll {
+  height: 288px;
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-gutter: stable;
+}
+
+.project-tree-branch {
+  border-bottom: 1px solid #cbd5e1;
+  border-left: 1px solid #cbd5e1;
+  display: none;
+  flex: 0 0 10px;
+  height: 15px;
+  margin-right: 3px;
+  transform: translateY(-4px);
+}
+
+.project-tree-row:not([data-depth="0"]) .project-tree-branch {
+  display: block;
+}
+
+.light-canvas {
+  background: #f8fafc;
+}
+
+.pan-canvas .react-flow__pane {
+  cursor: grab;
+}
+
+.pan-canvas .react-flow__pane.dragging {
+  cursor: grabbing;
+}
+
+/* One native pane hit surface avoids walking dense graph descendants in Hand.
+ * The viewport is z2 inside this pane; controls/MiniMap stay above its renderer.
+ * A pseudo-element keeps events on the original pane, with no extra controller.
+ */
+.pan-canvas .react-flow__pane::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: auto;
+  cursor: inherit;
+}
+
+/* Hand mode routes every primary drag to the pane, including drags that begin over graph content. */
+.pan-canvas .react-flow__node,
+.pan-canvas .react-flow__node *,
+.pan-canvas .react-flow__edge,
+.pan-canvas .react-flow__edge *,
+.pan-canvas .react-flow__edgelabel-renderer,
+.pan-canvas .react-flow__edgelabel-renderer * {
+  /* React Flow's inline pointer-events and explicit child hit targets must not defeat Hand mode. */
+  pointer-events: none !important;
+}
+
+.workspace-mode-control {
+  align-items: center;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  display: inline-flex;
+  flex-shrink: 0;
+  padding: 2px;
+}
+
+.workspace-mode-control button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  color: #64748b;
+  display: inline-flex;
+  font-size: 11px;
+  font-weight: 700;
+  gap: 5px;
+  height: 30px;
+  padding: 0 9px;
+}
+
+.workspace-mode-control button:hover,
+.workspace-mode-control button:focus-visible {
+  color: #0f172a;
+  outline: 2px solid #bae6fd;
+  outline-offset: 0;
+}
+
+.workspace-mode-control .workspace-mode-active {
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgb(15 23 42 / 12%);
+  color: #0f172a;
+}
+
+.connection-type-option {
+  align-items: flex-start;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  color: #334155;
+  display: flex;
+  gap: 10px;
+  min-height: 72px;
+  padding: 12px;
+  text-align: left;
+}
+
+.connection-type-option:hover,
+.connection-type-option:focus-visible {
+  background: #f8fafc;
+  border-color: #0284c7;
+  outline: 2px solid #bae6fd;
+}
+
+.connection-type-option:disabled {
+  background: #f8fafc;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.connection-type-option span,
+.connection-type-option strong,
+.connection-type-option small {
+  display: block;
+}
+
+.connection-type-option small {
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 4px;
+}

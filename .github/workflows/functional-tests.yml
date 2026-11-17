@@ -1,0 +1,183 @@
+name: Functional verification (non-performance)
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: functional-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  foundation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: something_to_tell_test
+          POSTGRES_USER: stt_test
+          POSTGRES_PASSWORD: stt_test_password
+        ports: [55432:5432]
+        options: >-
+          --health-cmd "pg_isready -U stt_test -d something_to_tell_test"
+          --health-interval 2s --health-timeout 3s --health-retries 20
+    env:
+      STT_TEST_POSTGRES_URL: postgresql+psycopg://stt_test:stt_test_password@127.0.0.1:55432/something_to_tell_test?sslmode=disable
+      STT_TEST_POSTGRES_TLS: "1"
+      STT_TEST_POSTGRES_NATIVE_DOCKER: "1"
+      PYTEST_ADDOPTS: --junitxml=${{ runner.temp }}/python.xml -ra
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@v6
+      - name: Record runner and tool versions
+        run: |
+          uname -a
+          printf 'Runner image %s %s\n' "$ImageOS" "$ImageVersion"
+          node --version
+          python --version
+          uv --version
+      - name: Install locked dependencies
+        run: |
+          npm install --global pnpm@10.15.0
+          pnpm install --frozen-lockfile
+          uv sync --all-extras --locked
+      - name: Verify public source including PostgreSQL and desktop configuration
+        # Product coverage is shared; private documentation archives are not shipped.
+        env:
+          STT_TEST_POSTGRES_CONTAINER: ${{ job.services.postgres.id }}
+        run: pnpm verify:public
+      - name: Check reviewed artifact drift
+        run: uv run python -m services.runtime.scripts.build_export_examples --check
+      - name: Disclose Python prerequisite skips and test totals
+        if: always()
+        # Compiler-specific skips here are covered by the required compiler jobs.
+        run: uv run python tools/check-ci-test-report.py "${{ runner.temp }}/python.xml"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: functional-python-results
+          path: ${{ runner.temp }}/python.xml
+          retention-days: 7
+
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      PLAYWRIGHT_JUNIT_OUTPUT_FILE: ${{ runner.temp }}/playwright.xml
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@v6
+      - name: Install locked dependencies
+        run: |
+          npm install --global pnpm@10.15.0
+          pnpm install --frozen-lockfile
+          uv sync --all-extras --locked
+      - name: Install browser
+        run: pnpm --dir apps/web exec playwright install --with-deps chromium
+      - name: Verify complete browser workflows
+        # The runtime and every test project are disposable runner-owned state.
+        env:
+          STT_RUNTIME_STORAGE_PROFILES_FILE: ${{ runner.temp }}/storage-profiles.json
+          STT_RUNTIME_STORAGE_MASTER_KEY_FILE: ${{ runner.temp }}/storage-key
+          STT_RUNTIME_CANON_PROVIDER_PROFILES_FILE: ${{ runner.temp }}/provider-profiles.enc
+        run: |
+          uv run python main.py > "$RUNNER_TEMP/stt-runtime.log" 2>&1 &
+          runtime_pid=$!
+          pnpm web:dev > "$RUNNER_TEMP/stt-web.log" 2>&1 &
+          web_pid=$!
+          trap 'kill "$runtime_pid" "$web_pid" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent http://127.0.0.1:8719/api/health && curl --fail --silent http://127.0.0.1:1420/ > /dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:8719/api/health
+          curl --fail --silent http://127.0.0.1:1420/ > /dev/null
+          pnpm web:test:e2e --reporter=line,junit
+      - name: Reject skipped or empty browser coverage
+        if: always()
+        run: uv run python tools/check-ci-test-report.py "$RUNNER_TEMP/playwright.xml" --no-skips
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: functional-browser-results
+          path: |
+            apps/web/test-results
+            ${{ runner.temp }}/playwright.xml
+          retention-days: 7
+
+  desktop-unit:
+    runs-on: macos-15
+    timeout-minutes: 45
+    env:
+      STT_RUNTIME_STORAGE_PROFILES_FILE: ${{ runner.temp }}/owned-storage.json
+      STT_RUNTIME_STORAGE_MASTER_KEY_FILE: ${{ runner.temp }}/owned-storage-key
+      STT_RUNTIME_CANON_PROVIDER_PROFILES_FILE: ${{ runner.temp }}/owned-providers.enc
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@v6
+      - name: Install locked test and build dependencies
+        run: |
+          npm install --global pnpm@10.15.0
+          pnpm install --frozen-lockfile
+          uv sync --all-extras --group build --locked
+      - name: Record native tool versions
+        run: |
+          uname -a
+          rustc --version --verbose
+          cargo --version
+      - name: Test native commands and resource configuration
+        # Ordinary unit tests and the explicit frozen test have different inputs.
+        run: |
+          pnpm desktop:config:test
+          cargo test --locked --manifest-path apps/desktop/src-tauri/Cargo.toml
+      - name: Build and verify frozen runtime without publishing binaries
+        run: |
+          uv run --group build python -m services.runtime.scripts.build_desktop_runtime > "$RUNNER_TEMP/runtime-build.json"
+          executable=$(node -p 'require("path").join(JSON.parse(require("fs").readFileSync(process.argv[1])).candidate,"stt-runtime")' "$RUNNER_TEMP/runtime-build.json")
+          test -x "$executable"
+          printf 'STT_TEST_DESKTOP_RUNTIME_EXECUTABLE=%s\n' "$executable" >> "$GITHUB_ENV"
+          env PATH=/nonexistent "$executable" --self-check
+      - name: Test real frozen child and native ownership
+        run: |
+          uv run pytest services/runtime/tests/test_desktop_runtime.py services/runtime/tests/test_desktop_lifecycle.py -ra --junitxml="$RUNNER_TEMP/frozen.xml"
+          uv run python tools/check-ci-test-report.py "$RUNNER_TEMP/frozen.xml" --no-skips
+          cargo test --locked --manifest-path apps/desktop/src-tauri/Cargo.toml runtime_supervisor::tests::real_frozen_child_handshake -- --ignored --exact
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: functional-frozen-results
+          path: ${{ runner.temp }}/frozen.xml
+          retention-days: 7
+
+  ink:
+    uses: ./.github/workflows/ink-export.yml
+
+  yarn:
+    uses: ./.github/workflows/yarn-export.yml

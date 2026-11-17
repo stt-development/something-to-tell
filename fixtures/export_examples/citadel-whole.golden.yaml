@@ -1,0 +1,50 @@
+"projection_version": 1
+"manifest":
+  "schema_version": 1
+  "kind": "narrative_export"
+  "source":
+    "identity_version": 1
+    "project_id": "project-citadel"
+    "project_name": "Citadel Branch"
+    "content_locale": "en"
+    "document_version": 5
+    "source_checksum": "e2eca993d928963892534fbca7edeb7b621f17ffb6659547e29ff31117bd448c"
+  "scope": "whole_project"
+  "story_flow_ids": []
+  "engine_tag_target": "generic"
+"project":
+  "project_version": 1
+  "id": "project-citadel"
+  "name": "Citadel Branch"
+  "description": "Branching questline prototype with an empty graph."
+  "content_locale": "en"
+  "extensions":
+    "extension_version": 1
+    "values": {}
+"nodes": []
+"relationships": []
+"dialogues": []
+"quests": []
+"story_flows":
+  "story_flows_version": 1
+  "definitions": []
+  "memberships": []
+  "transitions": []
+  "scene_boundaries": []
+  "invocations": []
+  "exits": []
+  "exit_bindings": []
+"narrative_state":
+  "narrative_state_version": 1
+  "initial_states": []
+  "effects": []
+  "bindings": []
+"engine_tags":
+  "engine_tags_version": 1
+  "project_id": "project-citadel"
+  "source_checksum": "e2eca993d928963892534fbca7edeb7b621f17ffb6659547e29ff31117bd448c"
+  "target": "generic"
+  "entries": []
+  "omitted": []
+  "diagnostics": []
+"diagnostics": []

@@ -1,0 +1,265 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "id": "start",
+      "title": {
+        "en": "Getting started",
+        "ru": "Начало работы"
+      }
+    },
+    {
+      "id": "graph",
+      "title": {
+        "en": "Graph and elements",
+        "ru": "Граф и элементы"
+      }
+    },
+    {
+      "id": "stories",
+      "title": {
+        "en": "Stories and playback",
+        "ru": "Истории и прохождение"
+      }
+    },
+    {
+      "id": "checks",
+      "title": {
+        "en": "Checks and AI assistance",
+        "ru": "Проверки и помощь ИИ"
+      }
+    },
+    {
+      "id": "export",
+      "title": {
+        "en": "Export",
+        "ru": "Экспорт"
+      }
+    },
+    {
+      "id": "storage",
+      "title": {
+        "en": "Storage and recovery",
+        "ru": "Хранение и восстановление"
+      }
+    }
+  ],
+  "articles": [
+    {
+      "id": "getting-started",
+      "category": "start",
+      "title": {
+        "en": "Your first story",
+        "ru": "Первая история"
+      },
+      "summary": {
+        "en": "Create a short branching story and try it.",
+        "ru": "Создайте короткую историю с развилкой и пройдите её."
+      }
+    },
+    {
+      "id": "projects",
+      "category": "start",
+      "title": {
+        "en": "Projects and saving",
+        "ru": "Проекты и сохранение"
+      },
+      "summary": {
+        "en": "Create, open, save and copy your work.",
+        "ru": "Создание, открытие, сохранение и копирование работы."
+      }
+    },
+    {
+      "id": "canvas",
+      "category": "graph",
+      "title": {
+        "en": "Working on the graph",
+        "ru": "Работа с графом"
+      },
+      "summary": {
+        "en": "Navigate, select, connect and arrange elements.",
+        "ru": "Навигация, выделение, соединение и размещение элементов."
+      }
+    },
+    {
+      "id": "node-types",
+      "category": "graph",
+      "title": {
+        "en": "Choose an element type",
+        "ru": "Выбор типа элемента"
+      },
+      "summary": {
+        "en": "Use characters, frames, requirements and outcomes.",
+        "ru": "Персонажи, контейнеры, требования и результаты."
+      }
+    },
+    {
+      "id": "dialogue",
+      "category": "stories",
+      "title": {
+        "en": "Branching dialogue",
+        "ru": "Ветвящиеся диалоги"
+      },
+      "summary": {
+        "en": "Write lines, choices and connected outcomes.",
+        "ru": "Реплики, выборы и связанные результаты."
+      }
+    },
+    {
+      "id": "quests",
+      "category": "stories",
+      "title": {
+        "en": "Quests",
+        "ru": "Квесты"
+      },
+      "summary": {
+        "en": "Set objectives, stages, requirements and rewards.",
+        "ru": "Цели, этапы, требования и награды."
+      }
+    },
+    {
+      "id": "story-flows",
+      "category": "stories",
+      "title": {
+        "en": "Story order and flows",
+        "ru": "Порядок истории и потоки"
+      },
+      "summary": {
+        "en": "Set a start, branch, call another flow and return.",
+        "ru": "Начало, развилки, вызовы другого потока и возврат."
+      }
+    },
+    {
+      "id": "narrative-state",
+      "category": "stories",
+      "title": {
+        "en": "Conditions and effects",
+        "ru": "Условия и эффекты"
+      },
+      "summary": {
+        "en": "Track item ownership and changes during a story.",
+        "ru": "Владение предметами и изменения во время истории."
+      }
+    },
+    {
+      "id": "playback",
+      "category": "stories",
+      "title": {
+        "en": "Try your story",
+        "ru": "Прохождение истории"
+      },
+      "summary": {
+        "en": "Test branches and inspect results without editing.",
+        "ru": "Проверка веток и результатов без изменения истории."
+      }
+    },
+    {
+      "id": "canon-check",
+      "category": "checks",
+      "title": {
+        "en": "Check story consistency",
+        "ru": "Проверка целостности истории"
+      },
+      "summary": {
+        "en": "Understand issues and review fixes.",
+        "ru": "Разбор замечаний и проверка исправлений."
+      }
+    },
+    {
+      "id": "impact-analysis",
+      "category": "checks",
+      "title": {
+        "en": "Check the impact of a change",
+        "ru": "Оценка влияния изменения"
+      },
+      "summary": {
+        "en": "Find affected elements before editing.",
+        "ru": "Поиск затронутых элементов до редактирования."
+      }
+    },
+    {
+      "id": "impact-resolution",
+      "category": "checks",
+      "title": {
+        "en": "Explore solutions",
+        "ru": "Разбор решений"
+      },
+      "summary": {
+        "en": "Compare and review proposed changes.",
+        "ru": "Сравнение и проверка предложенных изменений."
+      }
+    },
+    {
+      "id": "providers",
+      "category": "checks",
+      "title": {
+        "en": "Set up AI assistance",
+        "ru": "Настройка помощи ИИ"
+      },
+      "summary": {
+        "en": "Choose providers and models and control sharing.",
+        "ru": "Выбор провайдеров, моделей и контроль отправки данных."
+      }
+    },
+    {
+      "id": "style",
+      "category": "checks",
+      "title": {
+        "en": "Writing style",
+        "ru": "Стиль текста"
+      },
+      "summary": {
+        "en": "Set project and Scene styles and review rewrites.",
+        "ru": "Стили проекта и сцены, проверка рекомендаций."
+      }
+    },
+    {
+      "id": "memory",
+      "category": "checks",
+      "title": {
+        "en": "Guidance for assistants",
+        "ru": "Указания для помощников"
+      },
+      "summary": {
+        "en": "Keep reviewed guidance for future requests.",
+        "ru": "Сохранение проверенных указаний для будущих запросов."
+      }
+    },
+    {
+      "id": "export-identifiers",
+      "category": "export",
+      "title": {
+        "en": "Export Identifiers",
+        "ru": "Идентификаторы экспорта"
+      },
+      "summary": {
+        "en": "Assign stable names for exported story elements.",
+        "ru": "Стабильные имена элементов при экспорте."
+      }
+    },
+    {
+      "id": "export",
+      "category": "export",
+      "title": {
+        "en": "Export your story",
+        "ru": "Экспорт истории"
+      },
+      "summary": {
+        "en": "Preview and export JSON, YAML, Ink and Yarn Spinner.",
+        "ru": "Предпросмотр и экспорт JSON, YAML, Ink и Yarn Spinner."
+      }
+    },
+    {
+      "id": "storage-recovery",
+      "category": "storage",
+      "title": {
+        "en": "Storage and connection recovery",
+        "ru": "Хранение и восстановление соединения"
+      },
+      "summary": {
+        "en": "Choose storage and recover safely after a failure.",
+        "ru": "Выбор хранилища и безопасное восстановление после сбоя."
+      }
+    }
+  ]
+}

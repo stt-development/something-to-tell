@@ -1,0 +1,41 @@
+name: Ink export
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  official-compiler:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@v6
+      - name: Install pinned official Ink compiler
+        run: |
+          curl --fail --location https://github.com/inkle/ink/releases/download/v1.2.1/inklecate_linux.zip -o "$RUNNER_TEMP/ink.zip"
+          echo "1997ff5bca618c90003ecd5fecb286e7468abb955005a2a185042949642f8fb5  $RUNNER_TEMP/ink.zip" | sha256sum --check
+          unzip "$RUNNER_TEMP/ink.zip" -d "$RUNNER_TEMP/inklecate"
+          chmod +x "$RUNNER_TEMP/inklecate/inklecate"
+      - name: Install runtime test dependencies
+        run: uv sync --all-extras --locked
+      - name: Compile and execute deterministic Ink source
+        env:
+          STT_TEST_INKLECATE: ${{ runner.temp }}/inklecate/inklecate
+        run: |
+          test -x "$STT_TEST_INKLECATE"
+          uv run pytest services/runtime/tests/test_export_ink.py services/runtime/tests/test_export_official_examples.py -ra -k 'not official_yarn' --junitxml="$RUNNER_TEMP/ink.xml"
+      - name: Reject skipped compiler coverage
+        if: always()
+        run: uv run python tools/check-ci-test-report.py "$RUNNER_TEMP/ink.xml" --no-skips
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ink-compiler-results
+          path: ${{ runner.temp }}/ink.xml
+          retention-days: 7

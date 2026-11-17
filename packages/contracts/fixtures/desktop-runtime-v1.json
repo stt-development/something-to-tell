@@ -1,0 +1,7 @@
+{
+  "constants": {"version": 1, "max_frame_bytes": 4096, "bootstrap_timeout_seconds": 5, "ready_timeout_seconds": 15, "shutdown_timeout_seconds": 10},
+  "bootstrap": {"protocol_version": 1, "type": "bootstrap", "token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"},
+  "shutdown": {"protocol_version": 1, "type": "shutdown"},
+  "ready": {"protocol_version": 1, "type": "ready", "port": 51234, "pid": 12345, "runtime_version": "0.1.0"},
+  "error": {"protocol_version": 1, "type": "error", "code": "desktop_startup_failed"}
+}

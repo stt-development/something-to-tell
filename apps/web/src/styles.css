@@ -1,0 +1,32 @@
+/*
+ * Cascade order is contractual: Tailwind establishes primitives first and the
+ * application surface modules retain the historical override order afterward.
+ */
+@layer tailwind-base, tailwind-components, tailwind-utilities, stt-app;
+
+@import "./styles/base.css" layer(stt-app);
+@import "./styles/runtime-startup.css" layer(stt-app);
+@import "./styles/story.css" layer(stt-app);
+@import "./styles/story-flow.css" layer(stt-app);
+@import "./styles/shell-controls.css" layer(stt-app);
+@import "./styles/scene-analysis.css" layer(stt-app);
+@import "./styles/canvas-nodes.css" layer(stt-app);
+@import "./styles/editors.css" layer(stt-app);
+@import "./styles/canvas-frames.css" layer(stt-app);
+@import "./styles/playback.css" layer(stt-app);
+@import "./styles/canon.css" layer(stt-app);
+@import "./styles/impact.css" layer(stt-app);
+@import "./styles/engine-tags.css" layer(stt-app);
+@import "./styles/export.css" layer(stt-app);
+
+@layer tailwind-base {
+  @tailwind base;
+}
+
+@layer tailwind-components {
+  @tailwind components;
+}
+
+@layer tailwind-utilities {
+  @tailwind utilities;
+}

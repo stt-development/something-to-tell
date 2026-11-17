@@ -1,0 +1,2460 @@
+{
+  "fixture_version": 1,
+  "slug": "project-aurora",
+  "manifest": {
+    "format_version": 2,
+    "project_id": "project-aurora",
+    "name": "Project Aurora",
+    "description": "Primary sample workspace for testing graph editing flows.",
+    "created_at": "2026-07-28T10:00:00Z",
+    "updated_at": "2026-07-28T10:00:00Z",
+    "saved_revision": 1,
+    "settings_version": 5,
+    "settings": {
+      "ui_locale": "en",
+      "content_locale": "en",
+      "autosave": {
+        "enabled": true,
+        "interval_seconds": 300
+      },
+      "storage": {
+        "mode": "local_sqlite",
+        "connection_profile_id": null
+      },
+      "canon_check": {
+        "canon_check_version": 1,
+        "deterministic_enabled": true,
+        "enabled_rules": {},
+        "severity_overrides": {},
+        "agent_mode": "disabled",
+        "content_policy": "never",
+        "model_preference": null,
+        "provider_profile_id": null
+      },
+      "agent_providers": {
+        "agent_providers_version": 1,
+        "default_provider_profile_id": null,
+        "agents": {
+          "canon_checker": {
+            "provider_source": "project_default",
+            "provider_profile_override_id": null,
+            "model_id": null
+          },
+          "impact_resolver": {
+            "provider_source": "project_default",
+            "provider_profile_override_id": null,
+            "model_id": null
+          },
+          "style_rewriter": {
+            "provider_source": "project_default",
+            "provider_profile_override_id": null,
+            "model_id": "gpt-5.6-luna"
+          }
+        }
+      },
+      "impact_resolver": {
+        "impact_resolver_version": 1,
+        "agent_mode": "disabled",
+        "content_policy": "never"
+      },
+      "style_system": {
+        "style_system_version": 1,
+        "default_style_profile_id": "style-aurora-default",
+        "agent_mode": "disabled",
+        "content_policy": "never"
+      }
+    },
+    "asset_paths": []
+  },
+  "project_metadata": {
+    "status": "open",
+    "fixture": true
+  },
+  "nodes": [
+    {
+      "id": "node-customs-office",
+      "project_id": "project-aurora",
+      "type": "Location",
+      "title": "Customs Office",
+      "summary": "Inspection office nested inside Glass Harbor.",
+      "body": "Inspection office nested inside Glass Harbor.",
+      "status": "canon",
+      "metadata": {
+        "isFrame": true,
+        "kind": "Location",
+        "label": "Customs Office",
+        "title": "Customs Office",
+        "summary": "Inspection office nested inside Glass Harbor.",
+        "tags": [
+          "harbor",
+          "inspection"
+        ],
+        "position": {
+          "x": 24,
+          "y": 58
+        },
+        "width": 380,
+        "height": 220,
+        "composition_frame": true
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "node-dock-dialogue",
+      "project_id": "project-aurora",
+      "type": "Dialogue",
+      "title": "Dockmaster Warning",
+      "summary": "Dialogue beat where the player learns why legal passage is blocked.",
+      "body": "Dialogue beat where the player learns why legal passage is blocked.",
+      "status": "canon",
+      "metadata": {
+        "kind": "Dialogue",
+        "label": "Dockmaster Warning",
+        "title": "Dockmaster Warning",
+        "summary": "Dialogue beat where the player learns why legal passage is blocked.",
+        "tags": [
+          "dialogue",
+          "intro"
+        ],
+        "position": {
+          "x": 308,
+          "y": 384
+        },
+        "width": 260,
+        "height": 156
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "node-dockmaster",
+      "project_id": "project-aurora",
+      "type": "Character",
+      "title": "Ilya Voss",
+      "summary": "Glass Harbor dockmaster ordered to enforce the silver embargo.",
+      "body": "Glass Harbor dockmaster ordered to enforce the silver embargo.",
+      "status": "canon",
+      "metadata": {
+        "kind": "Character",
+        "label": "Ilya Voss",
+        "title": "Ilya Voss",
+        "summary": "Glass Harbor dockmaster ordered to enforce the silver embargo.",
+        "tags": [
+          "harbor",
+          "authority"
+        ],
+        "character_role": "Harbor authority and reluctant gatekeeper",
+        "position": {
+          "x": 1080,
+          "y": 900
+        },
+        "width": 260,
+        "height": 156
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "node-embargo",
+      "project_id": "project-aurora",
+      "type": "Lore",
+      "title": "Silver Embargo",
+      "summary": "Trade rule that blocks the player faction from legal travel.",
+      "body": "Trade rule that blocks the player faction from legal travel.",
+      "status": "canon",
+      "metadata": {
+        "kind": "Lore",
+        "label": "Silver Embargo",
+        "title": "Silver Embargo",
+        "summary": "Trade rule that blocks the player faction from legal travel.",
+        "tags": [
+          "economy",
+          "constraint"
+        ],
+        "position": {
+          "x": 24,
+          "y": 384
+        },
+        "width": 260,
+        "height": 156
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "node-harbor",
+      "project_id": "project-aurora",
+      "type": "Location",
+      "title": "Glass Harbor",
+      "summary": "Neutral port where the embargo enforcement is easiest to inspect.",
+      "body": "Neutral port where the embargo enforcement is easiest to inspect.",
+      "status": "canon",
+      "metadata": {
+        "isFrame": true,
+        "kind": "Location",
+        "label": "Glass Harbor",
+        "title": "Glass Harbor",
+        "summary": "Neutral port where the embargo enforcement is easiest to inspect.",
+        "tags": [
+          "port",
+          "travel"
+        ],
+        "position": {
+          "x": 592,
+          "y": 58
+        },
+        "width": 428,
+        "height": 302,
+        "composition_frame": true
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "node-hero",
+      "project_id": "project-aurora",
+      "type": "Character",
+      "title": "Mara Vale",
+      "summary": "Smuggler captain carrying the opening contradiction.",
+      "body": "Smuggler captain carrying the opening contradiction.",
+      "status": "canon",
+      "metadata": {
+        "kind": "Character",
+        "label": "Mara Vale",
+        "title": "Mara Vale",
+        "summary": "Smuggler captain carrying the opening contradiction.",
+        "tags": [
+          "crew",
+          "voice"
+        ],
+        "character_role": "Protagonist and smuggler captain",
+        "position": {
+          "x": 80,
+          "y": 100
+        },
+        "width": 260,
+        "height": 156
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "node-inspection",
+      "project_id": "project-aurora",
+      "type": "Event",
+      "title": "Harbor Inspection",
+      "summary": "Event where guild agents search outbound vessels.",
+      "body": "Event where guild agents search outbound vessels.",
+      "status": "canon",
+      "metadata": {
+        "kind": "Event",
+        "label": "Harbor Inspection",
+        "title": "Harbor Inspection",
+        "summary": "Event where guild agents search outbound vessels.",
+        "tags": [
+          "checkpoint"
+        ],
+        "position": {
+          "x": 760,
+          "y": 720
+        },
+        "width": 260,
+        "height": 156
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "node-ledger-condition",
+      "project_id": "project-aurora",
+      "type": "Condition",
+      "title": "Ledger Acquired",
+      "summary": "Condition that unlocks the route negotiation branch.",
+      "body": "Condition that unlocks the route negotiation branch.",
+      "status": "canon",
+      "metadata": {
+        "kind": "Condition",
+        "label": "Ledger Acquired",
+        "title": "Ledger Acquired",
+        "summary": "Condition that unlocks the route negotiation branch.",
+        "tags": [
+          "gate"
+        ],
+        "requirement": {
+          "subject": "Mara Vale",
+          "predicate": "has acquired the Sealed Ledger",
+          "expression": "inventory.has('sealed-ledger')"
+        },
+        "position": {
+          "x": 1420,
+          "y": 180
+        },
+        "width": 260,
+        "height": 156
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "node-mara-runs-blockade",
+      "project_id": "project-aurora",
+      "type": "Event",
+      "title": "Mara Runs the Blockade",
+      "summary": "Mara orders her crew to launch and evade the harbor inspection boats.",
+      "body": "Mara orders her crew to launch and evade the harbor inspection boats.",
+      "status": "canon",
+      "metadata": {
+        "kind": "Event",
+        "label": "Mara Runs the Blockade",
+        "title": "Mara Runs the Blockade",
+        "summary": "Mara orders her crew to launch and evade the harbor inspection boats.",
+        "tags": [
+          "dialogue-outcome",
+          "action"
+        ],
+        "position": {
+          "x": 592,
+          "y": 384
+        },
+        "width": 260,
+        "height": 156
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "node-opening",
+      "project_id": "project-aurora",
+      "type": "Scene",
+      "title": "Opening Dock",
+      "summary": "First playable scene where the embargo is revealed.",
+      "body": "First playable scene where the embargo is revealed.",
+      "status": "canon",
+      "metadata": {
+        "isFrame": true,
+        "kind": "Scene",
+        "label": "Opening Dock",
+        "title": "Opening Dock",
+        "summary": "First playable scene where the embargo is revealed.",
+        "tags": [
+          "intro"
+        ],
+        "position": {
+          "x": 400,
+          "y": 60
+        },
+        "width": 1060,
+        "height": 580,
+        "composition_frame": true
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "node-route-compromised",
+      "project_id": "project-aurora",
+      "type": "Consequence",
+      "title": "Route Compromised",
+      "summary": "The patrol identifies Mara's ship and closes the covert harbor route.",
+      "body": "The patrol identifies Mara's ship and closes the covert harbor route.",
+      "status": "canon",
+      "metadata": {
+        "kind": "Consequence",
+        "label": "Route Compromised",
+        "title": "Route Compromised",
+        "summary": "The patrol identifies Mara's ship and closes the covert harbor route.",
+        "tags": [
+          "outcome",
+          "failure"
+        ],
+        "outcome": {
+          "effect": "The covert departure route is no longer safe to use.",
+          "targetNodeIds": [
+            "node-smuggler-route",
+            "node-harbor"
+          ]
+        },
+        "position": {
+          "x": 1740,
+          "y": 420
+        },
+        "width": 260,
+        "height": 156
+      },
+      "created_at": "2026-08-04T12:00:00Z",
+      "updated_at": "2026-08-04T12:00:00Z"
+    },
+    {
+      "id": "node-route-consequence",
+      "project_id": "project-aurora",
+      "type": "Consequence",
+      "title": "Route Reopened",
+      "summary": "Consequence of proving the embargo enforcement is corrupt.",
+      "body": "Consequence of proving the embargo enforcement is corrupt.",
+      "status": "canon",
+      "metadata": {
+        "kind": "Consequence",
+        "label": "Route Reopened",
+        "title": "Route Reopened",
+        "summary": "Consequence of proving the embargo enforcement is corrupt.",
+        "tags": [
+          "outcome"
+        ],
+        "outcome": {
+          "effect": "The legal departure route through Glass Harbor becomes available.",
+          "targetNodeIds": [
+            "node-smuggler-route",
+            "node-harbor"
+          ]
+        },
+        "position": {
+          "x": 1420,
+          "y": 420
+        },
+        "width": 260,
+        "height": 156
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "node-sealed-ledger",
+      "project_id": "project-aurora",
+      "type": "Item",
+      "title": "Sealed Ledger",
+      "summary": "Evidence item that can prove the embargo was manipulated.",
+      "body": "Evidence item that can prove the embargo was manipulated.",
+      "status": "canon",
+      "metadata": {
+        "kind": "Item",
+        "label": "Sealed Ledger",
+        "title": "Sealed Ledger",
+        "summary": "Evidence item that can prove the embargo was manipulated.",
+        "tags": [
+          "evidence"
+        ],
+        "item_purpose": "Proof that the embargo order was manipulated",
+        "position": {
+          "x": 420,
+          "y": 720
+        },
+        "width": 260,
+        "height": 156
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "node-smuggler-route",
+      "project_id": "project-aurora",
+      "type": "Quest",
+      "title": "Smuggler Route",
+      "summary": "Quest branch where the player can bypass the legal harbor route.",
+      "body": "Quest branch where the player can bypass the legal harbor route.",
+      "status": "canon",
+      "metadata": {
+        "kind": "Quest",
+        "label": "Smuggler Route",
+        "title": "Smuggler Route",
+        "summary": "Quest branch where the player can bypass the legal harbor route.",
+        "tags": [
+          "branch",
+          "travel"
+        ],
+        "position": {
+          "x": 40,
+          "y": 300
+        },
+        "width": 260,
+        "height": 156
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "node-smuggling-abandoned",
+      "project_id": "project-aurora",
+      "type": "Consequence",
+      "title": "Smuggling Run Abandoned",
+      "summary": "Mara abandons the covert departure before committing the crew to the blockade.",
+      "body": "Mara abandons the covert departure before committing the crew to the blockade.",
+      "status": "canon",
+      "metadata": {
+        "kind": "Consequence",
+        "label": "Smuggling Run Abandoned",
+        "title": "Smuggling Run Abandoned",
+        "summary": "Mara abandons the covert departure before committing the crew to the blockade.",
+        "tags": [
+          "outcome",
+          "abandoned"
+        ],
+        "outcome": {
+          "effect": "The crew returns to the legal harbor plan without resolving the covert route.",
+          "targetNodeIds": [
+            "node-smuggler-route",
+            "node-harbor"
+          ]
+        },
+        "position": {
+          "x": 1740,
+          "y": 180
+        },
+        "width": 260,
+        "height": 156
+      },
+      "created_at": "2026-08-04T12:00:00Z",
+      "updated_at": "2026-08-04T12:00:00Z"
+    },
+    {
+      "id": "node-trade-guild",
+      "project_id": "project-aurora",
+      "type": "Faction",
+      "title": "Trade Guild",
+      "summary": "Faction that benefits from controlling silver routes.",
+      "body": "Faction that benefits from controlling silver routes.",
+      "status": "canon",
+      "metadata": {
+        "kind": "Faction",
+        "label": "Trade Guild",
+        "title": "Trade Guild",
+        "summary": "Faction that benefits from controlling silver routes.",
+        "tags": [
+          "economy",
+          "power"
+        ],
+        "position": {
+          "x": 80,
+          "y": 720
+        },
+        "width": 260,
+        "height": 156
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-condition-inspection",
+      "project_id": "project-aurora",
+      "source_node_id": "node-ledger-condition",
+      "target_node_id": "node-inspection",
+      "type": "requires",
+      "label": "enables inspection",
+      "condition": "",
+      "metadata": {
+        "sourceHandle": "right",
+        "targetHandle": "left"
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "edge-dialogue-blockade",
+      "project_id": "project-aurora",
+      "source_node_id": "node-dock-dialogue",
+      "target_node_id": "node-mara-runs-blockade",
+      "type": "leads_to",
+      "label": "Mara runs the blockade",
+      "condition": "",
+      "metadata": {
+        "sourceHandle": "right",
+        "targetHandle": "left",
+        "dialogue_element_id": "line-mara-orders-run",
+        "outcome_flow_composition": {
+          "invocation_id": "flow-invocation-dialogue-smuggler-route",
+          "source_flow_id": "flow-main-story",
+          "target_flow_id": "flow-z-blockade-outcome"
+        }
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "edge-guild-ledger",
+      "project_id": "project-aurora",
+      "source_node_id": "node-trade-guild",
+      "target_node_id": "node-sealed-ledger",
+      "type": "owns",
+      "label": "owns",
+      "condition": "",
+      "metadata": {
+        "sourceHandle": "right",
+        "targetHandle": "left"
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "edge-harbor-dialogue",
+      "project_id": "project-aurora",
+      "source_node_id": "node-harbor",
+      "target_node_id": "node-dock-dialogue",
+      "type": "mentions",
+      "label": "sets context",
+      "condition": "",
+      "metadata": {
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "edge-hero-opening",
+      "project_id": "project-aurora",
+      "source_node_id": "node-hero",
+      "target_node_id": "node-opening",
+      "type": "appears_in",
+      "label": "appears in",
+      "condition": "",
+      "metadata": {
+        "sourceHandle": "right",
+        "targetHandle": "left"
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "edge-inspection-consequence",
+      "project_id": "project-aurora",
+      "source_node_id": "node-inspection",
+      "target_node_id": "node-route-consequence",
+      "type": "causes",
+      "label": "reopens route",
+      "condition": "",
+      "metadata": {
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "edge-mara-trade-guild-membership",
+      "project_id": "project-aurora",
+      "source_node_id": "node-hero",
+      "target_node_id": "node-trade-guild",
+      "type": "member_of",
+      "label": "member of",
+      "condition": "",
+      "metadata": {
+        "canvas_visibility": "hidden"
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "edge-opening-embargo",
+      "project_id": "project-aurora",
+      "source_node_id": "node-opening",
+      "target_node_id": "node-embargo",
+      "type": "reveals",
+      "label": "reveals",
+      "condition": "",
+      "metadata": {
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "edge-opening-harbor",
+      "project_id": "project-aurora",
+      "source_node_id": "node-opening",
+      "target_node_id": "node-harbor",
+      "type": "located_in",
+      "label": "located in",
+      "condition": "",
+      "metadata": {
+        "sourceHandle": "right",
+        "targetHandle": "left"
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "edge-quest-blockade-route",
+      "project_id": "project-aurora",
+      "source_node_id": "node-smuggler-route",
+      "target_node_id": "node-mara-runs-blockade",
+      "type": "leads_to",
+      "label": "starts the blockade run",
+      "condition": "",
+      "metadata": {
+        "sourceHandle": "right",
+        "targetHandle": "left",
+        "quest_stage_id": "stage-choose-route",
+        "quest_branch_id": "branch-blockade-route"
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "edge-quest-legal-route",
+      "project_id": "project-aurora",
+      "source_node_id": "node-smuggler-route",
+      "target_node_id": "node-route-consequence",
+      "type": "leads_to",
+      "label": "reopens the legal route",
+      "condition": "",
+      "metadata": {
+        "sourceHandle": "right",
+        "targetHandle": "left",
+        "quest_stage_id": "stage-choose-route",
+        "quest_branch_id": "branch-legal-route"
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    }
+  ],
+  "issues": [
+    {
+      "id": "issue-embargo-detail",
+      "project_id": "project-aurora",
+      "title": "Trade law source",
+      "node_id": "node-embargo",
+      "edge_id": null,
+      "description": "Add the source faction that authored the embargo.",
+      "severity": "info",
+      "status": "open",
+      "metadata": {
+        "issue_version": 2,
+        "origin": "canon_rule",
+        "rule_id": "integrity.error-fact",
+        "rule_version": 1,
+        "fingerprint": "f5f59d3a6de0b8c9fe8c0e76d265c2f33805f3efc3b6e1904849c92ceb9fa10e",
+        "category": "continuity",
+        "scope": {
+          "owner_type": "node",
+          "owner_id": "node-embargo"
+        },
+        "message_key": "canon.issue.integrity.unknown.message",
+        "message_parameters": {
+          "fact_code": "graph.trade-law-source",
+          "domain": "graph",
+          "owner_type": "node",
+          "owner_id": "node-embargo",
+          "field_path": "metadata.trade_law_source"
+        },
+        "recommendation_key": "canon.issue.integrity.recommendation.unknown",
+        "recommendation_parameters": {
+          "fact_code": "graph.trade-law-source",
+          "domain": "graph",
+          "owner_type": "node",
+          "owner_id": "node-embargo",
+          "field_path": "metadata.trade_law_source"
+        },
+        "targets": [
+          {
+            "owner_type": "node",
+            "owner_id": "node-embargo"
+          }
+        ],
+        "evidence": [
+          {
+            "owner": {
+              "owner_type": "node",
+              "owner_id": "node-embargo"
+            },
+            "field_path": "metadata.trade_law_source",
+            "message_key": "canon.evidence.integrity-fact",
+            "message_parameters": {}
+          }
+        ],
+        "agent_explanation": null,
+        "agent_recommendation": null,
+        "saved_revision": 1,
+        "source_checksum": "0000000000000000000000000000000000000000000000000000000000000000",
+        "first_seen_at": "2026-07-28T10:00:00Z",
+        "last_seen_at": "2026-07-28T10:00:00Z",
+        "resolved_at": null,
+        "resolution_reason": null,
+        "diagnostic": {
+          "diagnostic_version": 1,
+          "fact_code": "graph.trade-law-source",
+          "domain": "graph",
+          "parameters": {},
+          "identity_parameters": {},
+          "targets": [
+            {
+              "owner_type": "node",
+              "owner_id": "node-embargo"
+            }
+          ],
+          "evidence": [
+            {
+              "owner": {
+                "owner_type": "node",
+                "owner_id": "node-embargo"
+              },
+              "field_path": "metadata.trade_law_source",
+              "message_key": "canon.evidence.integrity-fact",
+              "message_parameters": {}
+            }
+          ]
+        }
+      },
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "issue-hero-voice",
+      "project_id": "project-aurora",
+      "title": "Voice conflict",
+      "node_id": "node-hero",
+      "edge_id": null,
+      "description": "Mara's summary hints at a contradiction that needs canon review.",
+      "severity": "warning",
+      "status": "open",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "issue-opening-embargo-link",
+      "project_id": "project-aurora",
+      "title": "Reveal needs payoff",
+      "node_id": null,
+      "edge_id": "edge-opening-embargo",
+      "description": "The reveal edge should point to a scene beat that resolves player agency.",
+      "severity": "critical",
+      "status": "review",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    }
+  ],
+  "suggestions": [],
+  "engine_tags": [],
+  "engine_tag_definitions": [
+    {
+      "tag_version": 1,
+      "id": "tagdef-aurora-character-mara",
+      "project_id": "project-aurora",
+      "key": "Character.MaraVale",
+      "normalized_key": "character.maravale",
+      "description": "Playable captain and primary story viewpoint.",
+      "status": "active",
+      "aliases": [
+        {
+          "tag_version": 1,
+          "target": "unreal",
+          "external_identifier": "Character.MaraVale"
+        },
+        {
+          "tag_version": 1,
+          "target": "unity",
+          "external_identifier": "Character.MaraVale"
+        },
+        {
+          "tag_version": 1,
+          "target": "ink",
+          "external_identifier": "character_mara_vale"
+        },
+        {
+          "tag_version": 1,
+          "target": "yarn_spinner",
+          "external_identifier": "character_mara_vale"
+        }
+      ],
+      "created_at": "2026-09-19T12:00:00Z",
+      "updated_at": "2026-09-19T12:00:00Z"
+    },
+    {
+      "tag_version": 1,
+      "id": "tagdef-aurora-dialogue-warning",
+      "project_id": "project-aurora",
+      "key": "Dialogue.DockmasterWarning",
+      "normalized_key": "dialogue.dockmasterwarning",
+      "description": "Opening warning line in the dockmaster dialogue.",
+      "status": "active",
+      "aliases": [],
+      "created_at": "2026-09-19T12:02:00Z",
+      "updated_at": "2026-09-19T12:02:00Z"
+    },
+    {
+      "tag_version": 1,
+      "id": "tagdef-aurora-effect-ledger-transfer",
+      "project_id": "project-aurora",
+      "key": "State.TransferLedgerToMara",
+      "normalized_key": "state.transferledgertomara",
+      "description": "Narrative effect transferring the sealed ledger to Mara.",
+      "status": "active",
+      "aliases": [],
+      "created_at": "2026-09-19T12:08:00Z",
+      "updated_at": "2026-09-19T12:08:00Z"
+    },
+    {
+      "tag_version": 1,
+      "id": "tagdef-aurora-exit-success",
+      "project_id": "project-aurora",
+      "key": "StoryFlow.SmugglerRoute.Success",
+      "normalized_key": "storyflow.smugglerroute.success",
+      "description": "Successful return from the Smuggler Route.",
+      "status": "active",
+      "aliases": [],
+      "created_at": "2026-09-19T12:07:00Z",
+      "updated_at": "2026-09-19T12:07:00Z"
+    },
+    {
+      "tag_version": 1,
+      "id": "tagdef-aurora-flow-main",
+      "project_id": "project-aurora",
+      "key": "StoryFlow.Main",
+      "normalized_key": "storyflow.main",
+      "description": "Primary executable story flow.",
+      "status": "active",
+      "aliases": [],
+      "created_at": "2026-09-19T12:04:00Z",
+      "updated_at": "2026-09-19T12:04:00Z"
+    },
+    {
+      "tag_version": 1,
+      "id": "tagdef-aurora-invocation-smuggler",
+      "project_id": "project-aurora",
+      "key": "StoryFlow.Main.InvokeSmugglerRoute",
+      "normalized_key": "storyflow.main.invokesmugglerroute",
+      "description": "Call from Main Story into the optional Smuggler Route.",
+      "status": "active",
+      "aliases": [],
+      "created_at": "2026-09-19T12:06:00Z",
+      "updated_at": "2026-09-19T12:06:00Z"
+    },
+    {
+      "tag_version": 1,
+      "id": "tagdef-aurora-quest-legal-branch",
+      "project_id": "project-aurora",
+      "key": "Quest.SmugglerRoute.LegalBranch",
+      "normalized_key": "quest.smugglerroute.legalbranch",
+      "description": "Quest branch that resolves the embargo with evidence.",
+      "status": "active",
+      "aliases": [],
+      "created_at": "2026-09-19T12:03:00Z",
+      "updated_at": "2026-09-19T12:03:00Z"
+    },
+    {
+      "tag_version": 1,
+      "id": "tagdef-aurora-relationship-guild-ledger",
+      "project_id": "project-aurora",
+      "key": "Relationship.GuildOwnsLedger",
+      "normalized_key": "relationship.guildownsledger",
+      "description": "Stable metadata for the Trade Guild ownership relation.",
+      "status": "active",
+      "aliases": [
+        {
+          "tag_version": 1,
+          "target": "unreal",
+          "external_identifier": "Relationship.GuildOwnsLedger"
+        }
+      ],
+      "created_at": "2026-09-19T12:01:00Z",
+      "updated_at": "2026-09-19T12:01:00Z"
+    },
+    {
+      "tag_version": 1,
+      "id": "tagdef-aurora-transition-opening",
+      "project_id": "project-aurora",
+      "key": "StoryFlow.Main.BeginInspection",
+      "normalized_key": "storyflow.main.begininspection",
+      "description": "Transition from Opening Dock to the dockmaster exchange.",
+      "status": "active",
+      "aliases": [],
+      "created_at": "2026-09-19T12:05:00Z",
+      "updated_at": "2026-09-19T12:05:00Z"
+    }
+  ],
+  "engine_tag_bindings": [
+    {
+      "tag_version": 1,
+      "id": "tagbind-aurora-character-mara",
+      "project_id": "project-aurora",
+      "definition_id": "tagdef-aurora-character-mara",
+      "owner": {
+        "kind": "node",
+        "project_id": "project-aurora",
+        "node_id": "node-hero"
+      },
+      "value": "playable",
+      "created_at": "2026-09-19T12:00:00Z",
+      "updated_at": "2026-09-19T12:00:00Z"
+    },
+    {
+      "tag_version": 1,
+      "id": "tagbind-aurora-dialogue-warning",
+      "project_id": "project-aurora",
+      "definition_id": "tagdef-aurora-dialogue-warning",
+      "owner": {
+        "kind": "dialogue_line",
+        "project_id": "project-aurora",
+        "dialogue_node_id": "node-dock-dialogue",
+        "line_id": "line-dockmaster-warning"
+      },
+      "value": "opening_warning",
+      "created_at": "2026-09-19T12:02:00Z",
+      "updated_at": "2026-09-19T12:02:00Z"
+    },
+    {
+      "tag_version": 1,
+      "id": "tagbind-aurora-effect-ledger-transfer",
+      "project_id": "project-aurora",
+      "definition_id": "tagdef-aurora-effect-ledger-transfer",
+      "owner": {
+        "kind": "narrative_effect",
+        "project_id": "project-aurora",
+        "effect_id": "effect-01-ledger-ilya-to-mara"
+      },
+      "value": "custody_change",
+      "created_at": "2026-09-19T12:08:00Z",
+      "updated_at": "2026-09-19T12:08:00Z"
+    },
+    {
+      "tag_version": 1,
+      "id": "tagbind-aurora-exit-success",
+      "project_id": "project-aurora",
+      "definition_id": "tagdef-aurora-exit-success",
+      "owner": {
+        "kind": "flow_exit",
+        "project_id": "project-aurora",
+        "exit_id": "flow-exit-smuggler-success"
+      },
+      "value": "success",
+      "created_at": "2026-09-19T12:07:00Z",
+      "updated_at": "2026-09-19T12:07:00Z"
+    },
+    {
+      "tag_version": 1,
+      "id": "tagbind-aurora-flow-main",
+      "project_id": "project-aurora",
+      "definition_id": "tagdef-aurora-flow-main",
+      "owner": {
+        "kind": "story_flow",
+        "project_id": "project-aurora",
+        "flow_id": "flow-main-story"
+      },
+      "value": "entry",
+      "created_at": "2026-09-19T12:04:00Z",
+      "updated_at": "2026-09-19T12:04:00Z"
+    },
+    {
+      "tag_version": 1,
+      "id": "tagbind-aurora-invocation-smuggler",
+      "project_id": "project-aurora",
+      "definition_id": "tagdef-aurora-invocation-smuggler",
+      "owner": {
+        "kind": "flow_invocation",
+        "project_id": "project-aurora",
+        "invocation_id": "flow-invocation-inspection-smuggler-route"
+      },
+      "value": "optional_call",
+      "created_at": "2026-09-19T12:06:00Z",
+      "updated_at": "2026-09-19T12:06:00Z"
+    },
+    {
+      "tag_version": 1,
+      "id": "tagbind-aurora-quest-legal-branch",
+      "project_id": "project-aurora",
+      "definition_id": "tagdef-aurora-quest-legal-branch",
+      "owner": {
+        "kind": "quest_branch",
+        "project_id": "project-aurora",
+        "quest_node_id": "node-smuggler-route",
+        "stage_id": "stage-choose-route",
+        "branch_id": "branch-legal-route"
+      },
+      "value": "evidence_route",
+      "created_at": "2026-09-19T12:03:00Z",
+      "updated_at": "2026-09-19T12:03:00Z"
+    },
+    {
+      "tag_version": 1,
+      "id": "tagbind-aurora-relationship-guild-ledger",
+      "project_id": "project-aurora",
+      "definition_id": "tagdef-aurora-relationship-guild-ledger",
+      "owner": {
+        "kind": "relationship",
+        "project_id": "project-aurora",
+        "edge_id": "edge-guild-ledger"
+      },
+      "value": "semantic",
+      "created_at": "2026-09-19T12:01:00Z",
+      "updated_at": "2026-09-19T12:01:00Z"
+    },
+    {
+      "tag_version": 1,
+      "id": "tagbind-aurora-transition-opening",
+      "project_id": "project-aurora",
+      "definition_id": "tagdef-aurora-transition-opening",
+      "owner": {
+        "kind": "flow_transition",
+        "project_id": "project-aurora",
+        "transition_id": "flow-transition-opening-dialogue"
+      },
+      "value": "inspection_start",
+      "created_at": "2026-09-19T12:05:00Z",
+      "updated_at": "2026-09-19T12:05:00Z"
+    }
+  ],
+  "legacy_engine_tags": [],
+  "placements": [
+    {
+      "id": "fixture-placement-node-customs-office",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-customs-office",
+      "scope_key": "node-harbor:node-customs-office",
+      "x": 24,
+      "y": 58,
+      "width": 380,
+      "height": 220,
+      "container_node_id": "node-harbor",
+      "is_primary": true,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "fixture-placement-node-dock-dialogue",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-dock-dialogue",
+      "scope_key": "node-opening:node-dock-dialogue",
+      "x": 308,
+      "y": 384,
+      "width": 260,
+      "height": 156,
+      "container_node_id": "node-opening",
+      "is_primary": true,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "fixture-placement-node-dockmaster",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-dockmaster",
+      "scope_key": "<root>:node-dockmaster",
+      "x": 1080,
+      "y": 900,
+      "width": 260,
+      "height": 156,
+      "container_node_id": null,
+      "is_primary": true,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "fixture-placement-node-embargo",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-embargo",
+      "scope_key": "node-opening:node-embargo",
+      "x": 24,
+      "y": 384,
+      "width": 260,
+      "height": 156,
+      "container_node_id": "node-opening",
+      "is_primary": true,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "fixture-placement-node-harbor",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-harbor",
+      "scope_key": "node-opening:node-harbor",
+      "x": 592,
+      "y": 58,
+      "width": 428,
+      "height": 302,
+      "container_node_id": "node-opening",
+      "is_primary": true,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "fixture-placement-node-hero",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-hero",
+      "scope_key": "<root>:node-hero",
+      "x": 80,
+      "y": 100,
+      "width": 260,
+      "height": 156,
+      "container_node_id": null,
+      "is_primary": true,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "fixture-placement-node-inspection",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-inspection",
+      "scope_key": "<root>:node-inspection",
+      "x": 760,
+      "y": 720,
+      "width": 260,
+      "height": 156,
+      "container_node_id": null,
+      "is_primary": true,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "fixture-placement-node-ledger-condition",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-ledger-condition",
+      "scope_key": "<root>:node-ledger-condition",
+      "x": 1420,
+      "y": 180,
+      "width": 260,
+      "height": 156,
+      "container_node_id": null,
+      "is_primary": true,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "fixture-placement-node-mara-runs-blockade",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-mara-runs-blockade",
+      "scope_key": "node-opening:node-mara-runs-blockade",
+      "x": 592,
+      "y": 384,
+      "width": 260,
+      "height": 156,
+      "container_node_id": "node-opening",
+      "is_primary": true,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "fixture-placement-node-opening",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-opening",
+      "scope_key": "<root>:node-opening",
+      "x": 400,
+      "y": 60,
+      "width": 1060,
+      "height": 580,
+      "container_node_id": null,
+      "is_primary": true,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "fixture-placement-node-route-compromised",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-route-compromised",
+      "scope_key": "<root>:node-route-compromised",
+      "x": 1740,
+      "y": 420,
+      "width": 260,
+      "height": 156,
+      "container_node_id": null,
+      "is_primary": true,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-08-04T12:00:00Z",
+      "updated_at": "2026-08-04T12:00:00Z"
+    },
+    {
+      "id": "fixture-placement-node-route-consequence",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-route-consequence",
+      "scope_key": "<root>:node-route-consequence",
+      "x": 1420,
+      "y": 420,
+      "width": 260,
+      "height": 156,
+      "container_node_id": null,
+      "is_primary": true,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "fixture-placement-node-sealed-ledger",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-sealed-ledger",
+      "scope_key": "<root>:node-sealed-ledger",
+      "x": 420,
+      "y": 720,
+      "width": 260,
+      "height": 156,
+      "container_node_id": null,
+      "is_primary": true,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "fixture-placement-node-smuggler-route",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-smuggler-route",
+      "scope_key": "<root>:node-smuggler-route",
+      "x": 40,
+      "y": 300,
+      "width": 260,
+      "height": 156,
+      "container_node_id": null,
+      "is_primary": true,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "fixture-placement-node-smuggling-abandoned",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-smuggling-abandoned",
+      "scope_key": "<root>:node-smuggling-abandoned",
+      "x": 1740,
+      "y": 180,
+      "width": 260,
+      "height": 156,
+      "container_node_id": null,
+      "is_primary": true,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-08-04T12:00:00Z",
+      "updated_at": "2026-08-04T12:00:00Z"
+    },
+    {
+      "id": "fixture-placement-node-trade-guild",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-trade-guild",
+      "scope_key": "<root>:node-trade-guild",
+      "x": 80,
+      "y": 720,
+      "width": 260,
+      "height": 156,
+      "container_node_id": null,
+      "is_primary": true,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "seed-ilya-opening",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-dockmaster",
+      "scope_key": "node-opening:node-dockmaster",
+      "x": 308,
+      "y": 58,
+      "width": 260,
+      "height": 156,
+      "container_node_id": "node-opening",
+      "is_primary": false,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    },
+    {
+      "id": "seed-ledger-opening",
+      "project_id": "project-aurora",
+      "canonical_node_id": "node-sealed-ledger",
+      "scope_key": "node-opening:node-sealed-ledger",
+      "x": 24,
+      "y": 58,
+      "width": 260,
+      "height": 156,
+      "container_node_id": "node-opening",
+      "is_primary": false,
+      "presentation_state": "expanded",
+      "metadata": {},
+      "created_at": "2026-07-28T10:00:00Z",
+      "updated_at": "2026-07-28T10:00:00Z"
+    }
+  ],
+  "dialogues": [
+    {
+      "node_id": "node-dock-dialogue",
+      "document": {
+        "dialogue_version": 1,
+        "entry_element_id": "line-dockmaster-warning",
+        "participants": [
+          "node-dockmaster",
+          "node-hero"
+        ],
+        "elements": [
+          {
+            "id": "line-dockmaster-warning",
+            "kind": "line",
+            "speaker_node_id": "node-dockmaster",
+            "text": "No vessel leaves Glass Harbor while the silver embargo is in force.",
+            "next_element_id": "line-mara-challenge"
+          },
+          {
+            "id": "line-mara-challenge",
+            "kind": "line",
+            "speaker_node_id": "node-hero",
+            "text": "Your guild forged that order. I can prove it or sail through it.",
+            "next_element_id": "choice-mara-response"
+          },
+          {
+            "id": "choice-mara-response",
+            "kind": "choice",
+            "prompt": "How does Mara answer the dockmaster?",
+            "options": [
+              {
+                "id": "answer-show-ledger",
+                "text": "Show Ilya the sealed ledger.",
+                "condition": "items.node-sealed-ledger.holder.node_id == \"node-dockmaster\"",
+                "next_element_id": "line-ilya-concedes"
+              },
+              {
+                "id": "answer-run-blockade",
+                "text": "Order the crew to run the blockade.",
+                "condition": "",
+                "next_element_id": "line-mara-orders-run"
+              }
+            ]
+          },
+          {
+            "id": "line-ilya-concedes",
+            "kind": "line",
+            "speaker_node_id": "node-dockmaster",
+            "text": "Those seals are genuine. I will delay the patrol while you depart.",
+            "next_element_id": null
+          },
+          {
+            "id": "line-mara-orders-run",
+            "kind": "line",
+            "speaker_node_id": "node-hero",
+            "text": "Cast off. Full power, and keep the inspection boats in our wake.",
+            "next_element_id": null
+          }
+        ]
+      }
+    }
+  ],
+  "quests": [
+    {
+      "node_id": "node-smuggler-route",
+      "document": {
+        "quest_version": 1,
+        "objective": "Secure proof of the forged embargo and open a route out of Glass Harbor.",
+        "quest_giver_node_id": "node-dockmaster",
+        "entry_stage_id": "stage-secure-ledger",
+        "prerequisite_node_ids": [
+          "node-ledger-condition"
+        ],
+        "reward_node_ids": [
+          "node-sealed-ledger"
+        ],
+        "stages": [
+          {
+            "id": "stage-secure-ledger",
+            "title": "Secure the sealed ledger",
+            "description": "Recover evidence that the Trade Guild forged the embargo order.",
+            "branches": [
+              {
+                "id": "branch-present-ledger",
+                "label": "Present the ledger",
+                "condition": "ledger_acquired",
+                "target_stage_id": "stage-choose-route"
+              }
+            ]
+          },
+          {
+            "id": "stage-choose-route",
+            "title": "Choose the harbor route",
+            "description": "Use the evidence or force a passage through the blockade.",
+            "branches": [
+              {
+                "id": "branch-legal-route",
+                "label": "Convince the dockmaster",
+                "condition": "ledger_verified",
+                "target_stage_id": null
+              },
+              {
+                "id": "branch-blockade-route",
+                "label": "Run the blockade",
+                "condition": "",
+                "target_stage_id": null
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "story_flows": [
+    {
+      "id": "flow-main-story",
+      "project_id": "project-aurora",
+      "name": "Main Story",
+      "normalized_name": "main story",
+      "description": "Primary playable route through the harbor inspection.",
+      "kind": "main",
+      "status": "active",
+      "entry_node_id": "node-opening",
+      "metadata": {
+        "fixture": "project-aurora"
+      },
+      "created_at": "2026-07-23T10:00:00Z",
+      "updated_at": "2026-07-23T10:00:00Z"
+    },
+    {
+      "id": "flow-smuggler-route",
+      "project_id": "project-aurora",
+      "name": "Smuggler Route",
+      "normalized_name": "smuggler route",
+      "description": "Optional smuggler route through the blockade.",
+      "kind": "side",
+      "status": "active",
+      "entry_node_id": "node-smuggler-route",
+      "metadata": {
+        "fixture": "project-aurora"
+      },
+      "created_at": "2026-07-23T10:00:00Z",
+      "updated_at": "2026-07-23T10:00:00Z"
+    },
+    {
+      "id": "flow-z-blockade-outcome",
+      "project_id": "project-aurora",
+      "name": "Blockade Outcome",
+      "normalized_name": "blockade outcome",
+      "description": "Dialogue outcome composed as a reusable side flow call.",
+      "kind": "side",
+      "status": "active",
+      "entry_node_id": "node-mara-runs-blockade",
+      "metadata": {
+        "fixture": "project-aurora",
+        "example": "specialized-outcome-call"
+      },
+      "created_at": "2026-08-04T10:00:00Z",
+      "updated_at": "2026-08-04T10:00:00Z"
+    }
+  ],
+  "story_flow_nodes": [
+    {
+      "id": "flow-main-story:member:node-dock-dialogue",
+      "project_id": "project-aurora",
+      "flow_id": "flow-main-story",
+      "node_id": "node-dock-dialogue",
+      "presentation_order": 1,
+      "metadata": {},
+      "created_at": "2026-07-23T10:00:00Z",
+      "updated_at": "2026-07-23T10:00:00Z"
+    },
+    {
+      "id": "flow-main-story:member:node-inspection",
+      "project_id": "project-aurora",
+      "flow_id": "flow-main-story",
+      "node_id": "node-inspection",
+      "presentation_order": 2,
+      "metadata": {},
+      "created_at": "2026-07-23T10:00:00Z",
+      "updated_at": "2026-07-23T10:00:00Z"
+    },
+    {
+      "id": "flow-main-story:member:node-opening",
+      "project_id": "project-aurora",
+      "flow_id": "flow-main-story",
+      "node_id": "node-opening",
+      "presentation_order": 0,
+      "metadata": {},
+      "created_at": "2026-07-23T10:00:00Z",
+      "updated_at": "2026-07-23T10:00:00Z"
+    },
+    {
+      "id": "flow-main-story:member:node-route-consequence",
+      "project_id": "project-aurora",
+      "flow_id": "flow-main-story",
+      "node_id": "node-route-consequence",
+      "presentation_order": 3,
+      "metadata": {},
+      "created_at": "2026-07-23T10:00:00Z",
+      "updated_at": "2026-07-23T10:00:00Z"
+    },
+    {
+      "id": "flow-main-story:member:node-sealed-ledger",
+      "project_id": "project-aurora",
+      "flow_id": "flow-main-story",
+      "node_id": "node-sealed-ledger",
+      "presentation_order": 5,
+      "metadata": {},
+      "created_at": "2026-07-23T10:00:00Z",
+      "updated_at": "2026-07-23T10:00:00Z"
+    },
+    {
+      "id": "flow-smuggler-route:member:node-mara-runs-blockade",
+      "project_id": "project-aurora",
+      "flow_id": "flow-smuggler-route",
+      "node_id": "node-mara-runs-blockade",
+      "presentation_order": 1,
+      "metadata": {},
+      "created_at": "2026-07-23T10:00:00Z",
+      "updated_at": "2026-07-23T10:00:00Z"
+    },
+    {
+      "id": "flow-smuggler-route:member:node-route-compromised",
+      "project_id": "project-aurora",
+      "flow_id": "flow-smuggler-route",
+      "node_id": "node-route-compromised",
+      "presentation_order": 2,
+      "metadata": {},
+      "created_at": "2026-08-04T12:00:00Z",
+      "updated_at": "2026-08-04T12:00:00Z"
+    },
+    {
+      "id": "flow-smuggler-route:member:node-route-consequence",
+      "project_id": "project-aurora",
+      "flow_id": "flow-smuggler-route",
+      "node_id": "node-route-consequence",
+      "presentation_order": 3,
+      "metadata": {},
+      "created_at": "2026-07-23T10:00:00Z",
+      "updated_at": "2026-07-23T10:00:00Z"
+    },
+    {
+      "id": "flow-smuggler-route:member:node-smuggler-route",
+      "project_id": "project-aurora",
+      "flow_id": "flow-smuggler-route",
+      "node_id": "node-smuggler-route",
+      "presentation_order": 0,
+      "metadata": {},
+      "created_at": "2026-07-23T10:00:00Z",
+      "updated_at": "2026-07-23T10:00:00Z"
+    },
+    {
+      "id": "flow-smuggler-route:member:node-smuggling-abandoned",
+      "project_id": "project-aurora",
+      "flow_id": "flow-smuggler-route",
+      "node_id": "node-smuggling-abandoned",
+      "presentation_order": 4,
+      "metadata": {},
+      "created_at": "2026-08-04T12:00:00Z",
+      "updated_at": "2026-08-04T12:00:00Z"
+    },
+    {
+      "id": "flow-z-blockade-outcome:member:node-mara-runs-blockade",
+      "project_id": "project-aurora",
+      "flow_id": "flow-z-blockade-outcome",
+      "node_id": "node-mara-runs-blockade",
+      "presentation_order": 0,
+      "metadata": {},
+      "created_at": "2026-08-04T10:00:00Z",
+      "updated_at": "2026-08-04T10:00:00Z"
+    }
+  ],
+  "flow_transitions": [
+    {
+      "id": "flow-transition-blockade-cycle",
+      "project_id": "project-aurora",
+      "flow_id": "flow-smuggler-route",
+      "source_node_id": "node-mara-runs-blockade",
+      "target_node_id": "node-smuggler-route",
+      "priority": 1,
+      "kind": "return",
+      "label": "Circle back past the patrol",
+      "condition": "",
+      "is_default": false,
+      "metadata": {},
+      "created_at": "2026-07-23T10:00:00Z",
+      "updated_at": "2026-07-23T10:00:00Z"
+    },
+    {
+      "id": "flow-transition-blockade-failure",
+      "project_id": "project-aurora",
+      "flow_id": "flow-smuggler-route",
+      "source_node_id": "node-mara-runs-blockade",
+      "target_node_id": "node-route-compromised",
+      "priority": 2,
+      "kind": "optional",
+      "label": "Patrol identifies the ship",
+      "condition": "",
+      "is_default": false,
+      "metadata": {
+        "fixture_outcome": "failure"
+      },
+      "created_at": "2026-08-04T12:00:00Z",
+      "updated_at": "2026-08-04T12:00:00Z"
+    },
+    {
+      "id": "flow-transition-blockade-return",
+      "project_id": "project-aurora",
+      "flow_id": "flow-smuggler-route",
+      "source_node_id": "node-mara-runs-blockade",
+      "target_node_id": "node-route-consequence",
+      "priority": 0,
+      "kind": "return",
+      "label": "Rejoin the harbor outcome",
+      "condition": "",
+      "is_default": false,
+      "metadata": {},
+      "created_at": "2026-07-23T10:00:00Z",
+      "updated_at": "2026-07-23T10:00:00Z"
+    },
+    {
+      "id": "flow-transition-dialogue-inspection",
+      "project_id": "project-aurora",
+      "flow_id": "flow-main-story",
+      "source_node_id": "node-dock-dialogue",
+      "target_node_id": "node-inspection",
+      "priority": 0,
+      "kind": "branch",
+      "label": "Present the ledger",
+      "condition": "items.node-sealed-ledger.holder.node_id == \"node-hero\"",
+      "is_default": false,
+      "metadata": {
+        "dialogue_element_id": "line-ilya-concedes"
+      },
+      "created_at": "2026-07-23T10:00:00Z",
+      "updated_at": "2026-07-23T10:00:00Z"
+    },
+    {
+      "id": "flow-transition-inspection-route",
+      "project_id": "project-aurora",
+      "flow_id": "flow-main-story",
+      "source_node_id": "node-inspection",
+      "target_node_id": "node-route-consequence",
+      "priority": 0,
+      "kind": "next",
+      "label": "Embargo disproved",
+      "condition": "",
+      "is_default": false,
+      "metadata": {},
+      "created_at": "2026-07-23T10:00:00Z",
+      "updated_at": "2026-07-23T10:00:00Z"
+    },
+    {
+      "id": "flow-transition-opening-dialogue",
+      "project_id": "project-aurora",
+      "flow_id": "flow-main-story",
+      "source_node_id": "node-opening",
+      "target_node_id": "node-dock-dialogue",
+      "priority": 0,
+      "kind": "next",
+      "label": "Begin inspection",
+      "condition": "",
+      "is_default": false,
+      "metadata": {},
+      "created_at": "2026-07-23T10:00:00Z",
+      "updated_at": "2026-07-23T10:00:00Z"
+    },
+    {
+      "id": "flow-transition-quest-abandoned",
+      "project_id": "project-aurora",
+      "flow_id": "flow-smuggler-route",
+      "source_node_id": "node-smuggler-route",
+      "target_node_id": "node-smuggling-abandoned",
+      "priority": 1,
+      "kind": "optional",
+      "label": "Abandon the covert route",
+      "condition": "",
+      "is_default": false,
+      "metadata": {
+        "fixture_outcome": "abandoned"
+      },
+      "created_at": "2026-08-04T12:00:00Z",
+      "updated_at": "2026-08-04T12:00:00Z"
+    },
+    {
+      "id": "flow-transition-quest-blockade",
+      "project_id": "project-aurora",
+      "flow_id": "flow-smuggler-route",
+      "source_node_id": "node-smuggler-route",
+      "target_node_id": "node-mara-runs-blockade",
+      "priority": 0,
+      "kind": "optional",
+      "label": "Take the covert route",
+      "condition": "",
+      "is_default": false,
+      "metadata": {
+        "semantic_edge_id": "edge-quest-blockade-route",
+        "quest_stage_id": "stage-choose-route",
+        "quest_branch_id": "branch-blockade-route"
+      },
+      "created_at": "2026-07-23T10:00:00Z",
+      "updated_at": "2026-07-23T10:00:00Z"
+    }
+  ],
+  "scene_flow_boundaries": [
+    {
+      "id": "flow-main-story:boundary:node-opening",
+      "project_id": "project-aurora",
+      "flow_id": "flow-main-story",
+      "scene_node_id": "node-opening",
+      "entry_node_id": "node-dock-dialogue",
+      "exit_node_ids": [
+        "node-dock-dialogue"
+      ],
+      "metadata": {
+        "fixture": "project-aurora"
+      },
+      "created_at": "2026-07-23T10:00:00Z",
+      "updated_at": "2026-07-23T10:00:00Z"
+    }
+  ],
+  "flow_invocations": [
+    {
+      "id": "flow-invocation-dialogue-smuggler-route",
+      "project_id": "project-aurora",
+      "source_flow_id": "flow-main-story",
+      "source_node_id": "node-dock-dialogue",
+      "target_flow_id": "flow-z-blockade-outcome",
+      "label": "Mara runs the blockade",
+      "condition": "",
+      "priority": 1,
+      "is_default": true,
+      "created_at": "2026-08-04T10:00:00Z",
+      "updated_at": "2026-08-04T10:00:00Z"
+    },
+    {
+      "id": "flow-invocation-inspection-smuggler-route",
+      "project_id": "project-aurora",
+      "source_flow_id": "flow-main-story",
+      "source_node_id": "node-inspection",
+      "target_flow_id": "flow-smuggler-route",
+      "label": "Call the covert harbor route",
+      "condition": "",
+      "priority": 1,
+      "is_default": false,
+      "created_at": "2026-08-03T10:00:00Z",
+      "updated_at": "2026-08-03T10:00:00Z"
+    }
+  ],
+  "flow_exits": [
+    {
+      "id": "flow-exit-blockade-completed",
+      "project_id": "project-aurora",
+      "flow_id": "flow-z-blockade-outcome",
+      "key": "completed",
+      "label": "Blockade run completed",
+      "source_node_id": "node-mara-runs-blockade",
+      "created_at": "2026-08-04T10:00:00Z",
+      "updated_at": "2026-08-04T10:00:00Z"
+    },
+    {
+      "id": "flow-exit-smuggler-abandoned",
+      "project_id": "project-aurora",
+      "flow_id": "flow-smuggler-route",
+      "key": "abandoned",
+      "label": "Covert route abandoned",
+      "source_node_id": "node-smuggling-abandoned",
+      "created_at": "2026-08-04T12:00:00Z",
+      "updated_at": "2026-08-04T12:00:00Z"
+    },
+    {
+      "id": "flow-exit-smuggler-failure",
+      "project_id": "project-aurora",
+      "flow_id": "flow-smuggler-route",
+      "key": "failure",
+      "label": "Patrol exposes the route",
+      "source_node_id": "node-route-compromised",
+      "created_at": "2026-08-04T12:00:00Z",
+      "updated_at": "2026-08-04T12:00:00Z"
+    },
+    {
+      "id": "flow-exit-smuggler-success",
+      "project_id": "project-aurora",
+      "flow_id": "flow-smuggler-route",
+      "key": "success",
+      "label": "Patrol evaded",
+      "source_node_id": "node-route-consequence",
+      "created_at": "2026-08-03T10:00:00Z",
+      "updated_at": "2026-08-03T10:00:00Z"
+    }
+  ],
+  "flow_exit_bindings": [
+    {
+      "id": "flow-binding-blockade-completed-main",
+      "project_id": "project-aurora",
+      "invocation_id": "flow-invocation-dialogue-smuggler-route",
+      "exit_id": "flow-exit-blockade-completed",
+      "target_node_id": "node-route-consequence",
+      "created_at": "2026-08-04T10:00:00Z",
+      "updated_at": "2026-08-04T10:00:00Z"
+    },
+    {
+      "id": "flow-binding-smuggler-abandoned-main",
+      "project_id": "project-aurora",
+      "invocation_id": "flow-invocation-inspection-smuggler-route",
+      "exit_id": "flow-exit-smuggler-abandoned",
+      "target_node_id": "node-dock-dialogue",
+      "created_at": "2026-08-04T12:00:00Z",
+      "updated_at": "2026-08-04T12:00:00Z"
+    },
+    {
+      "id": "flow-binding-smuggler-failure-main",
+      "project_id": "project-aurora",
+      "invocation_id": "flow-invocation-inspection-smuggler-route",
+      "exit_id": "flow-exit-smuggler-failure",
+      "target_node_id": "node-sealed-ledger",
+      "created_at": "2026-08-04T12:00:00Z",
+      "updated_at": "2026-08-04T12:00:00Z"
+    },
+    {
+      "id": "flow-binding-smuggler-success-main",
+      "project_id": "project-aurora",
+      "invocation_id": "flow-invocation-inspection-smuggler-route",
+      "exit_id": "flow-exit-smuggler-success",
+      "target_node_id": "node-route-consequence",
+      "created_at": "2026-08-03T10:00:00Z",
+      "updated_at": "2026-08-03T10:00:00Z"
+    }
+  ],
+  "flow_initial_states": [
+    {
+      "id": "state-main-ledger",
+      "state_version": 1,
+      "project_id": "project-aurora",
+      "flow_id": "flow-main-story",
+      "flags": {},
+      "item_custody": [
+        {
+          "custody_version": 1,
+          "item_node_id": "node-sealed-ledger",
+          "holder": {
+            "holder_version": 1,
+            "kind": "character",
+            "node_id": "node-dockmaster"
+          }
+        }
+      ],
+      "quest_statuses": {
+        "node-smuggler-route": "active"
+      },
+      "created_at": "2026-08-07T16:00:00Z",
+      "updated_at": "2026-08-07T16:00:00Z"
+    },
+    {
+      "id": "state-side-ledger",
+      "state_version": 1,
+      "project_id": "project-aurora",
+      "flow_id": "flow-smuggler-route",
+      "flags": {},
+      "item_custody": [
+        {
+          "custody_version": 1,
+          "item_node_id": "node-sealed-ledger",
+          "holder": {
+            "holder_version": 1,
+            "kind": "character",
+            "node_id": "node-hero"
+          }
+        }
+      ],
+      "quest_statuses": {
+        "node-smuggler-route": "active"
+      },
+      "created_at": "2026-08-07T16:00:00Z",
+      "updated_at": "2026-08-07T16:00:00Z"
+    }
+  ],
+  "narrative_effects": [
+    {
+      "id": "effect-01-ledger-ilya-to-mara",
+      "effect_version": 1,
+      "project_id": "project-aurora",
+      "operation": "transfer_item",
+      "payload": {
+        "item_node_id": "node-sealed-ledger",
+        "from_holder": {
+          "holder_version": 1,
+          "kind": "character",
+          "node_id": "node-dockmaster"
+        },
+        "to_holder": {
+          "holder_version": 1,
+          "kind": "character",
+          "node_id": "node-hero"
+        }
+      },
+      "repeat_policy": "once",
+      "explanation": "Ilya returns the Sealed Ledger to Mara after accepting its proof.",
+      "created_at": "2026-08-07T16:00:00Z",
+      "updated_at": "2026-08-07T16:00:00Z"
+    },
+    {
+      "id": "effect-02-quest-route-completed",
+      "effect_version": 1,
+      "project_id": "project-aurora",
+      "operation": "set_quest_status",
+      "payload": {
+        "quest_node_id": "node-smuggler-route",
+        "status": "completed"
+      },
+      "repeat_policy": "once",
+      "explanation": "Choosing the blockade outcome completes the Smuggler Route quest.",
+      "created_at": "2026-08-07T16:00:00Z",
+      "updated_at": "2026-08-07T16:00:00Z"
+    },
+    {
+      "id": "effect-03-quest-reward-to-party",
+      "effect_version": 1,
+      "project_id": "project-aurora",
+      "operation": "transfer_item",
+      "payload": {
+        "item_node_id": "node-sealed-ledger",
+        "from_holder": {
+          "holder_version": 1,
+          "kind": "character",
+          "node_id": "node-hero"
+        },
+        "to_holder": {
+          "holder_version": 1,
+          "kind": "party"
+        }
+      },
+      "repeat_policy": "once",
+      "explanation": "The Sealed Ledger becomes a party quest reward.",
+      "created_at": "2026-08-07T16:00:00Z",
+      "updated_at": "2026-08-07T16:00:00Z"
+    },
+    {
+      "id": "effect-04-exit-ledger-to-player",
+      "effect_version": 1,
+      "project_id": "project-aurora",
+      "operation": "transfer_item",
+      "payload": {
+        "item_node_id": "node-sealed-ledger",
+        "from_holder": {
+          "holder_version": 1,
+          "kind": "party"
+        },
+        "to_holder": {
+          "holder_version": 1,
+          "kind": "player"
+        }
+      },
+      "repeat_policy": "once",
+      "explanation": "The party hands the Ledger to the player before returning to Main Story.",
+      "created_at": "2026-08-07T16:00:00Z",
+      "updated_at": "2026-08-07T16:00:00Z"
+    }
+  ],
+  "narrative_effect_bindings": [
+    {
+      "id": "binding-01-dialogue-ledger-to-mara",
+      "binding_version": 1,
+      "project_id": "project-aurora",
+      "effect_id": "effect-01-ledger-ilya-to-mara",
+      "owner_kind": "dialogue_element",
+      "owner_id": "line-ilya-concedes",
+      "context_node_id": "node-dock-dialogue",
+      "application_order": 0,
+      "created_at": "2026-08-07T16:00:00Z",
+      "updated_at": "2026-08-07T16:00:00Z"
+    },
+    {
+      "id": "binding-02-quest-complete",
+      "binding_version": 1,
+      "project_id": "project-aurora",
+      "effect_id": "effect-02-quest-route-completed",
+      "owner_kind": "quest_outcome",
+      "owner_id": "branch-blockade-route",
+      "context_node_id": "node-smuggler-route",
+      "application_order": 0,
+      "created_at": "2026-08-07T16:00:00Z",
+      "updated_at": "2026-08-07T16:00:00Z"
+    },
+    {
+      "id": "binding-03-quest-reward",
+      "binding_version": 1,
+      "project_id": "project-aurora",
+      "effect_id": "effect-03-quest-reward-to-party",
+      "owner_kind": "quest_outcome",
+      "owner_id": "branch-blockade-route",
+      "context_node_id": "node-smuggler-route",
+      "application_order": 1,
+      "created_at": "2026-08-07T16:00:00Z",
+      "updated_at": "2026-08-07T16:00:00Z"
+    },
+    {
+      "id": "binding-04-exit-ledger-to-player",
+      "binding_version": 1,
+      "project_id": "project-aurora",
+      "effect_id": "effect-04-exit-ledger-to-player",
+      "owner_kind": "flow_exit",
+      "owner_id": "flow-exit-smuggler-success",
+      "context_node_id": null,
+      "application_order": 0,
+      "created_at": "2026-08-07T16:00:00Z",
+      "updated_at": "2026-08-07T16:00:00Z"
+    }
+  ],
+  "style_profiles": [
+    {
+      "style_profile_version": 1,
+      "id": "style-aurora-default",
+      "project_id": "project-aurora",
+      "name": "Aurora maritime intrigue",
+      "description": "Project-wide style for tense harbor investigation prose.",
+      "guidance": "Use concrete maritime details, restrained suspicion, and concise sentences. Preserve authored names, quantities, and state terms exactly.",
+      "traits": {
+        "traits_version": 1,
+        "tone": [
+          "restrained",
+          "suspicious"
+        ],
+        "rhythm": [
+          "concise sentences"
+        ],
+        "pacing": [
+          "deliberate escalation"
+        ],
+        "vocabulary": [
+          "concrete maritime language"
+        ],
+        "dramatic_intensity": "controlled"
+      },
+      "positive_examples": [
+        "Rain silvered the sealed ledger while the harbor watch counted every departing hull."
+      ],
+      "created_at": "2026-08-08T10:00:00Z",
+      "updated_at": "2026-08-08T10:00:00Z"
+    },
+    {
+      "style_profile_version": 1,
+      "id": "style-aurora-opening",
+      "project_id": "project-aurora",
+      "name": "Opening urgency",
+      "description": "Higher-tension override for the opening Scene.",
+      "guidance": "Keep the maritime precision of the project style but shorten beats and foreground immediate danger.",
+      "traits": {
+        "traits_version": 1,
+        "tone": [
+          "urgent",
+          "watchful"
+        ],
+        "rhythm": [
+          "short beats"
+        ],
+        "pacing": [
+          "accelerating"
+        ],
+        "vocabulary": [
+          "physical action"
+        ],
+        "dramatic_intensity": "heightened"
+      },
+      "positive_examples": [
+        "The blockade bell struck once. Mara was already running."
+      ],
+      "created_at": "2026-08-08T10:00:00Z",
+      "updated_at": "2026-08-08T10:00:00Z"
+    },
+    {
+      "style_profile_version": 1,
+      "id": "style-aurora-test-luna",
+      "project_id": "project-aurora",
+      "name": "Luna harbor test",
+      "description": "Visible test profile for exercising Style Rewriter requests with the project-default provider and gpt-5.6-luna model.",
+      "guidance": "Polish the selected prose into crisp maritime suspense. Keep every authored fact, proper name, quantity, quotation, and state reference unchanged.",
+      "traits": {
+        "traits_version": 1,
+        "tone": [
+          "tense",
+          "observant"
+        ],
+        "rhythm": [
+          "alternating short and medium beats"
+        ],
+        "pacing": [
+          "steady forward pressure"
+        ],
+        "vocabulary": [
+          "precise maritime details"
+        ],
+        "dramatic_intensity": "controlled tension"
+      },
+      "positive_examples": [
+        "The harbor bell cut through the rain; every chain on the quay answered with a colder note."
+      ],
+      "created_at": "2026-09-08T10:00:00Z",
+      "updated_at": "2026-09-08T10:00:00Z"
+    }
+  ],
+  "scene_style_assignments": [
+    {
+      "assignment_version": 1,
+      "id": "scene-style-opening",
+      "project_id": "project-aurora",
+      "scene_node_id": "node-opening",
+      "style_profile_id": "style-aurora-test-luna",
+      "created_at": "2026-08-08T10:00:00Z",
+      "updated_at": "2026-08-08T10:00:00Z"
+    }
+  ],
+  "agent_memories": [
+    {
+      "memory_version": 1,
+      "id": "memory-style-01-project-en",
+      "project_id": "project-aurora",
+      "agent_id": "style_rewriter",
+      "namespace": "style_rewriter",
+      "scope": {
+        "scope_version": 1,
+        "kind": "project"
+      },
+      "content_locale": "en",
+      "title": "Harbor terminology",
+      "instruction": "Keep authored maritime ranks and harbor terms exact instead of replacing them with generic synonyms.",
+      "rationale": "Reviewed project terminology should remain stable across rewrites.",
+      "status": "active",
+      "supersedes_id": null,
+      "created_at": "2026-09-17T10:00:00Z",
+      "updated_at": "2026-09-17T10:00:00Z"
+    },
+    {
+      "memory_version": 1,
+      "id": "memory-style-02-scene-opening-en",
+      "project_id": "project-aurora",
+      "agent_id": "style_rewriter",
+      "namespace": "style_rewriter",
+      "scope": {
+        "scope_version": 1,
+        "kind": "scene",
+        "scene_node_id": "node-opening"
+      },
+      "content_locale": "en",
+      "title": "Opening rhythm",
+      "instruction": "Use short clauses immediately before physical danger while retaining the restrained project voice.",
+      "rationale": "The author reviewed this rhythm for the opening Scene.",
+      "status": "active",
+      "supersedes_id": null,
+      "created_at": "2026-09-17T10:00:00Z",
+      "updated_at": "2026-09-17T10:00:00Z"
+    },
+    {
+      "memory_version": 1,
+      "id": "memory-style-03-dialogue-ledger-en",
+      "project_id": "project-aurora",
+      "agent_id": "style_rewriter",
+      "namespace": "style_rewriter",
+      "scope": {
+        "scope_version": 1,
+        "kind": "dialogue_field",
+        "node_id": "node-dock-dialogue",
+        "field_kind": "option_text",
+        "element_id": "choice-mara-response",
+        "option_id": "answer-show-ledger"
+      },
+      "content_locale": "en",
+      "title": "Ledger choice constraint",
+      "instruction": "Keep the sealed ledger explicit and phrase Mara's decision as a direct action.",
+      "rationale": "This reviewed constraint belongs only to the selected Dialogue option.",
+      "status": "active",
+      "supersedes_id": null,
+      "created_at": "2026-09-17T10:00:00Z",
+      "updated_at": "2026-09-17T10:00:00Z"
+    },
+    {
+      "memory_version": 1,
+      "id": "memory-style-04-project-ru",
+      "project_id": "project-aurora",
+      "agent_id": "style_rewriter",
+      "namespace": "style_rewriter",
+      "scope": {
+        "scope_version": 1,
+        "kind": "project"
+      },
+      "content_locale": "ru",
+      "title": "Термины гавани",
+      "instruction": "Сохраняй русские названия должностей и морские термины без замены синонимами.",
+      "rationale": "Проверенная автором терминология проекта.",
+      "status": "active",
+      "supersedes_id": null,
+      "created_at": "2026-09-17T10:00:00Z",
+      "updated_at": "2026-09-17T10:00:00Z"
+    },
+    {
+      "memory_version": 1,
+      "id": "memory-style-05-scene-opening-ru",
+      "project_id": "project-aurora",
+      "agent_id": "style_rewriter",
+      "namespace": "style_rewriter",
+      "scope": {
+        "scope_version": 1,
+        "kind": "scene",
+        "scene_node_id": "node-opening"
+      },
+      "content_locale": "ru",
+      "title": "Ритм первой сцены",
+      "instruction": "Используй короткие фразы перед непосредственной опасностью, сохраняя сдержанный тон.",
+      "rationale": "Проверенный автором ритм первой сцены.",
+      "status": "active",
+      "supersedes_id": null,
+      "created_at": "2026-09-17T10:00:00Z",
+      "updated_at": "2026-09-17T10:00:00Z"
+    },
+    {
+      "memory_version": 1,
+      "id": "memory-style-06-dialogue-ledger-ru",
+      "project_id": "project-aurora",
+      "agent_id": "style_rewriter",
+      "namespace": "style_rewriter",
+      "scope": {
+        "scope_version": 1,
+        "kind": "dialogue_field",
+        "node_id": "node-dock-dialogue",
+        "field_kind": "line_text",
+        "element_id": "line-ilya-concedes",
+        "option_id": null
+      },
+      "content_locale": "ru",
+      "title": "Реплика о реестре",
+      "instruction": "Сохраняй формулировку про запечатанный реестр и делай решение персонажа прямым.",
+      "rationale": "Проверенное ограничение для конкретной реплики диалога.",
+      "status": "active",
+      "supersedes_id": null,
+      "created_at": "2026-09-17T10:00:00Z",
+      "updated_at": "2026-09-17T10:00:00Z"
+    },
+    {
+      "memory_version": 1,
+      "id": "memory-workflow-01-canon-en",
+      "project_id": "project-aurora",
+      "agent_id": "canon_checker",
+      "namespace": "canon_checker",
+      "scope": {
+        "scope_version": 1,
+        "kind": "project"
+      },
+      "content_locale": "en",
+      "title": "Blockade planning assumption",
+      "instruction": "Treat the blockade route as intentionally dangerous when explaining issues, but preserve deterministic evidence.",
+      "rationale": "Explicit Canon copy reviewed by the author.",
+      "status": "active",
+      "supersedes_id": null,
+      "created_at": "2026-09-17T11:00:00Z",
+      "updated_at": "2026-09-17T11:00:00Z"
+    },
+    {
+      "memory_version": 1,
+      "id": "memory-workflow-02-canon-ru",
+      "project_id": "project-aurora",
+      "agent_id": "canon_checker",
+      "namespace": "canon_checker",
+      "scope": {
+        "scope_version": 1,
+        "kind": "project"
+      },
+      "content_locale": "ru",
+      "title": "Допущение о блокаде",
+      "instruction": "Считай опасность маршрута через блокаду авторским замыслом при объяснении, но не изменяй детерминированные доказательства.",
+      "rationale": "Явная копия для проверки канона, подтверждённая автором.",
+      "status": "active",
+      "supersedes_id": null,
+      "created_at": "2026-09-17T11:00:00Z",
+      "updated_at": "2026-09-17T11:00:00Z"
+    },
+    {
+      "memory_version": 1,
+      "id": "memory-workflow-03-impact-en",
+      "project_id": "project-aurora",
+      "agent_id": "impact_resolver",
+      "namespace": "impact_resolver",
+      "scope": {
+        "scope_version": 1,
+        "kind": "project"
+      },
+      "content_locale": "en",
+      "title": "Blockade planning assumption",
+      "instruction": "Treat the blockade route as intentionally dangerous when explaining options, but preserve deterministic findings.",
+      "rationale": "Explicit Impact copy reviewed by the author.",
+      "status": "active",
+      "supersedes_id": null,
+      "created_at": "2026-09-17T11:00:00Z",
+      "updated_at": "2026-09-17T11:00:00Z"
+    },
+    {
+      "memory_version": 1,
+      "id": "memory-workflow-04-impact-ru",
+      "project_id": "project-aurora",
+      "agent_id": "impact_resolver",
+      "namespace": "impact_resolver",
+      "scope": {
+        "scope_version": 1,
+        "kind": "project"
+      },
+      "content_locale": "ru",
+      "title": "Допущение о блокаде",
+      "instruction": "Считай опасность маршрута через блокаду авторским замыслом при объяснении вариантов, но не изменяй детерминированные результаты.",
+      "rationale": "Явная копия для анализа влияния, подтверждённая автором.",
+      "status": "active",
+      "supersedes_id": null,
+      "created_at": "2026-09-17T11:00:00Z",
+      "updated_at": "2026-09-17T11:00:00Z"
+    }
+  ],
+  "playback_effects": [
+    {
+      "effect_version": 1,
+      "id": "playback-effect-acquire-ledger",
+      "project_id": "project-aurora",
+      "flow_id": "flow-main-story",
+      "owner_node_id": null,
+      "owner_transition_id": "flow-transition-opening-dialogue",
+      "review_status": "accepted",
+      "repeatable": false,
+      "explanation": "Carry the sealed ledger into the dockmaster exchange.",
+      "operation": "add_inventory",
+      "payload": {
+        "node_id": "node-sealed-ledger"
+      }
+    },
+    {
+      "effect_version": 1,
+      "id": "playback-effect-complete-smuggler-route",
+      "project_id": "project-aurora",
+      "flow_id": "flow-smuggler-route",
+      "owner_node_id": null,
+      "owner_transition_id": "flow-transition-quest-blockade",
+      "review_status": "accepted",
+      "repeatable": true,
+      "explanation": "Complete the Smuggler Route after committing to the blockade.",
+      "operation": "set_quest_status",
+      "payload": {
+        "quest_node_id": "node-smuggler-route",
+        "status": "completed"
+      }
+    }
+  ],
+  "expected_validation": {
+    "canonical_node_count": 16,
+    "edge_count": 11,
+    "issue_count": 3,
+    "placement_count": 18,
+    "story_flow_count": 3,
+    "dialogue_count": 1,
+    "quest_count": 1,
+    "flow_invocation_count": 2,
+    "flow_exit_count": 4,
+    "flow_exit_binding_count": 4,
+    "flow_initial_state_count": 2,
+    "narrative_effect_count": 4,
+    "narrative_effect_binding_count": 4,
+    "style_profile_count": 3,
+    "scene_style_assignment_count": 1,
+    "agent_memory_count": 10,
+    "engine_tag_definition_count": 9,
+    "engine_tag_binding_count": 9,
+    "legacy_engine_tag_count": 0
+  }
+}

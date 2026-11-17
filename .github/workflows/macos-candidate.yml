@@ -1,0 +1,106 @@
+name: Apple Silicon candidate (manual, ad-hoc only)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  macos-candidate:
+    runs-on: macos-15
+    timeout-minutes: 60
+    env:
+      MACOSX_DEPLOYMENT_TARGET: "15.0"
+      STT_RUNTIME_STORAGE_PROFILES_FILE: ${{ runner.temp }}/owned-storage.json
+      STT_RUNTIME_STORAGE_MASTER_KEY_FILE: ${{ runner.temp }}/owned-storage-key
+      STT_RUNTIME_CANON_PROVIDER_PROFILES_FILE: ${{ runner.temp }}/owned-providers.enc
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@v6
+      - name: Assert native Apple Silicon and record tools
+        run: |
+          test "$(uname -m)" = arm64
+          sw_vers
+          printf 'Runner image %s %s\n' "$ImageOS" "$ImageVersion"
+          rustc --version --verbose
+          cargo --version
+          node --version
+          python --version
+          uv --version
+      - name: Install locked dependencies
+        run: |
+          npm install --global pnpm@10.15.0
+          pnpm install --frozen-lockfile
+          uv sync --all-extras --group build --locked
+      - name: Build verified runtime and raw app
+        run: |
+          uv run --group build python -m services.runtime.scripts.build_desktop_runtime > "$RUNNER_TEMP/runtime-build.json"
+          raw=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).candidate' "$RUNNER_TEMP/runtime-build.json")
+          node tools/desktop-runtime-resources.mjs "$raw" > "$RUNNER_TEMP/runtime-stage.json"
+          configuration=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).configuration' "$RUNNER_TEMP/runtime-stage.json")
+          node -e 'const fs=require("fs"), path=process.argv[1], config=JSON.parse(fs.readFileSync(path)); config.bundle.macOS={minimumSystemVersion:"15.0"}; fs.writeFileSync(path, JSON.stringify(config));' "$configuration"
+          # The finalizer, not Tauri's resource materializer, owns inner/outer signing.
+          pnpm --dir apps/desktop exec tauri build --bundles app --no-sign --config "$configuration" -- --locked
+      - name: Finalize fresh ad-hoc candidate
+        run: |
+          raw=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).candidate' "$RUNNER_TEMP/runtime-build.json")
+          original=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).manifest' "$RUNNER_TEMP/runtime-build.json")
+          staged=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).manifest' "$RUNNER_TEMP/runtime-stage.json")
+          uv run python tools/macos_candidate.py finalize "apps/desktop/src-tauri/target/release/bundle/macos/Something To Tell Engine.app" "$staged" --raw-runtime "$raw" --raw-manifest "$original" > "$RUNNER_TEMP/finalized.json"
+          app=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).app' "$RUNNER_TEMP/finalized.json")
+          printf 'STT_FINAL_APP=%s\nSTT_TEST_DESKTOP_RUNTIME_EXECUTABLE=%s\n' "$app" "$app/Contents/Resources/runtime/stt-runtime" >> "$GITHUB_ENV"
+      - name: Verify signed runtime and native owner
+        run: |
+          env PATH=/nonexistent "$STT_TEST_DESKTOP_RUNTIME_EXECUTABLE" --self-check
+          uv run pytest services/runtime/tests/test_desktop_runtime.py services/runtime/tests/test_desktop_lifecycle.py -ra --junitxml="$RUNNER_TEMP/frozen.xml"
+          uv run python tools/check-ci-test-report.py "$RUNNER_TEMP/frozen.xml" --no-skips
+          pnpm desktop:config:test
+          cargo test --locked --manifest-path apps/desktop/src-tauri/Cargo.toml
+          cargo test --locked --manifest-path apps/desktop/src-tauri/Cargo.toml runtime_supervisor::tests::real_frozen_child_handshake -- --ignored --exact
+      - name: Create read-only DMG and verify mounted bytes
+        run: |
+          destination="$GITHUB_WORKSPACE/dist/macos-candidate"
+          mkdir -p "$destination" "$RUNNER_TEMP/dmg-root"
+          ditto "$STT_FINAL_APP" "$RUNNER_TEMP/dmg-root/Something To Tell Engine.app"
+          ln -s /Applications "$RUNNER_TEMP/dmg-root/Applications"
+          hdiutil create -fs HFS+ -volname "Something To Tell Engine" -srcfolder "$RUNNER_TEMP/dmg-root" -format UDZO "$destination/SomethingToTellEngine-arm64.dmg"
+          mount=$(mktemp -d "$RUNNER_TEMP/stt-dmg-mount.XXXXXX")
+          trap 'hdiutil detach "$mount" || true' EXIT
+          hdiutil attach -readonly -nobrowse -mountpoint "$mount" "$destination/SomethingToTellEngine-arm64.dmg"
+          runtime="$mount/Something To Tell Engine.app/Contents/Resources/runtime"
+          manifest=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).manifest' "$RUNNER_TEMP/finalized.json")
+          node --input-type=module -e 'import fs from "node:fs"; import {verifyCandidate} from "./tools/desktop-runtime-resources.mjs"; verifyCandidate(process.argv[1], JSON.parse(fs.readFileSync(process.argv[2])));' "$runtime" "$manifest"
+          uv run python tools/macos_candidate.py verify "$runtime" --app "$mount/Something To Tell Engine.app"
+          env PATH=/nonexistent "$runtime/stt-runtime" --self-check
+          hdiutil detach "$mount"
+          trap - EXIT
+          # Do not upload candidate binaries before the notice audit is complete.
+          test -s THIRD_PARTY_NOTICES.md
+          cp LICENSE "$destination/"
+          cp THIRD_PARTY_NOTICES.md "$destination/"
+          cp "$manifest" "$destination/runtime-manifest.json"
+          input=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).input_manifest' "$RUNNER_TEMP/finalized.json")
+          staged=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).staged_manifest' "$RUNNER_TEMP/finalized.json")
+          cp "$input" "$destination/input-runtime-manifest.json"
+          cp "$staged" "$destination/staged-runtime-manifest.json"
+          node -e 'require("fs").writeFileSync(process.argv[1],JSON.stringify({schema_version:1,source_commit:process.env.GITHUB_SHA,runner_image:process.env.ImageVersion,architecture:"arm64",minimum_macos:"15.0",signing:"adhoc",notarized:false,installed_gui_acceptance:"pending"},null,2));' "$destination/candidate.json"
+          (cd "$destination" && shasum -a 256 SomethingToTellEngine-arm64.dmg LICENSE THIRD_PARTY_NOTICES.md runtime-manifest.json input-runtime-manifest.json staged-runtime-manifest.json candidate.json > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos-arm64-candidate-${{ github.sha }}
+          path: dist/macos-candidate
+          if-no-files-found: error
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: macos-runtime-tests-${{ github.sha }}
+          path: ${{ runner.temp }}/frozen.xml
+          retention-days: 7

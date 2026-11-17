@@ -1,0 +1,352 @@
+/* Graph frames, containment surfaces, and container-node controls. Rules remain in the shared stt-app layer and preserve source order. */
+.narrative-node-frame {
+  background: color-mix(in srgb, var(--node-color) 5%, white 95%);
+  border: 2px solid color-mix(in srgb, var(--node-color) 68%, white 32%);
+  border-top-width: 2px;
+  box-shadow: 0 8px 20px rgb(15 23 42 / 7%);
+  min-height: 220px;
+  min-width: 320px;
+  padding: 46px 14px 14px;
+}
+
+.narrative-node-frame-collapsed {
+  min-height: 112px;
+  min-width: 280px;
+  padding-bottom: 10px;
+}
+
+.narrative-node-frame-collapsed .narrative-node-summary {
+  -webkit-line-clamp: 2;
+}
+
+.narrative-node-frame:not(.narrative-node-frame-collapsed) .narrative-node-content > .mt-3 {
+  display: none;
+}
+
+.narrative-node-frame:not(.narrative-node-frame-collapsed) .narrative-node-content > .narrative-node-summary {
+  left: 14px;
+  line-height: 1.35;
+  position: absolute;
+  right: 14px;
+  top: 39px;
+  -webkit-line-clamp: 1;
+  z-index: 3;
+}
+
+.narrative-node-frame-collapsed .narrative-node-content > .mt-3 {
+  display: none;
+}
+
+.narrative-frame-drop-valid {
+  border-color: #16a34a;
+  box-shadow: 0 0 0 4px rgb(34 197 94 / 25%);
+}
+
+.narrative-frame-drop-invalid {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 4px rgb(220 38 38 / 22%);
+}
+
+.narrative-node-title {
+  align-items: center;
+  background: color-mix(in srgb, var(--node-color) 12%, white 88%);
+  border-bottom: 1px solid color-mix(in srgb, var(--node-color) 35%, white 65%);
+  color: var(--node-color);
+  display: flex;
+  font-size: 13px;
+  font-weight: 700;
+  gap: 5px;
+  height: 34px;
+  inset: 0 0 auto;
+  min-width: 0;
+  padding: 0 6px 0 10px;
+  position: absolute;
+}
+
+.narrative-node-title-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.narrative-node-title-icon {
+  flex: 0 0 auto;
+}
+
+/* Detail modes replace content, never the authored card/frame dimensions or port geometry. */
+.node-detail-header {
+  align-items: center;
+  background: color-mix(in srgb, var(--node-color) 10%, white);
+  border-bottom: 1px solid color-mix(in srgb, var(--node-color) 30%, white);
+  color: var(--node-color);
+  display: flex;
+  font-size: 12px;
+  font-weight: 600;
+  gap: 5px;
+  height: 34px;
+  inset: 0 0 auto;
+  min-width: 0;
+  padding: 0 6px 0 10px;
+  position: absolute;
+}
+
+.node-detail-header > svg { flex: 0 0 auto; }
+.node-detail-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.node-detail-overview .node-detail-open { margin-left: auto; }
+.node-detail-preview {
+  color: #475569;
+  display: -webkit-box;
+  font-size: 12px;
+  font-weight: 400;
+  left: 10px;
+  line-height: 16px;
+  margin: 0;
+  max-height: calc(100% - 48px);
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  right: 10px;
+  top: 42px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+/* Keep the text above the existing minimum child y=58; never overlay child cards. */
+.node-detail-frame-preview { display: block; top: 36px; height: 16px; white-space: nowrap; text-overflow: ellipsis; }
+.node-detail-open {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  color: inherit;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 3px;
+  height: 22px;
+  justify-content: center;
+  min-width: 22px;
+  padding: 0 3px;
+}
+.node-detail-folded, .node-detail-issues { font-size: 10px; }
+.node-detail-folded, .node-detail-issues { flex: 0 0 auto; }
+.node-detail-issues { color: #b91c1c; }
+.node-detail-folded { color: #475569; }
+.node-detail-folded.node-detail-header { border-bottom-style: dashed; color: var(--node-color); }
+
+.narrative-node-title-meta {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 3px;
+  min-width: 0;
+}
+
+.frame-content-count {
+  align-items: center;
+  background: color-mix(in srgb, var(--node-color) 12%, white 88%);
+  border: 1px solid color-mix(in srgb, var(--node-color) 30%, white 70%);
+  border-radius: 999px;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 10px;
+  height: 20px;
+  justify-content: center;
+  min-width: 20px;
+  padding: 0 5px;
+}
+
+.narrative-frame-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 2px;
+  min-width: 0;
+}
+
+.narrative-frame-action {
+  align-items: center;
+  background: color-mix(in srgb, var(--node-color) 8%, white 92%);
+  border: 1px solid color-mix(in srgb, var(--node-color) 28%, white 72%);
+  border-radius: 4px;
+  color: var(--node-color);
+  cursor: pointer;
+  display: inline-flex;
+  height: 22px;
+  justify-content: center;
+  width: 22px;
+}
+
+.narrative-frame-action:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.linked-instance-indicator {
+  align-items: center;
+  color: #475569;
+  display: inline-flex;
+  flex: 0 0 auto;
+  justify-content: center;
+}
+
+.composition-drop-label {
+  background: #ffffff;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  color: #166534;
+  font-size: 11px;
+  font-weight: 700;
+  left: 50%;
+  padding: 5px 8px;
+  pointer-events: none;
+  position: absolute;
+  top: 42px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 5;
+}
+
+.narrative-frame-drop-invalid .composition-drop-label {
+  color: #b91c1c;
+}
+
+.composition-notice {
+  background: #0f172a;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  left: 50%;
+  padding: 7px 10px;
+  pointer-events: none;
+  position: absolute;
+  top: 16px;
+  transform: translateX(-50%);
+  z-index: 45;
+}
+
+.frame-workspace-banner {
+  /* Focus context belongs to shell chrome, never above authored frame actions. */
+  color: #64748b;
+  display: flex;
+  font-size: 12px;
+  min-width: 0;
+}
+
+.frame-draw-preview {
+  background: color-mix(in srgb, var(--frame-color) 8%, transparent);
+  border: 2px dashed var(--frame-color);
+  pointer-events: none;
+  position: fixed;
+  z-index: 40;
+}
+
+.dialogue-node-summary {
+  color: #475569;
+  display: -webkit-box;
+  font-size: 11px;
+  line-height: 1.35;
+  margin: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.dialogue-node-metrics {
+  display: grid;
+  gap: 5px 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 9px;
+}
+
+.dialogue-node-metric {
+  align-items: center;
+  color: #0e7490;
+  display: grid;
+  font-size: 10px;
+  gap: 4px;
+  grid-template-columns: 13px auto minmax(0, 1fr);
+  line-height: 1;
+  min-width: 0;
+}
+
+.dialogue-node-metric strong {
+  color: #164e63;
+  font-size: 11px;
+}
+
+.dialogue-node-metric span {
+  color: #64748b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.narrative-handle {
+  background: var(--node-color);
+  border: 2px solid #ffffff;
+  height: 10px;
+  opacity: 0;
+  transition: opacity 120ms ease;
+  width: 10px;
+}
+
+.react-flow__node:hover .narrative-handle,
+.narrative-node-connecting-target .narrative-handle,
+.narrative-handle:hover {
+  opacity: 1;
+}
+
+.narrative-handle-top {
+  top: -7px;
+}
+
+.narrative-handle-right {
+  right: -7px;
+}
+
+.narrative-handle-bottom {
+  bottom: -7px;
+}
+
+.narrative-handle-left {
+  left: -7px;
+}
+.project-flow-member {
+  align-items: center;
+  display: flex;
+  gap: 4px;
+  max-width: 100%;
+  min-height: 28px;
+  min-width: 0;
+  overflow: visible;
+  padding-left: 20px;
+  width: 100%;
+}
+
+.project-flow-member-title {
+  flex: 1 1 auto;
+  font-size: 11px;
+  line-height: 1.25;
+  min-width: 0;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-flow-member > button:not(:first-child) {
+  align-items: center;
+  border-radius: 4px;
+  color: #475569;
+  display: inline-flex;
+  height: 24px;
+  justify-content: center;
+  flex: 0 0 24px;
+  width: 24px;
+}
+
+.project-flow-member > button:not(:first-child):hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}

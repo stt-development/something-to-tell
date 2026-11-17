@@ -1,0 +1,40 @@
+name: Yarn Spinner export
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  official-compiler:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@v6
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "6.0.x"
+      - name: Install pinned official Yarn Spinner compiler
+        run: dotnet tool install YarnSpinner.Console --version 3.0.2 --tool-path "$RUNNER_TEMP/ysc"
+      - name: Add compiler to PATH
+        run: echo "$RUNNER_TEMP/ysc" >> "$GITHUB_PATH"
+      - name: Install runtime test dependencies
+        run: uv sync --all-extras --locked
+      - name: Compile deterministic Yarn golden source
+        run: |
+          command -v ysc
+          uv run pytest services/runtime/tests/test_export_yarn_spinner.py services/runtime/tests/test_export_official_examples.py -ra -k 'not official_ink' --junitxml="$RUNNER_TEMP/yarn.xml"
+      - name: Reject skipped compiler coverage
+        if: always()
+        run: uv run python tools/check-ci-test-report.py "$RUNNER_TEMP/yarn.xml" --no-skips
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: yarn-compiler-results
+          path: ${{ runner.temp }}/yarn.xml
+          retention-days: 7

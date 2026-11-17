@@ -1,0 +1,35 @@
+[project]
+name = "somethingtotell"
+version = "0.1.0"
+license = "GPL-3.0-or-later"
+description = "Local-first narrative graph system for game writers"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "alembic>=1.14.0",
+    "fastapi>=0.115.0",
+    "lark>=1.2.2,<2",
+    "psycopg[binary]>=3.2.0",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.6.0",
+    "pyyaml>=6.0.3,<7",
+    "sqlalchemy>=2.0.36",
+    "uvicorn[standard]>=0.32.0",
+    "cryptography>=45.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "httpx>=0.28.0",
+    "pytest>=8.3.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["services/runtime/tests"]
+markers = [
+    "internal_documentation: integrity of private architecture documents or archived verification reports (not functional coverage)",
+]
+
+[dependency-groups]
+build = ["pyinstaller==6.22.3"]

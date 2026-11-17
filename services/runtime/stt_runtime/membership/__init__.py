@@ -1,0 +1,1 @@
+"""Faction membership application boundary."""

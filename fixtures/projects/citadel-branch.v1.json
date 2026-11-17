@@ -1,0 +1,69 @@
+{
+  "fixture_version": 1,
+  "slug": "citadel-branch",
+  "manifest": {
+    "format_version": 2,
+    "project_id": "project-citadel",
+    "name": "Citadel Branch",
+    "description": "Branching questline prototype with an empty graph.",
+    "created_at": "2026-07-28T10:00:00Z",
+    "updated_at": "2026-07-28T10:00:00Z",
+    "saved_revision": 1,
+    "settings_version": 2,
+    "settings": {
+      "ui_locale": "en",
+      "content_locale": "en",
+      "autosave": {
+        "enabled": true,
+        "interval_seconds": 300
+      },
+      "storage": {
+        "mode": "local_sqlite",
+        "connection_profile_id": null
+      },
+      "canon_check": {
+        "canon_check_version": 1,
+        "deterministic_enabled": true,
+        "enabled_rules": {},
+        "severity_overrides": {},
+        "agent_mode": "disabled",
+        "content_policy": "never",
+        "model_preference": null,
+        "provider_profile_id": null
+      }
+    },
+    "asset_paths": []
+  },
+  "project_metadata": {
+    "status": "draft",
+    "fixture": true
+  },
+  "nodes": [],
+  "edges": [],
+  "issues": [],
+  "suggestions": [],
+  "engine_tags": [],
+  "engine_tag_definitions": [],
+  "engine_tag_bindings": [],
+  "legacy_engine_tags": [],
+  "placements": [],
+  "dialogues": [],
+  "quests": [],
+  "story_flows": [],
+  "story_flow_nodes": [],
+  "flow_transitions": [],
+  "scene_flow_boundaries": [],
+  "playback_effects": [],
+  "expected_validation": {
+    "canonical_node_count": 0,
+    "edge_count": 0,
+    "issue_count": 0,
+    "placement_count": 0,
+    "story_flow_count": 0,
+    "dialogue_count": 0,
+    "quest_count": 0,
+    "engine_tag_definition_count": 0,
+    "engine_tag_binding_count": 0,
+    "legacy_engine_tag_count": 0
+  }
+}

@@ -1,0 +1,260 @@
+/* Relationship inspection and Scene Analysis workspace. Rules remain in the shared stt-app layer and preserve source order. */
+.relationship-panel {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  bottom: 16px;
+  box-shadow: 0 16px 36px rgb(15 23 42 / 14%);
+  max-height: min(420px, calc(100% - 32px));
+  overflow: auto;
+  padding: 12px;
+  position: absolute;
+  right: 16px;
+  width: min(320px, calc(100% - 32px));
+  z-index: 35;
+}
+
+.scene-analysis-panel {
+  position: absolute;
+  inset: 0 0 0 auto;
+  z-index: 36;
+  display: flex;
+  width: 540px;
+  min-width: 0;
+  flex-direction: column;
+  border-left: 1px solid #cbd5e1;
+  background: #f8fafc;
+  box-shadow: -8px 0 20px rgb(15 23 42 / 8%);
+  color: #0f172a;
+}
+
+.workspace-stage.scene-analysis-workspace-open > .react-flow,
+.workspace-stage.scene-analysis-workspace-open > .story-document-workspace {
+  right: 540px;
+  width: auto;
+}
+
+/* Docked workspaces resize React Flow; relative right offsets would shift its
+   coordinate system left and miscenter every React Flow panel control. */
+.workspace-stage.scene-analysis-workspace-open > .react-flow,
+.workspace-stage.canon-workspace-open > .react-flow,
+.workspace-stage.impact-workspace-open > .react-flow {
+  position: absolute !important;
+  inset-block: 0;
+  left: 0;
+  width: auto !important;
+  height: auto !important;
+}
+
+.scene-analysis-workspace-header,
+.scene-analysis-controls {
+  flex: 0 0 auto;
+  border-bottom: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+.scene-analysis-workspace-header {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+}
+
+.scene-analysis-workspace-header > div:first-child > span,
+.scene-analysis-workspace-header > div:first-child > strong {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.scene-analysis-workspace-header > div:first-child > span {
+  color: #475569;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.scene-analysis-workspace-header > div:first-child > strong {
+  margin-top: 2px;
+  font-size: 13px;
+}
+
+.scene-analysis-workspace-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scene-analysis-run-state {
+  min-width: 72px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 4px 6px;
+  color: #475569;
+  font-size: 10px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.scene-analysis-run-state[data-status="failed"] {
+  border-color: #fca5a5;
+  color: #991b1b;
+}
+
+.scene-analysis-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  padding: 10px 12px 12px;
+}
+
+.scene-analysis-controls label {
+  color: #475569;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.scene-analysis-controls input,
+.scene-analysis-controls textarea {
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+.scene-analysis-controls textarea {
+  min-height: 112px;
+  line-height: 1.45;
+  resize: vertical;
+}
+
+.scene-analysis-disclosure {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #a7f3d0;
+  border-radius: 4px;
+  background: #ecfdf5;
+  padding: 7px 9px;
+  color: #065f46;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.scene-analysis-command-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.scene-analysis-primary-command,
+.scene-analysis-secondary-command {
+  display: inline-flex;
+  min-width: 104px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 4px;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.scene-analysis-primary-command {
+  border: 1px solid #0f766e;
+  background: #0f766e;
+  color: #fff;
+}
+
+.scene-analysis-secondary-command {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #334155;
+}
+
+.scene-analysis-primary-command:disabled,
+.scene-analysis-secondary-command:disabled {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
+.scene-analysis-results {
+  min-height: 0;
+  flex: 1 1 auto;
+  margin: 0;
+  overflow-y: auto;
+  background: #f8fafc;
+  padding: 10px 12px 16px;
+}
+
+.patch-operation {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-left-width: 4px;
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.patch-operation-node {
+  border-left-color: #2563eb;
+}
+
+.patch-operation-edge {
+  border-left-color: #475569;
+}
+
+.analysis-badge {
+  background: #f59e0b;
+  border: 2px solid #ffffff;
+  border-radius: 999px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+  padding: 5px 7px;
+  flex: 0 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.operation-decision {
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 7px;
+  text-transform: uppercase;
+}
+
+.operation-decision-approved {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.operation-decision-rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.relationship-row {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  color: #334155;
+  display: flex;
+  gap: 8px;
+  min-height: 34px;
+  padding: 7px 8px;
+  width: 100%;
+}
+
+.relationship-row:hover,
+.relationship-row:focus-visible {
+  background: #f0f9ff;
+  border-color: #38bdf8;
+  outline: none;
+}

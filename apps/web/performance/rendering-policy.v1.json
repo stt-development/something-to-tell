@@ -1,0 +1,17 @@
+{
+  "policy_version": 1,
+  "status": "frozen_for_implementation_not_enabled",
+  "entry_overscan_css_px": 240,
+  "release_overscan_css_px": 360,
+  "compact_zoom": 0.2,
+  "full_zoom": 0.65,
+  "zoom_hysteresis_ratio": 0.15,
+  "base_visible_levels": 3,
+  "extra_level_zoom": 1.25,
+  "min_zoom": 0.01,
+  "max_zoom": 10,
+  "minimap_columns": 32,
+  "minimap_rows": 16,
+  "spread_variant": "root_grid_v1",
+  "spread_gap_world": 256
+}

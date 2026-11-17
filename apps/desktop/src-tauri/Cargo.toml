@@ -1,0 +1,23 @@
+[package]
+name = "something-to-tell-desktop"
+version = "0.1.0"
+license = "GPL-3.0-or-later"
+description = "Desktop shell for Something To Tell Engine"
+authors = ["Something To Tell Engine"]
+edition = "2021"
+
+[lib]
+name = "something_to_tell_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+rfd = "0.15"
+base64 = "0.22"
+getrandom = "0.3"
+reqwest = { version = "0.13", default-features = false, features = ["blocking", "json"] }
