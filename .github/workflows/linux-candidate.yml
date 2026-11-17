@@ -10,12 +10,16 @@ jobs:
   linux-candidate:
     runs-on: ubuntu-24.04
     timeout-minutes: 60
-    env:
-      STT_RUNTIME_STORAGE_PROFILES_FILE: ${{ runner.temp }}/owned-storage.json
-      STT_RUNTIME_STORAGE_MASTER_KEY_FILE: ${{ runner.temp }}/owned-storage-key
-      STT_RUNTIME_CANON_PROVIDER_PROFILES_FILE: ${{ runner.temp }}/owned-providers.enc
     steps:
       - uses: actions/checkout@v4
+      - name: Configure disposable runtime paths
+        # Runner context is available to steps, not job-level env expressions.
+        env:
+          STT_RUNTIME_STORAGE_PROFILES_FILE: ${{ runner.temp }}/owned-storage.json
+          STT_RUNTIME_STORAGE_MASTER_KEY_FILE: ${{ runner.temp }}/owned-storage-key
+          STT_RUNTIME_CANON_PROVIDER_PROFILES_FILE: ${{ runner.temp }}/owned-providers.enc
+        run: |
+          printf '%s\n' "STT_RUNTIME_STORAGE_PROFILES_FILE=$STT_RUNTIME_STORAGE_PROFILES_FILE" "STT_RUNTIME_STORAGE_MASTER_KEY_FILE=$STT_RUNTIME_STORAGE_MASTER_KEY_FILE" "STT_RUNTIME_CANON_PROVIDER_PROFILES_FILE=$STT_RUNTIME_CANON_PROVIDER_PROFILES_FILE" >> "$GITHUB_ENV"
       - uses: actions/setup-node@v4
         with:
           node-version: 22

@@ -1,7 +1,9 @@
 """Functional CI keeps real prerequisites, product gates and visible skips."""
 import importlib.util
 import json
+import os
 from pathlib import Path
+import subprocess
 
 import pytest
 import yaml
@@ -28,6 +30,7 @@ def test_only_functional_workflow_automatically_runs_product_checks():
     assert automatic == ["functional-tests.yml"]
     current = workflow(automatic[0])
     assert set(current["on"]) == {"pull_request", "push", "workflow_dispatch"}
+    assert current["on"]["push"]["branches"] == ["main", "fix/ci-*"]
     assert current["permissions"] == {"contents": "read"}
     assert current["jobs"]["ink"]["uses"] == "./.github/workflows/ink-export.yml"
     assert current["jobs"]["yarn"]["uses"] == "./.github/workflows/yarn-export.yml"
@@ -43,7 +46,7 @@ def test_public_product_and_browser_checks_keep_real_postgresql_and_no_stress_ru
     assert job["env"]["STT_TEST_POSTGRES_NATIVE_DOCKER"] == "1"
     verify = next(step for step in job["steps"] if step.get("run") == "pnpm verify:public")
     assert verify["env"]["STT_TEST_POSTGRES_CONTAINER"] == "${{ job.services.postgres.id }}"
-    assert "--junitxml=" in job["env"]["PYTEST_ADDOPTS"]
+    assert "--junitxml=" in verify["env"]["PYTEST_ADDOPTS"]
     commands = "\n".join(step.get("run", "") for step in job["steps"])
     for gate in ["pnpm verify:public", "--frozen-lockfile", "uv sync --all-extras --locked", "check-ci-test-report.py"]:
         assert gate in commands
@@ -65,7 +68,8 @@ def test_browser_job_discovers_every_spec_independently_and_rejects_skipped_cove
     assert "pnpm web:test:e2e --reporter=line,junit" in commands
     assert "trap 'kill" in commands
     assert 'check-ci-test-report.py "$RUNNER_TEMP/playwright.xml" --no-skips' in commands
-    assert job["env"]["PLAYWRIGHT_JUNIT_OUTPUT_FILE"] == "${{ runner.temp }}/playwright.xml"
+    execute = next(step for step in job["steps"] if "pnpm web:test:e2e" in step.get("run", ""))
+    assert execute["env"]["PLAYWRIGHT_JUNIT_OUTPUT_FILE"] == "${{ runner.temp }}/playwright.xml"
     assert "continue-on-error" not in str(job)
     for path in (ROOT / "apps/web/e2e").glob("*.spec.ts"):
         assert "/private/tmp/" not in path.read_text(), f"Nonportable browser output: {path.name}"
@@ -81,14 +85,41 @@ def test_functional_native_job_exercises_explicit_frozen_handshake_without_binar
     assert "test_desktop_runtime.py services/runtime/tests/test_desktop_lifecycle.py" in commands
     assert 'check-ci-test-report.py "$RUNNER_TEMP/frozen.xml" --no-skips' in commands
     assert "runtime_supervisor::tests::real_frozen_child_handshake -- --ignored --exact" in commands
+    configure = next(step for step in job["steps"] if step.get("name") == "Configure disposable runtime paths")
     for name in ["STT_RUNTIME_STORAGE_PROFILES_FILE", "STT_RUNTIME_STORAGE_MASTER_KEY_FILE", "STT_RUNTIME_CANON_PROVIDER_PROFILES_FILE"]:
-        assert job["env"][name].startswith("${{ runner.temp }}/")
+        assert configure["env"][name].startswith("${{ runner.temp }}/")
     # Diagnostics are retained; compiler output is never a distributable PR artifact.
     for current in workflow("functional-tests.yml")["jobs"].values():
         for step in current.get("steps", []):
             if step.get("uses") == "actions/upload-artifact@v4":
                 assert all("dist/" not in line and "target/" not in line
                            for line in step["with"]["path"].splitlines())
+
+
+def test_runner_context_is_not_evaluated_before_steps_are_dispatched():
+    # GitHub rejects these contexts in workflow/job env before creating any jobs.
+    for path in WORKFLOWS.glob("*.yml"):
+        current = workflow(path.name)
+        envs = [current.get("env", {})]
+        envs.extend(job.get("env", {}) for job in current["jobs"].values())
+        for env in envs:
+            assert "runner." not in json.dumps(env), path.name
+
+
+@pytest.mark.parametrize("filename,job_id", [
+    ("functional-tests.yml", "desktop-unit"),
+    ("macos-candidate.yml", "macos-candidate"),
+    ("linux-candidate.yml", "linux-candidate"),
+])
+def test_disposable_paths_are_exported_for_later_steps(filename, job_id, tmp_path):
+    job = workflow(filename)["jobs"][job_id]
+    step = next(step for step in job["steps"] if step.get("name") == "Configure disposable runtime paths")
+    owned = {key: value.replace("${{ runner.temp }}", str(tmp_path / "owned space"))
+             for key, value in step["env"].items()}
+    output = tmp_path / "github-env"
+    subprocess.run(["bash", "-e", "-c", step["run"]],
+                   env={**os.environ, **owned, "GITHUB_ENV": str(output)}, check=True)
+    assert dict(line.split("=", 1) for line in output.read_text().splitlines()) == owned
 
 
 @pytest.mark.parametrize("name,pin", [("ink-export.yml", "v1.2.1"), ("yarn-export.yml", "--version 3.0.2")])
