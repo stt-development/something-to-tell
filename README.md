@@ -4,6 +4,38 @@
 
 Desktop-first, local-first narrative authoring for branching stories.
 
+## In Action
+
+**Connect story elements by dragging between nodes**
+
+![Connecting narrative nodes in Something To Tell Engine](docs/guides/assets/demos/connect-nodes.gif)
+
+<details>
+<summary>Create and arrange nodes</summary>
+
+![Creating and arranging narrative nodes](docs/guides/assets/demos/create-nodes.gif)
+
+</details>
+
+<details>
+<summary>Write in Story view</summary>
+
+![Editing story text and following an expanded story flow](docs/guides/assets/demos/story-view.gif)
+
+</details>
+
+<details>
+<summary>Explore branches in Flow view</summary>
+
+![Exploring branching transitions in Flow view](docs/guides/assets/demos/flow-view.gif)
+
+</details>
+
+Video versions: [Create nodes (WebM)](docs/guides/assets/demos/create-nodes.webm) |
+[Connect nodes (WebM)](docs/guides/assets/demos/connect-nodes.webm) |
+[Story view (WebM)](docs/guides/assets/demos/story-view.webm) |
+[Flow view (WebM)](docs/guides/assets/demos/flow-view.webm).
+
 ## Write And Test A Story
 
 - Arrange Characters, Scenes, Locations, Dialogue, Quests, Items and story facts.

@@ -31,6 +31,25 @@ test("both repository descriptions publish only the agreed English descriptor", 
   }
 });
 
+test("README demonstrations are linked, bounded GIFs with playable WebM counterparts", () => {
+  const internal = readFileSync(new URL("../README.md", import.meta.url), "utf8");
+  for (const clip of ["create-nodes", "connect-nodes", "story-view", "flow-view"]) {
+    const base = `docs/guides/assets/demos/${clip}`;
+    for (const text of [internal, publicReadme()]) {
+      assert.ok(text.includes(`](${base}.gif)`));
+      assert.ok(text.includes(`](${base}.webm)`));
+    }
+    const gif = readFileSync(new URL(`../${base}.gif`, import.meta.url));
+    assert.equal(gif.subarray(0, 6).toString(), "GIF89a");
+    assert.equal(gif.readUInt16LE(6), 960);
+    assert.equal(gif.readUInt16LE(8), 600);
+    assert.ok(gif.length > 1024 && gif.length < 3 * 1024 * 1024);
+    const video = readFileSync(new URL(`../${base}.webm`, import.meta.url));
+    assert.equal(video.subarray(0, 4).toString("hex"), "1a45dfa3");
+    assert.ok(video.length > 1024 && video.length < 1024 * 1024);
+  }
+});
+
 test("export uses current nonignored files, preserves bytes and refuses overwriting target work", () => {
   const directory = mkdtempSync(join(tmpdir(), "stt-public-export-"));
   const source = join(directory, "source"), target = join(directory, "public");
