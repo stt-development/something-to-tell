@@ -48,18 +48,34 @@ def test_replace_project_identity_rebinds_typed_and_json_owners() -> None:
     }
 
 
+@pytest.mark.parametrize("revisions", [(0, 1, 2, 3, 4), (4, 1, 3, 0, 2)])
 def test_checkpoint_paths_are_deterministic_and_pruning_is_bounded(
     tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    revisions: tuple[int, ...],
 ) -> None:
     project_path = tmp_path / "Checkpoint.narrative"
     (project_path / "snapshots").mkdir(parents=True)
     (project_path / "cache").mkdir()
-    for revision in range(5):
+    for revision in revisions:
         checkpoint_path(project_path, revision).mkdir()
 
+    original_iterdir = Path.iterdir
+
+    def unordered_entries(path: Path):
+        entries = list(original_iterdir(path))
+        if path == project_path / "snapshots":
+            # Directory order is unspecified; reproduce the Linux CI listing.
+            entries.sort(key=lambda entry: entry.name)
+            entries = entries[1:] + entries[:1]
+        return iter(entries)
+
+    monkeypatch.setattr(Path, "iterdir", unordered_entries)
     prune_checkpoints(project_path)
 
-    assert [path.name for path in (project_path / "snapshots").iterdir()] == [
+    names = [path.name for path in (project_path / "snapshots").iterdir()]
+    assert names != sorted(names)
+    assert sorted(names) == [
         "revision-00000002",
         "revision-00000003",
         "revision-00000004",
