@@ -1,5 +1,6 @@
 """Functional CI keeps real prerequisites, product gates and visible skips."""
 import importlib.util
+from fnmatch import fnmatchcase
 import json
 import os
 from pathlib import Path
@@ -30,10 +31,28 @@ def test_only_functional_workflow_automatically_runs_product_checks():
     assert automatic == ["functional-tests.yml"]
     current = workflow(automatic[0])
     assert set(current["on"]) == {"pull_request", "push", "workflow_dispatch"}
-    assert current["on"]["push"]["branches"] == ["main", "fix/ci-*"]
+    assert current["name"] == "Functional verification"
+    assert current["on"]["push"]["branches"] == ["main"]
     assert current["permissions"] == {"contents": "read"}
     assert current["jobs"]["ink"]["uses"] == "./.github/workflows/ink-export.yml"
     assert current["jobs"]["yarn"]["uses"] == "./.github/workflows/yarn-export.yml"
+
+
+@pytest.mark.parametrize("event,branch,expected", [
+    ("push", "fix/ci-runner-context", False),
+    ("push", "feature/story-tools", False),
+    ("pull_request", "fix/ci-runner-context", True),
+    ("pull_request", "feature/story-tools", True),
+    ("push", "main", True),
+    ("workflow_dispatch", "fix/ci-runner-context", True),
+])
+def test_pr_commits_do_not_schedule_a_second_branch_push_run(event, branch, expected):
+    # Branch pushes with an open PR emit both events; only PR may schedule tests.
+    triggers = workflow("functional-tests.yml")["on"]
+    selected = event in triggers
+    if event == "push" and selected:
+        selected = any(fnmatchcase(branch, pattern) for pattern in triggers[event]["branches"])
+    assert selected is expected
 
 
 def test_public_product_and_browser_checks_keep_real_postgresql_and_no_stress_runner():

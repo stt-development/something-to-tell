@@ -1,9 +1,9 @@
-name: Functional verification (non-performance)
+name: Functional verification
 
 on:
   pull_request:
   push:
-    branches: [main, 'fix/ci-*']
+    branches: [main]
   workflow_dispatch:
 
 permissions:
