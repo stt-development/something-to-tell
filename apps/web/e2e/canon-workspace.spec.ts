@@ -93,11 +93,15 @@ test("reviews Canon evidence, navigation, highlighting, and a fix at 1440x900", 
   await expect(dialogueOwner.getByRole("button", { name: "Open source" })).toBeFocused();
   await workspace.getByLabel("Filter by target").fill("");
   await conditionIssues.first().dblclick();
-  const currentQuestDialog = page.getByRole("heading", { name: "Edit quest: Smuggler Route" }).locator("xpath=ancestor::section[1]");
+  const currentQuestDialog = page.getByRole("heading", { name: "Edit quest: Smuggler Route", includeHidden: true }).locator("xpath=ancestor::section[1]");
   const currentQuestDiagnostic = currentQuestDialog.locator(".canon-owner-diagnostic-control").first();
   await currentQuestDiagnostic.locator("summary").click();
   await currentQuestDiagnostic.getByRole("button", { name: "Request suggestion" }).click();
-  await currentQuestDialog.getByRole("button", { name: "Close dialog" }).click();
+  // Canon keeps the draft mounted but hides its editor when the proposal arrives.
+  // Clicking Close here raced that handoff and timed out on faster responses.
+  await expect(page.locator(".editor-dialog-host")).toHaveAttribute("hidden", "");
+  await expect(currentQuestDialog).toHaveCount(1);
+  await expect(currentQuestDialog).toBeHidden();
   const proposal = workspace.getByLabel("Proposed forward changes");
   await expect(proposal).toContainText("Declare the referenced state path or revise the condition");
   await expect(proposal).toContainText("quests");
