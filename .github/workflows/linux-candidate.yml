@@ -69,8 +69,13 @@ jobs:
       - name: Build AppImage and deb candidates
         env:
           APPIMAGE_EXTRACT_AND_RUN: "1"
-        # Tauri otherwise hides linuxdeploy output behind a generic packaging error.
-        run: pnpm --dir apps/desktop exec tauri build --verbose --bundles appimage deb --config "$STT_RUNTIME_CONFIGURATION" -- --locked
+        run: |
+          raw=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).candidate' "$RUNNER_TEMP/runtime-build.json")
+          # Wheel-private libraries are already verified resources, but linuxdeploy cannot discover their nested directories.
+          library_path=$(uv run python -c 'import json, sys; from pathlib import Path; root = Path(sys.argv[1]); files = json.loads(Path(sys.argv[2]).read_text())["files"]; print(":".join(sorted({str((root / entry["path"]).parent) for entry in files if Path(entry["path"]).name.endswith(".so") or ".so." in Path(entry["path"]).name})))' "$raw" "$(dirname "$raw")/manifest.json")
+          test -n "$library_path"
+          # Scope discovery to packaging; installed runtime and no-PATH probes keep their original environment.
+          LD_LIBRARY_PATH="$library_path${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" pnpm --dir apps/desktop exec tauri build --verbose --bundles appimage deb --config "$STT_RUNTIME_CONFIGURATION" -- --locked
       - name: Verify both extracted payloads before artifact collection
         run: |
           mapfile -d '' images < <(find apps/desktop/src-tauri/target/release/bundle/appimage -maxdepth 1 -type f -name '*.AppImage' -print0)

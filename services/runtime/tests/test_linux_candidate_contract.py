@@ -1,5 +1,9 @@
 """Linux job contracts do not claim real Ubuntu or SteamOS acceptance."""
 from pathlib import Path
+import json
+import shlex
+import subprocess
+import sys
 
 import yaml
 
@@ -42,3 +46,28 @@ def test_both_extracted_candidates_must_match_original_staged_bytes_and_execute(
     assert len(uploads) == 1
     assert "dist/linux-candidate" not in uploads[0]["with"]["path"]
     assert "${{ runner.temp }}/package-SHA256SUMS" in uploads[0]["with"]["path"]
+
+
+def test_packaging_discovers_manifest_library_directories_without_changing_probes(tmp_path):
+    script = commands()
+    line = next(line.strip() for line in script.splitlines() if "library_path=$(uv run python -c " in line)
+    # Execute the actual workflow expression, not a duplicate path implementation.
+    program = shlex.split(line.removeprefix("library_path=$(uv run python -c "))[0]
+    root = tmp_path / "runtime with spaces"
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(json.dumps({"files": [
+        {"path": "_internal/libssl-hashed.so.3"},
+        {"path": "_internal/wheel.libs/libcrypto-hashed.so.3"},
+        {"path": "_internal/wheel.libs/libother.so"},
+        {"path": "_internal/module/extension.so"},
+        {"path": "_internal/metadata/notice.txt"},
+    ]}))
+    result = subprocess.run([sys.executable, "-c", program, str(root), str(manifest)],
+                            check=True, capture_output=True, text=True)
+    assert result.stdout.strip().split(":") == sorted([
+        str(root / "_internal"), str(root / "_internal/wheel.libs"), str(root / "_internal/module"),
+    ])
+    assert 'test -n "$library_path"' in script
+    assert 'LD_LIBRARY_PATH="$library_path${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" pnpm' in script
+    assert "LD_LIBRARY_PATH" not in definition().get("env", {})
+    assert script.count("LD_LIBRARY_PATH=") == 1
