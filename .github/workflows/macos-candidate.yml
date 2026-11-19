@@ -50,6 +50,9 @@ jobs:
           pnpm install --frozen-lockfile
           uv sync --all-extras --group build --locked
       - name: Build verified runtime and raw app
+        env:
+          # The arm64 hosted runner defaults to a 2 GiB Node heap; tsc exceeds it.
+          NODE_OPTIONS: --max-old-space-size=4096
         run: |
           uv run --group build python -m services.runtime.scripts.build_desktop_runtime > "$RUNNER_TEMP/runtime-build.json"
           raw=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).candidate' "$RUNNER_TEMP/runtime-build.json")

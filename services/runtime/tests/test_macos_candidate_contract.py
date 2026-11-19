@@ -47,3 +47,11 @@ def test_package_paths_match_the_engine_product_name():
     assert '-volname "Something To Tell Engine"' in script
     assert "Something To Tell.app" not in script
     assert "SomethingToTell-arm64.dmg" not in script
+
+
+def test_frontend_package_build_has_a_bounded_heap_budget():
+    workflow = yaml.load((ROOT / ".github/workflows/macos-candidate.yml").read_text(), Loader=yaml.BaseLoader)
+    definition = workflow["jobs"]["macos-candidate"]
+    build = next(step for step in definition["steps"] if step.get("name") == "Build verified runtime and raw app")
+    assert build["env"]["NODE_OPTIONS"] == "--max-old-space-size=4096"
+    assert "NODE_OPTIONS" not in definition["env"]
