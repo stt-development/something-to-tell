@@ -69,7 +69,8 @@ jobs:
       - name: Build AppImage and deb candidates
         env:
           APPIMAGE_EXTRACT_AND_RUN: "1"
-        run: pnpm --dir apps/desktop exec tauri build --bundles appimage deb --config "$STT_RUNTIME_CONFIGURATION" -- --locked
+        # Tauri otherwise hides linuxdeploy output behind a generic packaging error.
+        run: pnpm --dir apps/desktop exec tauri build --verbose --bundles appimage deb --config "$STT_RUNTIME_CONFIGURATION" -- --locked
       - name: Verify both extracted payloads before artifact collection
         run: |
           mapfile -d '' images < <(find apps/desktop/src-tauri/target/release/bundle/appimage -maxdepth 1 -type f -name '*.AppImage' -print0)

@@ -23,7 +23,7 @@ def test_native_locked_linux_build_includes_real_prerequisites_and_probes():
     script = commands()
     for value in ['test "$(uname -m)" = x86_64', "getconf GNU_LIBC_VERSION", "libwebkit2gtk-4.1-dev", "libfuse2t64",
                   "--frozen-lockfile", "--group build --locked", "--no-skips", "real_frozen_child_handshake -- --ignored --exact",
-                  'tauri build --bundles appimage deb --config "$STT_RUNTIME_CONFIGURATION" -- --locked']:
+                  'tauri build --verbose --bundles appimage deb --config "$STT_RUNTIME_CONFIGURATION" -- --locked']:
         assert value in script
     assert script.index("scripts.build_desktop_runtime") < script.index("desktop-runtime-resources.mjs") < script.index("tauri build")
     assert "perf:baseline" not in script and "benchmark_storage" not in script
