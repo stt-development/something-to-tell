@@ -8,7 +8,7 @@ ROOT = Path(__file__).parents[3]
 
 def definition():
     workflow = yaml.load((ROOT / ".github/workflows/linux-candidate.yml").read_text(), Loader=yaml.BaseLoader)
-    assert set(workflow["on"]) == {"workflow_dispatch"}
+    assert set(workflow["on"]) == {"pull_request", "workflow_dispatch"}
     assert workflow["permissions"] == {"contents": "read"}
     assert "secrets." not in str(workflow) and "continue-on-error" not in str(workflow)
     return workflow["jobs"]["linux-candidate"]
@@ -35,9 +35,10 @@ def test_both_extracted_candidates_must_match_original_staged_bytes_and_execute(
                   'verifyCandidate(process.argv[1]', 'ldd "$runtime"', "grep -q 'not found'", 'env PATH=/nonexistent "$runtime" --self-check',
                   'probe appimage "$RUNNER_TEMP/appimage-extracted/squashfs-root"', 'probe deb "$RUNNER_TEMP/deb-extracted"']:
         assert value in script
-    assert script.index("probe deb") < script.index('cp "$image"')
+    assert script.index("probe deb") < script.index('sha256sum "$image" "$package"')
     assert 'ubuntu_installed_acceptance:"pending",steamos_acceptance:"pending"' in script
     assert "gh release" not in script and "steamcmd" not in script
     uploads = [step for step in definition()["steps"] if step.get("uses") == "actions/upload-artifact@v4"]
-    assert uploads[0]["with"]["path"] == "dist/linux-candidate"
-    assert uploads[0]["with"]["if-no-files-found"] == "error"
+    assert len(uploads) == 1
+    assert "dist/linux-candidate" not in uploads[0]["with"]["path"]
+    assert "${{ runner.temp }}/package-SHA256SUMS" in uploads[0]["with"]["path"]

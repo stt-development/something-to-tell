@@ -22,14 +22,19 @@ def workflow(name):
     return yaml.load((WORKFLOWS / name).read_text(), Loader=yaml.BaseLoader)
 
 
-def test_only_functional_workflow_automatically_runs_product_checks():
+def test_automatic_workflows_separate_product_checks_from_build_only_packages():
     automatic = []
     for path in WORKFLOWS.glob("*.yml"):
         triggers = workflow(path.name)["on"]
         if "pull_request" in triggers or "push" in triggers:
             automatic.append(path.name)
-    assert automatic == ["functional-tests.yml"]
-    current = workflow(automatic[0])
+    assert set(automatic) == {
+        "functional-tests.yml", "windows-candidate.yml", "macos-candidate.yml", "linux-candidate.yml"
+    }
+    for name in automatic:
+        if name != "functional-tests.yml":
+            assert "push" not in workflow(name)["on"]
+    current = workflow("functional-tests.yml")
     assert set(current["on"]) == {"pull_request", "push", "workflow_dispatch"}
     assert current["name"] == "Functional verification"
     assert current["on"]["push"]["branches"] == ["main"]

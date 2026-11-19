@@ -1,10 +1,15 @@
-name: Linux candidate (manual, not a release)
+name: Linux package verification
 
 on:
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: linux-package-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   linux-candidate:
@@ -95,30 +100,22 @@ jobs:
           }
           probe appimage "$RUNNER_TEMP/appimage-extracted/squashfs-root"
           probe deb "$RUNNER_TEMP/deb-extracted"
-          destination="$GITHUB_WORKSPACE/dist/linux-candidate"
-          mkdir -p "$destination"
-          # No placeholder notice file: actual audited component texts are required.
-          test -s THIRD_PARTY_NOTICES.md
-          cp "$image" "$destination/candidate-x86_64.AppImage"
-          cp "$package" "$destination/candidate-x86_64.deb"
-          cp LICENSE "$destination/"
-          cp THIRD_PARTY_NOTICES.md "$destination/"
-          cp "$STT_STAGED_MANIFEST" "$destination/runtime-manifest.json"
+          # Build-only evidence; reviewed notices remain mandatory for future binary uploads.
+          cp "$STT_STAGED_MANIFEST" "$RUNNER_TEMP/runtime-manifest.json"
           original=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).manifest' "$RUNNER_TEMP/runtime-build.json")
-          cp "$original" "$destination/input-runtime-manifest.json"
-          node -e 'require("fs").writeFileSync(process.argv[1],JSON.stringify({schema_version:1,source_commit:process.env.GITHUB_SHA,runner_image:process.env.ImageVersion,architecture:"x86_64",libc:process.env.STT_GLIBC,ubuntu_installed_acceptance:"pending",steamos_acceptance:"pending"},null,2));' "$destination/candidate.json"
-          (cd "$destination" && sha256sum candidate-x86_64.AppImage candidate-x86_64.deb LICENSE THIRD_PARTY_NOTICES.md runtime-manifest.json input-runtime-manifest.json candidate.json > SHA256SUMS)
-      - uses: actions/upload-artifact@v4
-        with:
-          name: linux-x64-candidate-${{ github.sha }}
-          path: dist/linux-candidate
-          if-no-files-found: error
-          retention-days: 7
+          cp "$original" "$RUNNER_TEMP/input-runtime-manifest.json"
+          node -e 'require("fs").writeFileSync(process.argv[1],JSON.stringify({schema_version:1,source_commit:process.env.GITHUB_SHA,runner_image:process.env.ImageVersion,architecture:"x86_64",libc:process.env.STT_GLIBC,ubuntu_installed_acceptance:"pending",steamos_acceptance:"pending"},null,2));' "$RUNNER_TEMP/package-verification.json"
+          sha256sum "$image" "$package" > "$RUNNER_TEMP/package-SHA256SUMS"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: linux-runtime-tests-${{ github.sha }}
           path: |
             ${{ runner.temp }}/frozen.xml
-            ${{ runner.temp }}/*-ldd.txt
+            ${{ runner.temp }}/appimage-ldd.txt
+            ${{ runner.temp }}/deb-ldd.txt
+            ${{ runner.temp }}/runtime-manifest.json
+            ${{ runner.temp }}/input-runtime-manifest.json
+            ${{ runner.temp }}/package-verification.json
+            ${{ runner.temp }}/package-SHA256SUMS
           retention-days: 7

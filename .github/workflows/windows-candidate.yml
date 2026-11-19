@@ -1,10 +1,15 @@
-name: Windows candidate (manual, not a release)
+name: Windows package verification
 
 on:
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: windows-package-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   windows-candidate:
@@ -83,31 +88,21 @@ jobs:
           $configuration | ConvertTo-Json -Depth 20 | Set-Content -Encoding utf8 $env:STT_RUNTIME_STAGE
           pnpm --dir apps/desktop exec tauri build --bundles nsis --config $env:STT_RUNTIME_STAGE -- --locked
           if ($LASTEXITCODE -ne 0) { throw 'NSIS build failed' }
-      - name: Record candidate source and checksums
+      - name: Verify fresh NSIS package without distributing binaries
         run: |
-          $destination = 'dist/windows-candidate'
-          New-Item -ItemType Directory -Path $destination -ErrorAction Stop
           $installers = @(Get-ChildItem apps/desktop/src-tauri/target/release/bundle/nsis -Filter '*.exe')
           if ($installers.Count -ne 1) { throw 'Expected one fresh NSIS installer' }
-          # Candidate upload is distribution too; do not fake notice readiness.
-          if (-not (Test-Path THIRD_PARTY_NOTICES.md) -or (Get-Item THIRD_PARTY_NOTICES.md).Length -eq 0) { throw 'Reviewed THIRD_PARTY_NOTICES.md is required before uploading binaries' }
-          Copy-Item $installers[0].FullName $destination
-          Copy-Item LICENSE $destination
-          Copy-Item THIRD_PARTY_NOTICES.md $destination
-          Copy-Item $env:STT_RUNTIME_MANIFEST "$destination/runtime-manifest.json"
-          Copy-Item $env:STT_RUNTIME_SOURCE_MANIFEST "$destination/source-manifest.json"
-          @{ schema_version = 1; source_commit = $env:GITHUB_SHA; runner_image = $env:ImageVersion; architecture = 'x64'; signed = $false; windows_11_acceptance = 'pending'; webview_install_mode = 'offlineInstaller' } | ConvertTo-Json | Set-Content -Encoding utf8 "$destination/candidate.json"
-          $hashes = @(Get-ChildItem $destination -File | ForEach-Object { "$( (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower() )  $($_.Name)" })
-          $hashes | Set-Content -Encoding utf8 "$destination/SHA256SUMS"
-      - uses: actions/upload-artifact@v4
-        with:
-          name: windows-x64-candidate-${{ github.sha }}
-          path: dist/windows-candidate
-          if-no-files-found: error
-          retention-days: 7
+          # Build-only evidence, not installers. Tagged-draft distribution still needs reviewed notices.
+          Copy-Item $env:STT_RUNTIME_MANIFEST "$env:RUNNER_TEMP/runtime-manifest.json"
+          Copy-Item $env:STT_RUNTIME_SOURCE_MANIFEST "$env:RUNNER_TEMP/source-manifest.json"
+          @{ schema_version = 1; source_commit = $env:GITHUB_SHA; runner_image = $env:ImageVersion; architecture = 'x64'; signed = $false; windows_11_acceptance = 'pending'; webview_install_mode = 'offlineInstaller'; package_sha256 = (Get-FileHash $installers[0].FullName -Algorithm SHA256).Hash.ToLower() } | ConvertTo-Json | Set-Content -Encoding utf8 "$env:RUNNER_TEMP/package-verification.json"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: windows-runtime-tests-${{ github.sha }}
-          path: ${{ runner.temp }}/frozen.xml
+          path: |
+            ${{ runner.temp }}/frozen.xml
+            ${{ runner.temp }}/runtime-manifest.json
+            ${{ runner.temp }}/source-manifest.json
+            ${{ runner.temp }}/package-verification.json
           retention-days: 7
