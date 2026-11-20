@@ -76,13 +76,31 @@ jobs:
           test -n "$library_path"
           # Scope discovery to packaging; installed runtime and no-PATH probes keep their original environment.
           LD_LIBRARY_PATH="$library_path${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" pnpm --dir apps/desktop exec tauri build --verbose --bundles appimage deb --config "$STT_RUNTIME_CONFIGURATION" -- --locked
+      - name: Finalize byte-faithful runtime in a fresh AppDir
+        env:
+          APPIMAGE_EXTRACT_AND_RUN: "1"
+        run: |
+          node --test tools/linux-runtime-finalizer.test.mjs
+          mapfile -d '' appdirs < <(find apps/desktop/src-tauri/target/release/bundle/appimage -maxdepth 1 -type d -name '*.AppDir' -print0)
+          test "${#appdirs[@]}" = 1
+          runtime="$(dirname "$STT_STAGED_MANIFEST")/runtime"
+          node tools/linux-runtime-finalizer.mjs "${appdirs[0]}" "$runtime" "$STT_STAGED_MANIFEST" > "$RUNNER_TEMP/linux-finalized.json"
+          appdir=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).appdir' "$RUNNER_TEMP/linux-finalized.json")
+          plugin="${XDG_CACHE_HOME:-$HOME/.cache}/tauri/linuxdeploy-plugin-appimage.AppImage"
+          test -x "$plugin"
+          output="$(dirname "$appdir")/SomethingToTellEngine-x86_64.AppImage"
+          LDAI_OUTPUT="$output" ARCH=x86_64 "$plugin" --appdir "$appdir"
+          test -s "$output"
+          printf 'STT_VERIFIED_APPIMAGE=%s\n' "$output" >> "$GITHUB_ENV"
       - name: Verify both extracted payloads before artifact collection
         run: |
           mapfile -d '' images < <(find apps/desktop/src-tauri/target/release/bundle/appimage -maxdepth 1 -type f -name '*.AppImage' -print0)
           mapfile -d '' packages < <(find apps/desktop/src-tauri/target/release/bundle/deb -maxdepth 1 -type f -name '*.deb' -print0)
           test "${#images[@]}" = 1
           test "${#packages[@]}" = 1
-          image=$(realpath "${images[0]}")
+          # The initial linuxdeploy image is never promoted; only the fresh canonical-runtime image is tested.
+          image="$STT_VERIFIED_APPIMAGE"
+          test -f "$image"
           package=$(realpath "${packages[0]}")
           mkdir -p "$RUNNER_TEMP/appimage-extracted" "$RUNNER_TEMP/deb-extracted"
           chmod +x "$image"

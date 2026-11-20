@@ -71,3 +71,14 @@ def test_packaging_discovers_manifest_library_directories_without_changing_probe
     assert 'LD_LIBRARY_PATH="$library_path${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" pnpm' in script
     assert "LD_LIBRARY_PATH" not in definition().get("env", {})
     assert script.count("LD_LIBRARY_PATH=") == 1
+
+
+def test_finalized_image_is_repacked_before_unchanged_extracted_integrity_probes():
+    script = commands()
+    for value in ["node --test tools/linux-runtime-finalizer.test.mjs", "node tools/linux-runtime-finalizer.mjs",
+                  'test "${#appdirs[@]}" = 1', 'LDAI_OUTPUT="$output" ARCH=x86_64 "$plugin" --appdir "$appdir"',
+                  'image="$STT_VERIFIED_APPIMAGE"', '"$image" --appimage-extract']:
+        assert value in script
+    assert script.index("tauri build") < script.index("node tools/linux-runtime-finalizer.mjs")
+    assert script.index("node tools/linux-runtime-finalizer.mjs") < script.index('probe appimage')
+    assert script.index('probe appimage') < script.index('sha256sum "$image" "$package"')
