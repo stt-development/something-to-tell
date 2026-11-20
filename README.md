@@ -90,9 +90,11 @@ require the backend separately. Experimental packaged candidates start a verifie
 bundled runtime through a private connection; bundling requires a verified runtime
 resource override. Native lifecycle and platform acceptance remain in progress.
 Standalone installers are still being prepared.
-Manual native candidate workflows also require a reviewed, nonempty
-`THIRD_PARTY_NOTICES.md` before binary upload. That notice bundle is not yet
-complete; workflow definitions and local probes are not release certification.
+Native package verification runs on pull requests or manual dispatch and uploads
+only diagnostic reports, never installers or bundled runtimes. Downloadable
+packages require a separately approved tagged draft release and reviewed
+`THIRD_PARTY_NOTICES.md`. That notice bundle is not yet complete; workflow
+definitions and local probes are not release certification.
 
 ## Tests
 

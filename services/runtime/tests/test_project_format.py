@@ -1,11 +1,15 @@
 import json
 import sqlite3
+import os
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import Mock
 
 import pytest
 from fastapi.testclient import TestClient
 
 from services.runtime.stt_runtime.app import create_app
+from services.runtime.stt_runtime.project_format import service as project_format
 from services.runtime.stt_runtime.project_format.service import (
     PROJECT_DIRECTORIES,
     PROJECT_FORMAT_VERSION,
@@ -121,3 +125,53 @@ def test_project_folder_api_does_not_echo_rejected_secret_values(tmp_path: Path)
     assert response.status_code == 400
     assert "provider_api_key" in response.text
     assert "do-not-echo-this-value" not in response.text
+
+
+def test_windows_manifest_flushes_file_and_replaces_without_opening_directory(tmp_path, monkeypatch):
+    project_path = tmp_path / "Windows.narrative"
+    create_project_folder(project_path, "Before")
+    path = project_path / "project.config.json"
+    manifest = project_format.parse_project_manifest(json.loads(path.read_text()))
+    sync = Mock(wraps=os.fsync)
+    open_directory = Mock(side_effect=PermissionError("Windows CRT directory open"))
+    monkeypatch.setattr(project_format, "sys", SimpleNamespace(platform="win32"))
+    monkeypatch.setattr(project_format, "os", SimpleNamespace(
+        fsync=sync, open=open_directory, close=Mock(), O_RDONLY=os.O_RDONLY,
+    ))
+    project_format.write_project_manifest(path, manifest.model_copy(update={"name": "After"}))
+    assert json.loads(path.read_text())["name"] == "After"
+    assert not path.with_name(".project.config.json.tmp").exists()
+    assert sync.call_count == 1
+    open_directory.assert_not_called()
+
+
+def test_windows_file_flush_error_still_fails_before_manifest_replacement(tmp_path, monkeypatch):
+    project_path = tmp_path / "Windows.narrative"
+    create_project_folder(project_path, "Before")
+    path = project_path / "project.config.json"
+    original = path.read_bytes()
+    manifest = project_format.parse_project_manifest(json.loads(original))
+    monkeypatch.setattr(project_format, "sys", SimpleNamespace(platform="win32"))
+    monkeypatch.setattr(project_format, "os", SimpleNamespace(
+        fsync=Mock(side_effect=OSError("file flush failed")),
+    ))
+    with pytest.raises(OSError, match="file flush failed"):
+        project_format.write_project_manifest(path, manifest.model_copy(update={"name": "After"}))
+    assert path.read_bytes() == original
+
+
+def test_posix_directory_flush_errors_propagate_and_close_descriptor(tmp_path, monkeypatch):
+    project_path = tmp_path / "Posix.narrative"
+    create_project_folder(project_path, "Before")
+    path = project_path / "project.config.json"
+    manifest = project_format.parse_project_manifest(json.loads(path.read_text()))
+    close = Mock()
+    sync = Mock(side_effect=[None, OSError("directory flush failed")])
+    monkeypatch.setattr(project_format, "sys", SimpleNamespace(platform="linux"))
+    monkeypatch.setattr(project_format, "os", SimpleNamespace(
+        fsync=sync, open=Mock(return_value=941), close=close, O_RDONLY=os.O_RDONLY,
+    ))
+    with pytest.raises(OSError, match="directory flush failed"):
+        project_format.write_project_manifest(path, manifest)
+    assert sync.call_count == 2
+    close.assert_called_once_with(941)

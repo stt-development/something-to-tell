@@ -1,6 +1,7 @@
 import json
 import os
 import sqlite3
+import sys
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -157,6 +158,10 @@ def write_project_manifest(path: Path, manifest: ProjectManifestV2) -> None:
         temporary.flush()
         os.fsync(temporary.fileno())
     temporary_path.replace(path)
+    # Windows CRT cannot open directories for fsync. The file was already
+    # flushed before atomic replacement; do not claim POSIX directory durability.
+    if sys.platform == "win32":
+        return
     directory_fd = os.open(path.parent, os.O_RDONLY)
     try:
         os.fsync(directory_fd)

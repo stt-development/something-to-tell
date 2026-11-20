@@ -1,10 +1,15 @@
-name: Apple Silicon candidate (manual, ad-hoc only)
+name: Apple Silicon package verification
 
 on:
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: macos-package-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   macos-candidate:
@@ -45,6 +50,9 @@ jobs:
           pnpm install --frozen-lockfile
           uv sync --all-extras --group build --locked
       - name: Build verified runtime and raw app
+        env:
+          # The arm64 hosted runner defaults to a 2 GiB Node heap; tsc exceeds it.
+          NODE_OPTIONS: --max-old-space-size=4096
         run: |
           uv run --group build python -m services.runtime.scripts.build_desktop_runtime > "$RUNNER_TEMP/runtime-build.json"
           raw=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).candidate' "$RUNNER_TEMP/runtime-build.json")
@@ -86,26 +94,23 @@ jobs:
           env PATH=/nonexistent "$runtime/stt-runtime" --self-check
           hdiutil detach "$mount"
           trap - EXIT
-          # Do not upload candidate binaries before the notice audit is complete.
-          test -s THIRD_PARTY_NOTICES.md
-          cp LICENSE "$destination/"
-          cp THIRD_PARTY_NOTICES.md "$destination/"
-          cp "$manifest" "$destination/runtime-manifest.json"
+          # Upload only build evidence. Future binary distribution requires reviewed notices.
+          cp "$manifest" "$RUNNER_TEMP/runtime-manifest.json"
           input=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).input_manifest' "$RUNNER_TEMP/finalized.json")
           staged=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).staged_manifest' "$RUNNER_TEMP/finalized.json")
-          cp "$input" "$destination/input-runtime-manifest.json"
-          cp "$staged" "$destination/staged-runtime-manifest.json"
-          node -e 'require("fs").writeFileSync(process.argv[1],JSON.stringify({schema_version:1,source_commit:process.env.GITHUB_SHA,runner_image:process.env.ImageVersion,architecture:"arm64",minimum_macos:"15.0",signing:"adhoc",notarized:false,installed_gui_acceptance:"pending"},null,2));' "$destination/candidate.json"
-          (cd "$destination" && shasum -a 256 SomethingToTellEngine-arm64.dmg LICENSE THIRD_PARTY_NOTICES.md runtime-manifest.json input-runtime-manifest.json staged-runtime-manifest.json candidate.json > SHA256SUMS)
-      - uses: actions/upload-artifact@v4
-        with:
-          name: macos-arm64-candidate-${{ github.sha }}
-          path: dist/macos-candidate
-          if-no-files-found: error
-          retention-days: 7
+          cp "$input" "$RUNNER_TEMP/input-runtime-manifest.json"
+          cp "$staged" "$RUNNER_TEMP/staged-runtime-manifest.json"
+          node -e 'require("fs").writeFileSync(process.argv[1],JSON.stringify({schema_version:1,source_commit:process.env.GITHUB_SHA,runner_image:process.env.ImageVersion,architecture:"arm64",minimum_macos:"15.0",signing:"adhoc",notarized:false,installed_gui_acceptance:"pending"},null,2));' "$RUNNER_TEMP/package-verification.json"
+          shasum -a 256 "$destination/SomethingToTellEngine-arm64.dmg" > "$RUNNER_TEMP/package-SHA256SUMS"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: macos-runtime-tests-${{ github.sha }}
-          path: ${{ runner.temp }}/frozen.xml
+          path: |
+            ${{ runner.temp }}/frozen.xml
+            ${{ runner.temp }}/runtime-manifest.json
+            ${{ runner.temp }}/input-runtime-manifest.json
+            ${{ runner.temp }}/staged-runtime-manifest.json
+            ${{ runner.temp }}/package-verification.json
+            ${{ runner.temp }}/package-SHA256SUMS
           retention-days: 7
