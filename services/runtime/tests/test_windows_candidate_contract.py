@@ -31,7 +31,7 @@ def test_candidate_builds_verified_runtime_before_probes_and_nsis():
     script = commands()
     sequence = ["--frozen-lockfile", "--group build --locked", "scripts.build_desktop_runtime",
                 "tools/desktop-runtime-resources.mjs", "--self-check", "test_desktop_lifecycle.py",
-                "tauri icon", "real_frozen_child_handshake -- --ignored --exact", "tauri build --bundles nsis"]
+                "tauri icon", "real_frozen_child_handshake -- --ignored --exact", "tauri.js build --bundles nsis"]
     positions = [script.index(value) for value in sequence]
     assert positions == sorted(positions)
     assert "no-developer-tools" in script and "finally { $env:PATH = $previousPath }" in script
@@ -64,3 +64,12 @@ def test_native_tests_receive_temporary_icon_before_compilation_without_source_o
     assert "$env:TAURI_CONFIG = @{ bundle = @{ icon = @($env:STT_WINDOWS_ICON) } }" in script
     assert "finally { $env:TAURI_CONFIG = $previousConfig }" in script
     assert "--output src-tauri/icons" not in script
+
+
+def test_nsis_invokes_node_directly_to_preserve_cargo_separator_on_windows():
+    steps = candidate()["jobs"]["windows-candidate"]["steps"]
+    package = next(step for step in steps if step.get("name") == "Package NSIS with verified resources")
+    assert package["working-directory"] == "apps/desktop"
+    assert "node node_modules/@tauri-apps/cli/tauri.js build --bundles nsis" in package["run"]
+    assert "--config $env:STT_RUNTIME_STAGE -- --locked" in package["run"]
+    assert "pnpm" not in package["run"].splitlines()[1]

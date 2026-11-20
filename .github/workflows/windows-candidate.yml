@@ -93,8 +93,10 @@ jobs:
             if ($LASTEXITCODE -ne 0) { throw 'frozen handshake failed' }
           } finally { $env:TAURI_CONFIG = $previousConfig }
       - name: Package NSIS with verified resources
+        working-directory: apps/desktop
         run: |
-          pnpm --dir apps/desktop exec tauri build --bundles nsis --config $env:STT_RUNTIME_STAGE -- --locked
+          # Avoid Windows pnpm command shims consuming Cargo's argument separator.
+          node node_modules/@tauri-apps/cli/tauri.js build --bundles nsis --config $env:STT_RUNTIME_STAGE -- --locked
           if ($LASTEXITCODE -ne 0) { throw 'NSIS build failed' }
       - name: Verify fresh NSIS package without distributing binaries
         run: |
