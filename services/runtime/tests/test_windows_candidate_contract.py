@@ -31,7 +31,7 @@ def test_candidate_builds_verified_runtime_before_probes_and_nsis():
     script = commands()
     sequence = ["--frozen-lockfile", "--group build --locked", "scripts.build_desktop_runtime",
                 "tools/desktop-runtime-resources.mjs", "--self-check", "test_desktop_lifecycle.py",
-                "real_frozen_child_handshake -- --ignored --exact", "tauri icon", "tauri build --bundles nsis"]
+                "tauri icon", "real_frozen_child_handshake -- --ignored --exact", "tauri build --bundles nsis"]
     positions = [script.index(value) for value in sequence]
     assert positions == sorted(positions)
     assert "no-developer-tools" in script and "finally { $env:PATH = $previousPath }" in script
@@ -54,3 +54,13 @@ def test_verification_preserves_provenance_and_hash_without_uploading_installer(
     assert len(uploads) == 1
     assert "dist/windows-candidate" not in uploads[0]["with"]["path"]
     assert "${{ runner.temp }}/package-verification.json" in uploads[0]["with"]["path"]
+
+
+def test_native_tests_receive_temporary_icon_before_compilation_without_source_overwrites():
+    script = commands()
+    assert script.index("tauri icon") < script.index("cargo test --locked")
+    assert "$icons = Join-Path $env:RUNNER_TEMP 'desktop-icons'" in script
+    assert '"STT_WINDOWS_ICON=$(Join-Path $icons' in script
+    assert "$env:TAURI_CONFIG = @{ bundle = @{ icon = @($env:STT_WINDOWS_ICON) } }" in script
+    assert "finally { $env:TAURI_CONFIG = $previousConfig }" in script
+    assert "--output src-tauri/icons" not in script
