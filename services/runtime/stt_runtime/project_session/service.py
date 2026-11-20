@@ -1866,15 +1866,8 @@ class ProjectSessionRegistry:
 
     @staticmethod
     def _process_alive(pid: int) -> bool:
-        if pid <= 0:
-            return False
-        try:
-            os.kill(pid, 0)
-        except ProcessLookupError:
-            return False
-        except PermissionError:
-            return True
-        return True
+        from .process_liveness import process_alive
+        return process_alive(pid)
 
     def _release_lock(self, project_path: Path, session_id: str) -> None:
         lock_path = self._lock_path(project_path)
