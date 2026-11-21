@@ -44,6 +44,15 @@ for (const locale of ["en", "ru"] as const) {
       await page.setViewportSize(viewport);
       const calls = await installRecovery(page, locale, viewport.width === 1024);
       await openAuroraFixture(page);
+      // Deliver the real memory catalog only after hover, forcing the ordering
+      // that previously let a background editor steal focus and scroll the header.
+      let releaseMemory!: () => void;
+      const memoryDelivery = new Promise<void>(resolve => { releaseMemory = resolve; });
+      await page.route(/\/api\/agent-memory\?/, async route => {
+        const response = await route.fetch();
+        await memoryDelivery;
+        await route.fulfill({ response });
+      });
       await page.getByRole("button", { name: locale === "en" ? "Project settings" : "Настройки проекта", exact: true }).click();
       const settings = page.getByRole("heading", { name: locale === "en" ? "Project settings" : "Настройки проекта", exact: true }).locator("../..");
       const name = settings.getByLabel(locale === "en" ? "Name" : "Название", { exact: true }).first();
@@ -53,7 +62,14 @@ for (const locale of ["en", "ru"] as const) {
       // Make an actual pointer entry, not a stationary hit-test after mounting.
       await page.mouse.move(0, 0);
       await launch.hover();
-      await expect(page.getByRole("tooltip")).toBeVisible();
+      try {
+        await expect(page.getByRole("tooltip")).toBeVisible();
+        releaseMemory();
+        const memory = settings.getByRole("region", { name: locale === "en" ? "Agent memory" : "Память агентов", exact: true });
+        await expect(memory.getByLabel(locale === "en" ? "Title" : "Название", { exact: true })).toBeAttached();
+        await expect(name).toBeFocused();
+        await expect(page.getByRole("tooltip")).toBeVisible();
+      } finally { releaseMemory(); }
       await launch.click();
       const recovery = page.getByRole("dialog", { name: locale === "en" ? "Remote storage recovery" : "Восстановление удалённого хранилища", exact: true });
       await expect(recovery).toBeVisible();

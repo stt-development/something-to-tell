@@ -1,6 +1,6 @@
 /** Agent Memory settings tests cover typed scopes and reviewed lifecycle actions. */
 
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import type { AgentMemoryEntryV1 } from "@something-to-tell/contracts/agent-memory";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { i18next } from "../../localization/i18n";
@@ -93,6 +93,28 @@ function persistence(source = workspace()): RuntimeAgentMemoryPersistence {
 describe("AgentMemoryManager", () => {
   beforeEach(async () => {
     await i18next.changeLanguage("en");
+  });
+
+  it("preserves the project field focus when an existing memory finishes loading", async () => {
+    let resolveLoad!: (snapshot: AgentMemoryWorkspaceSnapshot) => void;
+    const runtime = persistence();
+    vi.mocked(runtime.loadAgentMemoryWorkspace).mockReturnValue(new Promise(resolve => { resolveLoad = resolve; }));
+    render(<><input aria-label="Project name draft" /><AgentMemoryManager activeSessionId="session-one" contentLocale="en" persistence={runtime} projectId="project-one" /></>);
+    const projectName = screen.getByRole("textbox", { name: "Project name draft" });
+    projectName.focus();
+    await act(async () => { resolveLoad(workspace()); });
+    expect(screen.getByLabelText("Title")).toHaveValue(memory.title);
+    expect(projectName).toHaveFocus();
+  });
+
+  it("focuses a new memory only after an explicit Create from a loaded entry", async () => {
+    render(<AgentMemoryManager activeSessionId="session-one" contentLocale="en" persistence={persistence()} projectId="project-one" />);
+    await screen.findByDisplayValue(memory.title);
+    const create = screen.getByRole("button", { name: "Create memory" });
+    create.focus();
+    fireEvent.click(create);
+    expect(screen.getByLabelText("Title")).toHaveValue("");
+    expect(screen.getByLabelText("Title")).toHaveFocus();
   });
 
   it("creates a Scene-scoped entry through searchable typed owners", async () => {

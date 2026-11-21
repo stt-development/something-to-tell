@@ -288,7 +288,8 @@ export function AgentMemoryManager({
                 event.preventDefault();
               }
             }}>
-              <MemoryFields allOwners={snapshot?.owners ?? []} draft={draft} onChange={setDraft} onOwnerSearch={setOwnerSearch} ownerOptions={ownerOptions} ownerSearch={ownerSearch} />
+              {/* Loading an existing entry must not steal focus or scroll Project Settings. */}
+              <MemoryFields key={selectedId ?? "new-memory"} autoFocus={selectedId === null} allOwners={snapshot?.owners ?? []} draft={draft} onChange={setDraft} onOwnerSearch={setOwnerSearch} ownerOptions={ownerOptions} ownerSearch={ownerSearch} />
               <div className="flex flex-wrap items-center gap-2">
                 <button className={`inline-flex items-center gap-2 rounded-md bg-slate-900 px-3 py-2 text-sm font-semibold text-white disabled:opacity-50 ${dirty ? "animate-pulse" : ""}`} disabled={busy || !draft.title.trim() || !draft.instruction.trim()} onClick={() => void saveDraft()} type="button"><Save aria-hidden="true" size={15} />{tr("common.save")}</button>
                 <button aria-label={tr("agentMemory.suggestCandidate")} className="icon-button" data-tooltip={tr("agentMemory.suggestCandidate")} disabled={busy} onClick={() => setCandidateOpen(true)} ref={candidateButtonRef} type="button"><Bot aria-hidden="true" size={15} /></button>
@@ -342,6 +343,7 @@ export function AgentMemoryManager({
 
 function MemoryFields({
   allOwners,
+  autoFocus,
   draft,
   onChange,
   onOwnerSearch,
@@ -349,6 +351,7 @@ function MemoryFields({
   ownerSearch
 }: {
   allOwners: AgentMemoryOwnerOption[];
+  autoFocus: boolean;
   draft: MemoryDraft;
   onChange: (draft: MemoryDraft) => void;
   onOwnerSearch: (value: string) => void;
@@ -381,7 +384,7 @@ function MemoryFields({
           {ownerOptions.map((option) => <option key={scopeKey(option.scope)} value={scopeKey(option.scope)}>{option.label}</option>)}
         </select>
       </label> : null}
-      <label className="style-profile-field col-span-2">{tr("agentMemory.title")}<input autoFocus onChange={(event) => onChange({ ...draft, title: event.target.value })} value={draft.title} /></label>
+      <label className="style-profile-field col-span-2">{tr("agentMemory.title")}<input autoFocus={autoFocus} onChange={(event) => onChange({ ...draft, title: event.target.value })} value={draft.title} /></label>
       <label className="style-profile-field col-span-2">{tr("agentMemory.instruction")}<textarea className="min-h-24" onChange={(event) => onChange({ ...draft, instruction: event.target.value })} value={draft.instruction} /></label>
       <label className="style-profile-field col-span-2">{tr("agentMemory.rationale")}<textarea className="min-h-16" onChange={(event) => onChange({ ...draft, rationale: event.target.value })} value={draft.rationale} /></label>
     </div>
