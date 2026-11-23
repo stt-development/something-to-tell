@@ -1,10 +1,15 @@
-name: Linux candidate (manual, not a release)
+name: Linux package verification
 
 on:
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: linux-package-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   linux-candidate:
@@ -64,14 +69,38 @@ jobs:
       - name: Build AppImage and deb candidates
         env:
           APPIMAGE_EXTRACT_AND_RUN: "1"
-        run: pnpm --dir apps/desktop exec tauri build --bundles appimage deb --config "$STT_RUNTIME_CONFIGURATION" -- --locked
+        run: |
+          raw=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).candidate' "$RUNNER_TEMP/runtime-build.json")
+          # Wheel-private libraries are already verified resources, but linuxdeploy cannot discover their nested directories.
+          library_path=$(uv run python -c 'import json, sys; from pathlib import Path; root = Path(sys.argv[1]); files = json.loads(Path(sys.argv[2]).read_text())["files"]; print(":".join(sorted({str((root / entry["path"]).parent) for entry in files if Path(entry["path"]).name.endswith(".so") or ".so." in Path(entry["path"]).name})))' "$raw" "$(dirname "$raw")/manifest.json")
+          test -n "$library_path"
+          # Scope discovery to packaging; installed runtime and no-PATH probes keep their original environment.
+          LD_LIBRARY_PATH="$library_path${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" pnpm --dir apps/desktop exec tauri build --verbose --bundles appimage deb --config "$STT_RUNTIME_CONFIGURATION" -- --locked
+      - name: Finalize byte-faithful runtime in a fresh AppDir
+        env:
+          APPIMAGE_EXTRACT_AND_RUN: "1"
+        run: |
+          node --test tools/linux-runtime-finalizer.test.mjs
+          mapfile -d '' appdirs < <(find apps/desktop/src-tauri/target/release/bundle/appimage -maxdepth 1 -type d -name '*.AppDir' -print0)
+          test "${#appdirs[@]}" = 1
+          runtime="$(dirname "$STT_STAGED_MANIFEST")/runtime"
+          node tools/linux-runtime-finalizer.mjs "${appdirs[0]}" "$runtime" "$STT_STAGED_MANIFEST" > "$RUNNER_TEMP/linux-finalized.json"
+          appdir=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).appdir' "$RUNNER_TEMP/linux-finalized.json")
+          plugin="${XDG_CACHE_HOME:-$HOME/.cache}/tauri/linuxdeploy-plugin-appimage.AppImage"
+          test -x "$plugin"
+          output="$(dirname "$appdir")/SomethingToTellEngine-x86_64.AppImage"
+          LDAI_OUTPUT="$output" ARCH=x86_64 "$plugin" --appdir "$appdir"
+          test -s "$output"
+          printf 'STT_VERIFIED_APPIMAGE=%s\n' "$output" >> "$GITHUB_ENV"
       - name: Verify both extracted payloads before artifact collection
         run: |
           mapfile -d '' images < <(find apps/desktop/src-tauri/target/release/bundle/appimage -maxdepth 1 -type f -name '*.AppImage' -print0)
           mapfile -d '' packages < <(find apps/desktop/src-tauri/target/release/bundle/deb -maxdepth 1 -type f -name '*.deb' -print0)
           test "${#images[@]}" = 1
           test "${#packages[@]}" = 1
-          image=$(realpath "${images[0]}")
+          # The initial linuxdeploy image is never promoted; only the fresh canonical-runtime image is tested.
+          image="$STT_VERIFIED_APPIMAGE"
+          test -f "$image"
           package=$(realpath "${packages[0]}")
           mkdir -p "$RUNNER_TEMP/appimage-extracted" "$RUNNER_TEMP/deb-extracted"
           chmod +x "$image"
@@ -95,30 +124,22 @@ jobs:
           }
           probe appimage "$RUNNER_TEMP/appimage-extracted/squashfs-root"
           probe deb "$RUNNER_TEMP/deb-extracted"
-          destination="$GITHUB_WORKSPACE/dist/linux-candidate"
-          mkdir -p "$destination"
-          # No placeholder notice file: actual audited component texts are required.
-          test -s THIRD_PARTY_NOTICES.md
-          cp "$image" "$destination/candidate-x86_64.AppImage"
-          cp "$package" "$destination/candidate-x86_64.deb"
-          cp LICENSE "$destination/"
-          cp THIRD_PARTY_NOTICES.md "$destination/"
-          cp "$STT_STAGED_MANIFEST" "$destination/runtime-manifest.json"
+          # Build-only evidence; reviewed notices remain mandatory for future binary uploads.
+          cp "$STT_STAGED_MANIFEST" "$RUNNER_TEMP/runtime-manifest.json"
           original=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).manifest' "$RUNNER_TEMP/runtime-build.json")
-          cp "$original" "$destination/input-runtime-manifest.json"
-          node -e 'require("fs").writeFileSync(process.argv[1],JSON.stringify({schema_version:1,source_commit:process.env.GITHUB_SHA,runner_image:process.env.ImageVersion,architecture:"x86_64",libc:process.env.STT_GLIBC,ubuntu_installed_acceptance:"pending",steamos_acceptance:"pending"},null,2));' "$destination/candidate.json"
-          (cd "$destination" && sha256sum candidate-x86_64.AppImage candidate-x86_64.deb LICENSE THIRD_PARTY_NOTICES.md runtime-manifest.json input-runtime-manifest.json candidate.json > SHA256SUMS)
-      - uses: actions/upload-artifact@v4
-        with:
-          name: linux-x64-candidate-${{ github.sha }}
-          path: dist/linux-candidate
-          if-no-files-found: error
-          retention-days: 7
+          cp "$original" "$RUNNER_TEMP/input-runtime-manifest.json"
+          node -e 'require("fs").writeFileSync(process.argv[1],JSON.stringify({schema_version:1,source_commit:process.env.GITHUB_SHA,runner_image:process.env.ImageVersion,architecture:"x86_64",libc:process.env.STT_GLIBC,ubuntu_installed_acceptance:"pending",steamos_acceptance:"pending"},null,2));' "$RUNNER_TEMP/package-verification.json"
+          sha256sum "$image" "$package" > "$RUNNER_TEMP/package-SHA256SUMS"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: linux-runtime-tests-${{ github.sha }}
           path: |
             ${{ runner.temp }}/frozen.xml
-            ${{ runner.temp }}/*-ldd.txt
+            ${{ runner.temp }}/appimage-ldd.txt
+            ${{ runner.temp }}/deb-ldd.txt
+            ${{ runner.temp }}/runtime-manifest.json
+            ${{ runner.temp }}/input-runtime-manifest.json
+            ${{ runner.temp }}/package-verification.json
+            ${{ runner.temp }}/package-SHA256SUMS
           retention-days: 7

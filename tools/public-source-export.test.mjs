@@ -20,6 +20,8 @@ test("public README contains guides/license links, not private documentation ref
   assert.match(text, /Browser and Tauri development\nrequire the backend separately/);
   assert.doesNotMatch(text, /collaborat|Steam/i);
   assert.match(text, /one active writer at a time/);
+  assert.match(text, /only diagnostic reports, never installers or bundled runtimes/);
+  assert.match(text, /separately approved tagged draft release and reviewed/);
   assert.doesNotMatch(readFileSync(new URL("../README.md", import.meta.url), "utf8"), /collaborat|Steam/i);
 });
 

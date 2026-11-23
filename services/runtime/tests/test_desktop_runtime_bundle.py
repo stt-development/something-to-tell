@@ -59,16 +59,51 @@ def test_offline_self_check_round_trips_only_owned_temporary_project(tmp_path, m
     monkeypatch.setenv("STT_RUNTIME_STORAGE_PROFILES_FILE", str(tmp_path / "must-not-read.json"))
     (tmp_path / "must-not-read.json").write_text("invalid private registry")
     before = {path.name: path.read_bytes() for path in tmp_path.iterdir()}
-    report = asyncio.run(desktop_entry.self_check())
+    stages = []
+    report = asyncio.run(desktop_entry.self_check(stages.append))
     assert report["status"] == "ok" and "reopen" in report["checks"]
     assert {path.name: path.read_bytes() for path in tmp_path.iterdir()} == before
+    assert stages == ["temporary_directory", "create_app", "lifespan_start", "create", "edit", "save",
+                      "close", "reopen", "round_trip", "reopen_close", "lock_release", "lifespan_stop",
+                      "profile_isolation", "temporary_cleanup"]
 
 
 def test_failed_cli_probe_emits_only_stable_error(monkeypatch, capsys):
-    async def failure():
+    async def failure(progress=None):
         raise RuntimeError("private-token-and-path")
     monkeypatch.setattr(desktop_entry, "self_check", failure)
     assert desktop_entry.main(["--self-check"]) == 1
     output = capsys.readouterr()
     assert json.loads(output.out)["code"] == "runtime_self_check_failed"
     assert "private-token-and-path" not in output.out + output.err
+
+
+@pytest.mark.parametrize("stage", ["create", "save", "temporary_cleanup", "private-stage-and-path"])
+def test_probe_diagnostics_disclose_only_fixed_stage_and_error_categories(monkeypatch, capsys, stage):
+    async def failure(progress):
+        progress(stage)
+        try:
+            raise FileNotFoundError("private-path-and-key")
+        except FileNotFoundError as cause:
+            raise PermissionError("private-token-and-project") from cause
+
+    monkeypatch.setattr(desktop_entry, "self_check", failure)
+    assert desktop_entry.main(["--self-check"]) == 1
+    output = capsys.readouterr()
+    assert json.loads(output.out) == {
+        "schema_version": 1, "status": "failed", "code": "runtime_self_check_failed",
+        "stage": stage if stage in desktop_entry.SELF_CHECK_STAGES else "unknown",
+        "error_types": ["PermissionError", "FileNotFoundError"],
+    }
+    assert "private-" not in output.out + output.err
+
+
+def test_probe_error_categories_are_bounded_and_reject_custom_type_names():
+    private_error = type("PrivateTokenAndPath", (Exception,), {})
+    error = private_error("private-data")
+    for _ in range(8):
+        wrapped = RuntimeError("private-data")
+        wrapped.__cause__ = error
+        error = wrapped
+    assert desktop_entry._probe_error_types(error) == ["RuntimeError"] * 5
+    assert desktop_entry._probe_error_types(private_error()) == ["other"]
