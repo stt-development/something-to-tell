@@ -57,6 +57,7 @@ jobs:
           uv run --group build python -m services.runtime.scripts.build_desktop_runtime > "$RUNNER_TEMP/runtime-build.json"
           raw=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).candidate' "$RUNNER_TEMP/runtime-build.json")
           node tools/desktop-runtime-resources.mjs "$raw" > "$RUNNER_TEMP/runtime-stage.json"
+          uv run --group build python -m services.runtime.scripts.runtime_notice_evidence "$raw" "$(dirname "$raw")/manifest.json" > "$RUNNER_TEMP/runtime-notice-evidence.json"
           configuration=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).configuration' "$RUNNER_TEMP/runtime-stage.json")
           node -e 'const fs=require("fs"), path=process.argv[1], config=JSON.parse(fs.readFileSync(path)); config.bundle.macOS={minimumSystemVersion:"15.0"}; fs.writeFileSync(path, JSON.stringify(config));' "$configuration"
           # The finalizer, not Tauri's resource materializer, owns inner/outer signing.
@@ -112,5 +113,6 @@ jobs:
             ${{ runner.temp }}/input-runtime-manifest.json
             ${{ runner.temp }}/staged-runtime-manifest.json
             ${{ runner.temp }}/package-verification.json
+            ${{ runner.temp }}/runtime-notice-evidence.json
             ${{ runner.temp }}/package-SHA256SUMS
           retention-days: 7
