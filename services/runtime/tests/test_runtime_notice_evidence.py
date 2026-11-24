@@ -1,12 +1,14 @@
 """Evidence collection is bounded, tied to actual candidate bytes and never approval."""
 
 from hashlib import sha256
+from importlib.metadata import version
 import json
 from pathlib import Path
 
 import pytest
 
 from services.runtime.scripts import runtime_notice_evidence as evidence
+from services.runtime.scripts import build_desktop_runtime as recipe
 from services.runtime.scripts.build_desktop_runtime import artifact_manifest
 
 
@@ -55,6 +57,9 @@ def test_rejects_stale_candidate_provenance_before_any_notice_read(candidate, mo
 @pytest.mark.parametrize("tamper", [False, True])
 def test_integrates_with_original_recipe_manifest_verification(candidate, monkeypatch, tamper):
     root, manifest, _ = candidate
+    # Foundation deliberately excludes the freezer. Only its version lookup is
+    # a build-tool fixture; recipe source/file hashes and runtime metadata are real.
+    monkeypatch.setattr(recipe, "version", lambda package: "build-tool-fixture" if package == "pyinstaller" else version(package))
     manifest.write_text(json.dumps(artifact_manifest(root)))
     monkeypatch.setattr(evidence, "artifact_manifest", artifact_manifest)
     if tamper:
