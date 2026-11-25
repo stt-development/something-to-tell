@@ -1,0 +1,5 @@
+# Verbatim upstream legal texts retain CRLF/trailing spaces and reviewed digests.
+# Formatting checks still apply to our code, indexes and all other paths.
+third_party/python-runtime-notices/licenses/* -text -whitespace
+third_party/python-runtime-notices/index.json text eol=lf
+third_party/runtime-notice-inputs.json text eol=lf
