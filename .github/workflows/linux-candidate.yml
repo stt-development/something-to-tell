@@ -56,7 +56,8 @@ jobs:
           raw=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).candidate' "$RUNNER_TEMP/runtime-build.json")
           node tools/desktop-runtime-resources.mjs "$raw" > "$RUNNER_TEMP/runtime-stage.json"
           uv run --group build python -m services.runtime.scripts.runtime_notice_evidence "$raw" "$(dirname "$raw")/manifest.json" > "$RUNNER_TEMP/runtime-notice-evidence.json"
-          uv run --group build python -m services.runtime.scripts.runtime_native_provenance "$raw" "$(dirname "$raw")/manifest.json" > "$RUNNER_TEMP/runtime-native-provenance.json"
+          toc=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).collection_toc' "$RUNNER_TEMP/runtime-build.json")
+          uv run --group build python -m services.runtime.scripts.runtime_native_provenance "$raw" "$(dirname "$raw")/manifest.json" --collection-toc "$toc" > "$RUNNER_TEMP/runtime-native-provenance.json"
           staged=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).manifest' "$RUNNER_TEMP/runtime-stage.json")
           configuration=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).configuration' "$RUNNER_TEMP/runtime-stage.json")
           printf 'STT_TEST_DESKTOP_RUNTIME_EXECUTABLE=%s\nSTT_STAGED_MANIFEST=%s\nSTT_RUNTIME_CONFIGURATION=%s\n' "$raw/stt-runtime" "$staged" "$configuration" >> "$GITHUB_ENV"

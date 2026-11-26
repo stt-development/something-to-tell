@@ -52,7 +52,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'runtime staging failed' }
           uv run --group build python -m services.runtime.scripts.runtime_notice_evidence $built.candidate $built.manifest > "$env:RUNNER_TEMP/runtime-notice-evidence.json"
           if ($LASTEXITCODE -ne 0) { throw 'runtime notice evidence failed' }
-          uv run --group build python -m services.runtime.scripts.runtime_native_provenance $built.candidate $built.manifest > "$env:RUNNER_TEMP/runtime-native-provenance.json"
+          uv run --group build python -m services.runtime.scripts.runtime_native_provenance $built.candidate $built.manifest --collection-toc $built.collection_toc > "$env:RUNNER_TEMP/runtime-native-provenance.json"
           if ($LASTEXITCODE -ne 0) { throw 'runtime native provenance failed' }
           "STT_TEST_DESKTOP_RUNTIME_EXECUTABLE=$(Join-Path $built.candidate 'stt-runtime.exe')" >> $env:GITHUB_ENV
           "STT_RUNTIME_STAGE=$($staged.configuration)" >> $env:GITHUB_ENV

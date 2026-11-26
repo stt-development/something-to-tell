@@ -132,3 +132,32 @@ def test_interpreter_inventory_accepts_homebrew_style_prefix_alias(tmp_path, mon
     monkeypatch.setattr(provenance.sys, "base_prefix", str(prefix))
     monkeypatch.setattr(provenance.sysconfig, "get_path", lambda _: str(alias / "lib/python3.13"))
     assert list(provenance.input_files()) == [(prefix, "lib/python3.13/lib-dynload/_ssl.so", {"kind": "interpreter_installation"})]
+
+
+def test_collection_record_links_changed_bytes_without_claiming_exact_match(case):
+    item = case.evidence["native_files"][0]
+    item["path"] = "_internal/module.so"
+    (case.candidate / "_internal").mkdir()
+    (case.candidate / "module.so").rename(case.candidate / item["path"])
+    original = b"original input differs in size and bytes"
+    (case.source / "original.so").write_bytes(original)
+    case.manifest.write_text(json.dumps({"files": case.evidence["native_files"]}))
+    toc = case.source / "COLLECT-00.toc"
+    toc.write_text(repr(([('module.so', str(case.source / 'original.so'), 'EXTENSION')],)))
+    report = provenance.collect_provenance(case.candidate, case.manifest, toc)
+    record = report["files"][0]
+    assert record["origins"] == [] and record["status"] == "unmatched_or_transformed"
+    assert record["collection_input"]["sha256"] == sha256(original).hexdigest()
+    assert record["collection_input"]["bytes"] == len(original)
+    assert record["collection_input"]["origins"][0]["name"] == "example"
+    assert report["collection_record"]["sha256"] == sha256(toc.read_bytes()).hexdigest()
+    assert report["distribution_approved"] is False
+    assert str(case.source) not in json.dumps(report)
+
+
+def test_collection_source_is_not_read_unless_independently_in_input_inventory(case, monkeypatch):
+    case.manifest.write_text(json.dumps({"files": case.evidence["native_files"]}))
+    toc = case.source / "COLLECT-00.toc"
+    toc.write_text(repr(([('module.so', str(case.source / 'must-not-read'), 'EXECUTABLE')],)))
+    report = provenance.collect_provenance(case.candidate, case.manifest, toc)
+    assert report["files"][0]["collection_input"] is None

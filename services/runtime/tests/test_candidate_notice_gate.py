@@ -64,8 +64,11 @@ def test_native_attribution_uses_raw_candidate_before_packaging_and_uploads_only
     assert "uv run --group build python -m" in command
     if platform == "windows":
         assert "$built.candidate $built.manifest" in command
+        assert "--collection-toc $built.collection_toc" in command
         assert "throw 'runtime native provenance failed'" in script
     else:
         assert '\"$raw\" \"$(dirname \"$raw\")/manifest.json\"' in command
+        assert '--collection-toc "$toc"' in command
+        assert ".collection_toc'" in script
     upload = next(step for step in steps if step.get("uses") == "actions/upload-artifact@v4")
     assert "${{ runner.temp }}/runtime-native-provenance.json" in upload["with"]["path"].splitlines()
