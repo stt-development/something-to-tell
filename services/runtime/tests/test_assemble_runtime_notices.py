@@ -185,7 +185,7 @@ def test_rejects_extra_receipt_fields_instead_of_exporting_unreviewed_metadata(c
     with pytest.raises(ValueError, match="receipt_fields_invalid"): assemble(case)
 
 
-def test_checked_in_archive_preserves_digests_associations_and_source_references():
+def test_checked_in_index_preserves_digests_associations_and_source_references():
     root = ROOT / "third_party/python-runtime-notices"
     index = json.loads((root / "index.json").read_bytes())
     receipts_path = ROOT / "third_party/runtime-notice-inputs.json"
@@ -193,12 +193,10 @@ def test_checked_in_archive_preserves_digests_associations_and_source_references
     assert index["receipts_sha256"] == sha256(receipts_path.read_bytes()).hexdigest()
     assert index["lock_lf_sha256"] == sha256((ROOT / "uv.lock").read_bytes().replace(b"\r\n", b"\n")).hexdigest()
     declared = {item["file"] for item in index["license_texts"]}
-    assert declared == {path.relative_to(root).as_posix() for path in (root / "licenses").iterdir()}
+    # Texts belong to generated evidence/output, not the source checkout.
+    assert not (root / "licenses").exists()
     for item in index["license_texts"]:
         assert item["file"] == f'licenses/{notices.checked_digest(item["sha256"])}.txt'
-        path = root / item["file"]
-        assert not path.is_symlink()
-        assert sha256(path.read_bytes()).hexdigest() == item["sha256"]
     locked = {(notices.canonicalize_name(item["name"]), item["version"]): item for item in notices.tomllib.loads((ROOT / "uv.lock").read_text())["package"]}
     for package in index["packages"]:
         assert package["source_archive"] == notices.source_reference(locked.get((package["name"], package["version"])))
@@ -206,5 +204,3 @@ def test_checked_in_archive_preserves_digests_associations_and_source_references
             for notice in record["notices"]:
                 assert notice["file"] in declared
                 assert notice["original_path"].startswith(record["metadata_path"].rsplit("/", 1)[0] + "/")
-    assert any(line.startswith("third_party/python-runtime-notices/licenses/* ") and "-text" in line.split()[1:]
-               for line in (ROOT / ".gitattributes").read_text().splitlines())
