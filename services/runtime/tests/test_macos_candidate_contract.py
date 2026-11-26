@@ -29,11 +29,12 @@ def test_native_arm64_minimum_and_explicit_signing_owner():
 
 def test_mounted_readonly_dmg_requires_signed_bytes_and_backend_probes_before_upload():
     script = "\n".join(step.get("run", "") for step in job()["steps"])
-    for value in ["hdiutil create -fs HFS+", "hdiutil attach -readonly -nobrowse", 'trap \'hdiutil detach "$mount" || true\' EXIT',
+    for value in ["hdiutil create -fs HFS+", "hdiutil attach -readonly -nobrowse", 'trap \'bash tools/detach-macos-image.sh "$mount" || true\' EXIT',
                   "verifyCandidate(process.argv[1]", 'macos_candidate.py verify "$runtime"', 'env PATH=/nonexistent "$runtime/stt-runtime" --self-check',
                   'shasum -a 256 "$destination/SomethingToTellEngine-arm64.dmg"', 'signing:"adhoc",notarized:false,installed_gui_acceptance:"pending"']:
         assert value in script
     assert script.index("hdiutil create") < script.index("hdiutil attach") < script.index('macos_candidate.py verify "$runtime"')
+    assert '\nbash tools/detach-macos-image.sh "$mount"\ntrap - EXIT\n' in script
     uploads = [step for step in job()["steps"] if step.get("uses") == "actions/upload-artifact@v4"]
     assert len(uploads) == 1
     assert "dist/macos-candidate" not in uploads[0]["with"]["path"]
