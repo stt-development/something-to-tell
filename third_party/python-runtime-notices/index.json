@@ -1,0 +1,1806 @@
+{
+  "schema_version": 1,
+  "generated_by": "tools/assemble_runtime_notices.py",
+  "scope": "python_notice_texts_and_locked_references_only",
+  "distribution_approved": false,
+  "source_head_commit": "92dac1e0169d7d0168633f1e4d3017b4c1c61aba",
+  "build_merge_commit": "ae8afc160a6f69821d74210eaaea3ab0076d2b49",
+  "receipts_sha256": "a81df0ff8722fde03ba77add8571416ce379c59096ae97918a255efdb06d815e",
+  "lock_lf_sha256": "9d69ad69a48b7c1c667480e73d6fd51ef62f4d5eb129b4bd884c160f02c7e677",
+  "report_inputs": [
+    {
+      "platform": "Darwin",
+      "run_url": "https://github.com/stt-development/something-to-tell/actions/runs/45478743833",
+      "sha256": "1795de7ab68bb76d1b694372cd3f8c086f7e02cc9c6a3311ed57aeb628b435f5",
+      "runtime": {
+        "system": "Darwin",
+        "machine": "arm64",
+        "python": "3.13.17",
+        "pyinstaller": "6.22.3",
+        "lock_sha256": "9d69ad69a48b7c1c667480e73d6fd51ef62f4d5eb129b4bd884c160f02c7e677"
+      },
+      "collector_sha256": "fcc142bbb8911c9a0028ee9f34eb85fa4a56c708f85486924d8441af86eff093",
+      "manifest_sha256": "9b4434f93a0551246fa5bd26cf6df860d9a5a5eff50c92fb85bc1edd5314c9fb",
+      "review_gaps": [
+        "native_component_versions_licenses_and_corresponding_source",
+        "python_interpreter_and_pyinstaller_bootloader_notices",
+        "frontend_rust_installer_and_asset_notices",
+        "human_review_and_distribution_approval"
+      ]
+    },
+    {
+      "platform": "Linux",
+      "run_url": "https://github.com/stt-development/something-to-tell/actions/runs/45478744058",
+      "sha256": "1342a37bd01f1de8ac13c3160d9ecb610d48da0bceb7f93d573e3c8e19c4492c",
+      "runtime": {
+        "system": "Linux",
+        "machine": "x86_64",
+        "python": "3.13.18",
+        "pyinstaller": "6.22.3",
+        "lock_sha256": "9d69ad69a48b7c1c667480e73d6fd51ef62f4d5eb129b4bd884c160f02c7e677"
+      },
+      "collector_sha256": "fcc142bbb8911c9a0028ee9f34eb85fa4a56c708f85486924d8441af86eff093",
+      "manifest_sha256": "df52225237c7b82cefc7335e3e3a94132f144929dd4c94b1bd257d4960f564fc",
+      "review_gaps": [
+        "native_component_versions_licenses_and_corresponding_source",
+        "python_interpreter_and_pyinstaller_bootloader_notices",
+        "frontend_rust_installer_and_asset_notices",
+        "human_review_and_distribution_approval"
+      ]
+    },
+    {
+      "platform": "Windows",
+      "run_url": "https://github.com/stt-development/something-to-tell/actions/runs/45478744282",
+      "sha256": "0266556c298909cc1742b5d5a5cd91d5cd947a9e0cec01bec5389e42bbb67469",
+      "runtime": {
+        "system": "Windows",
+        "machine": "AMD64",
+        "python": "3.13.17",
+        "pyinstaller": "6.22.3",
+        "lock_sha256": "e72324c6e7e494d1c2dfbb2b46c252d35f6c938ddd2fafbff09f7f2dc7ab539b"
+      },
+      "collector_sha256": "e7ecd43b6f422f83b84137af612a27382cc2552ec56243a0a21040f247def671",
+      "manifest_sha256": "afa437967407386004c58915126ce39adfe483300b6b393fd103a64d9343d60a",
+      "review_gaps": [
+        "native_component_versions_licenses_and_corresponding_source",
+        "python_interpreter_and_pyinstaller_bootloader_notices",
+        "frontend_rust_installer_and_asset_notices",
+        "human_review_and_distribution_approval"
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "name": "alembic",
+      "version": "1.18.4",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/94/13/8b084e0f2efb0275a1d534838844926f798bd766566b1375174e2448cd31/alembic-1.18.4.tar.gz",
+        "sha256": "cb6e1fd84b6174ab8dbb2329f86d631ba9559dd78df550b57804d607672cedbc",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/alembic-1.18.4.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/alembic-1.18.4.dist-info/licenses/LICENSE",
+              "file": "licenses/6e68d94a03a0e3e327ddf3e86d1ebedc14eece3922022618fc246a36296fd0cc.txt",
+              "sha256": "6e68d94a03a0e3e327ddf3e86d1ebedc14eece3922022618fc246a36296fd0cc"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/alembic-1.18.4.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/alembic-1.18.4.dist-info/licenses/LICENSE",
+              "file": "licenses/6e68d94a03a0e3e327ddf3e86d1ebedc14eece3922022618fc246a36296fd0cc.txt",
+              "sha256": "6e68d94a03a0e3e327ddf3e86d1ebedc14eece3922022618fc246a36296fd0cc"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/alembic-1.18.4.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/alembic-1.18.4.dist-info/licenses/LICENSE",
+              "file": "licenses/6e68d94a03a0e3e327ddf3e86d1ebedc14eece3922022618fc246a36296fd0cc.txt",
+              "sha256": "6e68d94a03a0e3e327ddf3e86d1ebedc14eece3922022618fc246a36296fd0cc"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "annotated-doc",
+      "version": "0.0.4",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/57/ba/046ceea27344560984e26a590f90bc7f4a75b06701f653222458922b558c/annotated_doc-0.0.4.tar.gz",
+        "sha256": "fbcda96e87e9c92ad167c2e53839e57503ecfda18804ea28102353485033faa4",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/annotated_doc-0.0.4.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/annotated_doc-0.0.4.dist-info/licenses/LICENSE",
+              "file": "licenses/fff170779a6acbf65abdb405c087f1cee1786691e4a96a4034517e4a504a0cdf.txt",
+              "sha256": "fff170779a6acbf65abdb405c087f1cee1786691e4a96a4034517e4a504a0cdf"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/annotated_doc-0.0.4.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/annotated_doc-0.0.4.dist-info/licenses/LICENSE",
+              "file": "licenses/fff170779a6acbf65abdb405c087f1cee1786691e4a96a4034517e4a504a0cdf.txt",
+              "sha256": "fff170779a6acbf65abdb405c087f1cee1786691e4a96a4034517e4a504a0cdf"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/annotated_doc-0.0.4.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/annotated_doc-0.0.4.dist-info/licenses/LICENSE",
+              "file": "licenses/fff170779a6acbf65abdb405c087f1cee1786691e4a96a4034517e4a504a0cdf.txt",
+              "sha256": "fff170779a6acbf65abdb405c087f1cee1786691e4a96a4034517e4a504a0cdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.7.0",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/ee/67/531ea369ba64dcff5ec9c3402f9f51bf748cec26dde048a2f973a4eea7f5/annotated_types-0.7.0.tar.gz",
+        "sha256": "aff07c09a53a08bc8cfccb9c85b05f1aa9a2a6f23728d790723543408344ce89",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [
+        "license_declaration_missing_requires_text_review"
+      ],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/annotated_types-0.7.0.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/annotated_types-0.7.0.dist-info/licenses/LICENSE",
+              "file": "licenses/fe1049884b1a0d9342901e88e07f32925d24b3121d9972b6a6805fb9824b095d.txt",
+              "sha256": "fe1049884b1a0d9342901e88e07f32925d24b3121d9972b6a6805fb9824b095d"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/annotated_types-0.7.0.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/annotated_types-0.7.0.dist-info/licenses/LICENSE",
+              "file": "licenses/fe1049884b1a0d9342901e88e07f32925d24b3121d9972b6a6805fb9824b095d.txt",
+              "sha256": "fe1049884b1a0d9342901e88e07f32925d24b3121d9972b6a6805fb9824b095d"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/annotated_types-0.7.0.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/annotated_types-0.7.0.dist-info/licenses/LICENSE",
+              "file": "licenses/fe1049884b1a0d9342901e88e07f32925d24b3121d9972b6a6805fb9824b095d.txt",
+              "sha256": "fe1049884b1a0d9342901e88e07f32925d24b3121d9972b6a6805fb9824b095d"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "anyio",
+      "version": "4.13.0",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/19/14/2c5dd9f512b66549ae92767a9c7b330ae88e1932ca57876909410251fe13/anyio-4.13.0.tar.gz",
+        "sha256": "334b70e641fd2221c1505b3890c69882fe4a2df910cba14d97019b90b24439dc",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/anyio-4.13.0.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/anyio-4.13.0.dist-info/licenses/LICENSE",
+              "file": "licenses/5361ac9dc58f2ef5fd2e9b09c68297c17f04950909bbc8023bdb82eacf22c2b0.txt",
+              "sha256": "5361ac9dc58f2ef5fd2e9b09c68297c17f04950909bbc8023bdb82eacf22c2b0"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/anyio-4.13.0.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/anyio-4.13.0.dist-info/licenses/LICENSE",
+              "file": "licenses/5361ac9dc58f2ef5fd2e9b09c68297c17f04950909bbc8023bdb82eacf22c2b0.txt",
+              "sha256": "5361ac9dc58f2ef5fd2e9b09c68297c17f04950909bbc8023bdb82eacf22c2b0"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/anyio-4.13.0.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/anyio-4.13.0.dist-info/licenses/LICENSE",
+              "file": "licenses/5361ac9dc58f2ef5fd2e9b09c68297c17f04950909bbc8023bdb82eacf22c2b0.txt",
+              "sha256": "5361ac9dc58f2ef5fd2e9b09c68297c17f04950909bbc8023bdb82eacf22c2b0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "cffi",
+      "version": "2.1.0",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/57/5f/ff100cae70ebe9d8df1c01a00e510e45d9adb5c1fdda84791b199141de97/cffi-2.1.0.tar.gz",
+        "sha256": "efc1cdd798b1aaf39b4610bba7aad28c9bea9b910f25c784ccf9ec1fa719d1f9",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/cffi-2.1.0.dist-info/METADATA",
+          "license_expression": "MIT-0",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/cffi-2.1.0.dist-info/licenses/LICENSE",
+              "file": "licenses/5ba24ddc57067f9249add644c3afc41a5d6dc37e23433ef759d95df370b0af63.txt",
+              "sha256": "5ba24ddc57067f9249add644c3afc41a5d6dc37e23433ef759d95df370b0af63"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/cffi-2.1.0.dist-info/METADATA",
+          "license_expression": "MIT-0",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/cffi-2.1.0.dist-info/licenses/LICENSE",
+              "file": "licenses/5ba24ddc57067f9249add644c3afc41a5d6dc37e23433ef759d95df370b0af63.txt",
+              "sha256": "5ba24ddc57067f9249add644c3afc41a5d6dc37e23433ef759d95df370b0af63"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/cffi-2.1.0.dist-info/METADATA",
+          "license_expression": "MIT-0",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/cffi-2.1.0.dist-info/licenses/LICENSE",
+              "file": "licenses/5ba24ddc57067f9249add644c3afc41a5d6dc37e23433ef759d95df370b0af63.txt",
+              "sha256": "5ba24ddc57067f9249add644c3afc41a5d6dc37e23433ef759d95df370b0af63"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "click",
+      "version": "8.4.1",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/9b/98/518d8e5081007684232226f475082b30087d0f585e8457db087298259f49/click-8.4.1.tar.gz",
+        "sha256": "918b5633eddf6b41c32d4f454bf0de810065c74e3f7dbf8ee5452f8be88d3e96",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/click-8.4.1.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/click-8.4.1.dist-info/licenses/LICENSE.txt",
+              "file": "licenses/9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d.txt",
+              "sha256": "9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/click-8.4.1.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/click-8.4.1.dist-info/licenses/LICENSE.txt",
+              "file": "licenses/9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d.txt",
+              "sha256": "9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/click-8.4.1.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/click-8.4.1.dist-info/licenses/LICENSE.txt",
+              "file": "licenses/9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d.txt",
+              "sha256": "9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/d8/53/6f443c9a4a8358a93a6792e2acffb9d9d5cb0a5cfd8802644b7b1c9a02e4/colorama-0.4.6.tar.gz",
+        "sha256": "08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [
+        "license_declaration_missing_requires_text_review"
+      ],
+      "evidence": [
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/colorama-0.4.6.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/colorama-0.4.6.dist-info/licenses/LICENSE.txt",
+              "file": "licenses/cac35c02686e5d04a5a7140bfb3b36e73aed496656e891102e428886d7930318.txt",
+              "sha256": "cac35c02686e5d04a5a7140bfb3b36e73aed496656e891102e428886d7930318"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "cryptography",
+      "version": "49.0.0",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/1f/99/d1c90d6041656cc6ee229dc99cd67fd0cd5aec3c5f7d72fffc27cc750054/cryptography-49.0.0.tar.gz",
+        "sha256": "f89660a348f4f78a92366240a61404e337586ef7f5909a2fef59ca88ef505493",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/cryptography-49.0.0.dist-info/METADATA",
+          "license_expression": "Apache-2.0 OR BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/cryptography-49.0.0.dist-info/licenses/LICENSE",
+              "file": "licenses/3e0c7c091a948b82533ba98fd7cbb40432d6f1a9acbf85f5922d2f99a93ae6bb.txt",
+              "sha256": "3e0c7c091a948b82533ba98fd7cbb40432d6f1a9acbf85f5922d2f99a93ae6bb"
+            },
+            {
+              "original_path": "_internal/cryptography-49.0.0.dist-info/licenses/LICENSE.APACHE",
+              "file": "licenses/aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe.txt",
+              "sha256": "aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe"
+            },
+            {
+              "original_path": "_internal/cryptography-49.0.0.dist-info/licenses/LICENSE.BSD",
+              "file": "licenses/602c4c7482de6479dd2e9793cda275e5e63d773dacd1eca689232ab7008fb4fb.txt",
+              "sha256": "602c4c7482de6479dd2e9793cda275e5e63d773dacd1eca689232ab7008fb4fb"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/cryptography-49.0.0.dist-info/METADATA",
+          "license_expression": "Apache-2.0 OR BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/cryptography-49.0.0.dist-info/licenses/LICENSE",
+              "file": "licenses/3e0c7c091a948b82533ba98fd7cbb40432d6f1a9acbf85f5922d2f99a93ae6bb.txt",
+              "sha256": "3e0c7c091a948b82533ba98fd7cbb40432d6f1a9acbf85f5922d2f99a93ae6bb"
+            },
+            {
+              "original_path": "_internal/cryptography-49.0.0.dist-info/licenses/LICENSE.APACHE",
+              "file": "licenses/aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe.txt",
+              "sha256": "aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe"
+            },
+            {
+              "original_path": "_internal/cryptography-49.0.0.dist-info/licenses/LICENSE.BSD",
+              "file": "licenses/602c4c7482de6479dd2e9793cda275e5e63d773dacd1eca689232ab7008fb4fb.txt",
+              "sha256": "602c4c7482de6479dd2e9793cda275e5e63d773dacd1eca689232ab7008fb4fb"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/cryptography-49.0.0.dist-info/METADATA",
+          "license_expression": "Apache-2.0 OR BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/cryptography-49.0.0.dist-info/licenses/LICENSE",
+              "file": "licenses/3e0c7c091a948b82533ba98fd7cbb40432d6f1a9acbf85f5922d2f99a93ae6bb.txt",
+              "sha256": "3e0c7c091a948b82533ba98fd7cbb40432d6f1a9acbf85f5922d2f99a93ae6bb"
+            },
+            {
+              "original_path": "_internal/cryptography-49.0.0.dist-info/licenses/LICENSE.APACHE",
+              "file": "licenses/aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe.txt",
+              "sha256": "aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe"
+            },
+            {
+              "original_path": "_internal/cryptography-49.0.0.dist-info/licenses/LICENSE.BSD",
+              "file": "licenses/602c4c7482de6479dd2e9793cda275e5e63d773dacd1eca689232ab7008fb4fb.txt",
+              "sha256": "602c4c7482de6479dd2e9793cda275e5e63d773dacd1eca689232ab7008fb4fb"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "fastapi",
+      "version": "0.136.3",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/81/2d/ff8d91d7b564d464629a0fd50a4489c97fcb836ac230bf3a7269232a9b1f/fastapi-0.136.3.tar.gz",
+        "sha256": "e487fae93ad408e6f47641ee4dfe389864fd7bec92e547ea8498fc13f43e83ab",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/fastapi-0.136.3.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/fastapi-0.136.3.dist-info/licenses/LICENSE",
+              "file": "licenses/4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e.txt",
+              "sha256": "4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/fastapi-0.136.3.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/fastapi-0.136.3.dist-info/licenses/LICENSE",
+              "file": "licenses/4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e.txt",
+              "sha256": "4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/fastapi-0.136.3.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/fastapi-0.136.3.dist-info/licenses/LICENSE",
+              "file": "licenses/4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e.txt",
+              "sha256": "4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "greenlet",
+      "version": "3.5.1",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/6d/6e/802acd792aebb2256fbbee8cacf2727faaeb6f240ac11008f09eae4414bc/greenlet-3.5.1.tar.gz",
+        "sha256": "5a56aeb7d5d9cc4b3a735efb5095bd4b4f6f0e4f93e5ca876d0e2315137b7829",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/greenlet-3.5.1.dist-info/METADATA",
+          "license_expression": "MIT AND PSF-2.0",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/greenlet-3.5.1.dist-info/licenses/LICENSE",
+              "file": "licenses/769831d6e5dfaf2c20802faccff1fafb4c2025dd8f6253dfa47fcad59d4d0979.txt",
+              "sha256": "769831d6e5dfaf2c20802faccff1fafb4c2025dd8f6253dfa47fcad59d4d0979"
+            },
+            {
+              "original_path": "_internal/greenlet-3.5.1.dist-info/licenses/LICENSE.PSF",
+              "file": "licenses/e5ff3c23c110e494cd7d736c10fd96d462457bafeca310840db6527298c7d46b.txt",
+              "sha256": "e5ff3c23c110e494cd7d736c10fd96d462457bafeca310840db6527298c7d46b"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/greenlet-3.5.1.dist-info/METADATA",
+          "license_expression": "MIT AND PSF-2.0",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/greenlet-3.5.1.dist-info/licenses/LICENSE",
+              "file": "licenses/ab977b654605670319509481ece49198f405a129372ac38c96f51cd96c2f452e.txt",
+              "sha256": "ab977b654605670319509481ece49198f405a129372ac38c96f51cd96c2f452e"
+            },
+            {
+              "original_path": "_internal/greenlet-3.5.1.dist-info/licenses/LICENSE.PSF",
+              "file": "licenses/69efa689cc7aec7736236d3039c1d665e4b0c734a5bfea5abf633023abb2fff4.txt",
+              "sha256": "69efa689cc7aec7736236d3039c1d665e4b0c734a5bfea5abf633023abb2fff4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/01/ee/02a2c011bdab74c6fb3c75474d40b3052059d95df7e73351460c8588d963/h11-0.16.0.tar.gz",
+        "sha256": "4e35b956cf45792e4caa5885e69fba00bdbc6ffafbfa020300e549b208ee5ff1",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/h11-0.16.0.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "MIT",
+          "notices": [
+            {
+              "original_path": "_internal/h11-0.16.0.dist-info/licenses/LICENSE.txt",
+              "file": "licenses/37db5bb85926db28a427a25867f10b1232003aea1be69ccb851138adb8e6f361.txt",
+              "sha256": "37db5bb85926db28a427a25867f10b1232003aea1be69ccb851138adb8e6f361"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/h11-0.16.0.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "MIT",
+          "notices": [
+            {
+              "original_path": "_internal/h11-0.16.0.dist-info/licenses/LICENSE.txt",
+              "file": "licenses/37db5bb85926db28a427a25867f10b1232003aea1be69ccb851138adb8e6f361.txt",
+              "sha256": "37db5bb85926db28a427a25867f10b1232003aea1be69ccb851138adb8e6f361"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/h11-0.16.0.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "MIT",
+          "notices": [
+            {
+              "original_path": "_internal/h11-0.16.0.dist-info/licenses/LICENSE.txt",
+              "file": "licenses/37db5bb85926db28a427a25867f10b1232003aea1be69ccb851138adb8e6f361.txt",
+              "sha256": "37db5bb85926db28a427a25867f10b1232003aea1be69ccb851138adb8e6f361"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "idna",
+      "version": "3.16",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/1a/88/bcf9709822fe69d02c2a6a77956c98ce6ea8ca8767a9aadcedc7eb6a2390/idna-3.16.tar.gz",
+        "sha256": "d7a6da03db833450fca25d2358ac9ff06cd624577a4aea3a596d5c0f77b8e03d",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/idna-3.16.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/idna-3.16.dist-info/licenses/LICENSE.md",
+              "file": "licenses/1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04.txt",
+              "sha256": "1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/idna-3.16.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/idna-3.16.dist-info/licenses/LICENSE.md",
+              "file": "licenses/1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04.txt",
+              "sha256": "1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/idna-3.16.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/idna-3.16.dist-info/licenses/LICENSE.md",
+              "file": "licenses/1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04.txt",
+              "sha256": "1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "importlib-metadata",
+      "version": "8.7.1",
+      "source_archive": null,
+      "review_gaps": [
+        "distribution_not_in_lock_including_vendored_records"
+      ],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/setuptools/_vendor/importlib_metadata-8.7.1.dist-info/METADATA",
+          "license_expression": "Apache-2.0",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/setuptools/_vendor/importlib_metadata-8.7.1.dist-info/licenses/LICENSE",
+              "file": "licenses/458502e12d97bbf64438606a20044aa85eb05fb0a8a807bb35dbec253fd1fc04.txt",
+              "sha256": "458502e12d97bbf64438606a20044aa85eb05fb0a8a807bb35dbec253fd1fc04"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/setuptools/_vendor/importlib_metadata-8.7.1.dist-info/METADATA",
+          "license_expression": "Apache-2.0",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/setuptools/_vendor/importlib_metadata-8.7.1.dist-info/licenses/LICENSE",
+              "file": "licenses/458502e12d97bbf64438606a20044aa85eb05fb0a8a807bb35dbec253fd1fc04.txt",
+              "sha256": "458502e12d97bbf64438606a20044aa85eb05fb0a8a807bb35dbec253fd1fc04"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/setuptools/_vendor/importlib_metadata-8.7.1.dist-info/METADATA",
+          "license_expression": "Apache-2.0",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/setuptools/_vendor/importlib_metadata-8.7.1.dist-info/licenses/LICENSE",
+              "file": "licenses/458502e12d97bbf64438606a20044aa85eb05fb0a8a807bb35dbec253fd1fc04.txt",
+              "sha256": "458502e12d97bbf64438606a20044aa85eb05fb0a8a807bb35dbec253fd1fc04"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "lark",
+      "version": "1.3.1",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/da/34/28fff3ab31ccff1fd4f6c7c7b0ceb2b6968d8ea4950663eadcb5720591a0/lark-1.3.1.tar.gz",
+        "sha256": "b426a7a6d6d53189d318f2b6236ab5d6429eaf09259f1ca33eb716eed10d2905",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/lark-1.3.1.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "MIT",
+          "notices": [
+            {
+              "original_path": "_internal/lark-1.3.1.dist-info/licenses/LICENSE",
+              "file": "licenses/2eee60f52d4e11357bf89e72b034d050e285e47fda1361e5662fb322ee27d771.txt",
+              "sha256": "2eee60f52d4e11357bf89e72b034d050e285e47fda1361e5662fb322ee27d771"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/lark-1.3.1.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "MIT",
+          "notices": [
+            {
+              "original_path": "_internal/lark-1.3.1.dist-info/licenses/LICENSE",
+              "file": "licenses/2eee60f52d4e11357bf89e72b034d050e285e47fda1361e5662fb322ee27d771.txt",
+              "sha256": "2eee60f52d4e11357bf89e72b034d050e285e47fda1361e5662fb322ee27d771"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/lark-1.3.1.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "MIT",
+          "notices": [
+            {
+              "original_path": "_internal/lark-1.3.1.dist-info/licenses/LICENSE",
+              "file": "licenses/2eee60f52d4e11357bf89e72b034d050e285e47fda1361e5662fb322ee27d771.txt",
+              "sha256": "2eee60f52d4e11357bf89e72b034d050e285e47fda1361e5662fb322ee27d771"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "mako",
+      "version": "1.3.12",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/00/62/791b31e69ae182791ec67f04850f2f062716bbd205483d63a215f3e062d3/mako-1.3.12.tar.gz",
+        "sha256": "9f778e93289bd410bb35daadeb4fc66d95a746f0b75777b942088b7fd7af550a",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/mako-1.3.12.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "MIT",
+          "notices": [
+            {
+              "original_path": "_internal/mako-1.3.12.dist-info/licenses/LICENSE",
+              "file": "licenses/68d7064e53e3ffa8e9f420a9e604bd2e2059d9c330492fa6ebd4eb3d48111689.txt",
+              "sha256": "68d7064e53e3ffa8e9f420a9e604bd2e2059d9c330492fa6ebd4eb3d48111689"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/mako-1.3.12.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "MIT",
+          "notices": [
+            {
+              "original_path": "_internal/mako-1.3.12.dist-info/licenses/LICENSE",
+              "file": "licenses/68d7064e53e3ffa8e9f420a9e604bd2e2059d9c330492fa6ebd4eb3d48111689.txt",
+              "sha256": "68d7064e53e3ffa8e9f420a9e604bd2e2059d9c330492fa6ebd4eb3d48111689"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/mako-1.3.12.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "MIT",
+          "notices": [
+            {
+              "original_path": "_internal/mako-1.3.12.dist-info/licenses/LICENSE",
+              "file": "licenses/68d7064e53e3ffa8e9f420a9e604bd2e2059d9c330492fa6ebd4eb3d48111689.txt",
+              "sha256": "68d7064e53e3ffa8e9f420a9e604bd2e2059d9c330492fa6ebd4eb3d48111689"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "markupsafe",
+      "version": "3.0.3",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/7e/99/7690b6d4034fffd95959cbe0c02de8deb3098cc577c67bb6a24fe5d7caa7/markupsafe-3.0.3.tar.gz",
+        "sha256": "722695808f4b6457b320fdc131280796bdceb04ab50fe1795cd540799ebe1698",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/markupsafe-3.0.3.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/markupsafe-3.0.3.dist-info/licenses/LICENSE.txt",
+              "file": "licenses/489a8e1108509ed98a37bb983e11e0f7e1d31f0bd8f99a79c8448e7ff37d07ea.txt",
+              "sha256": "489a8e1108509ed98a37bb983e11e0f7e1d31f0bd8f99a79c8448e7ff37d07ea"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/markupsafe-3.0.3.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/markupsafe-3.0.3.dist-info/licenses/LICENSE.txt",
+              "file": "licenses/489a8e1108509ed98a37bb983e11e0f7e1d31f0bd8f99a79c8448e7ff37d07ea.txt",
+              "sha256": "489a8e1108509ed98a37bb983e11e0f7e1d31f0bd8f99a79c8448e7ff37d07ea"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/markupsafe-3.0.3.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/markupsafe-3.0.3.dist-info/licenses/LICENSE.txt",
+              "file": "licenses/4631ec0db5fd90a547e336817264c6798214338146f8ac94b4a57f96ee8c9ec4.txt",
+              "sha256": "4631ec0db5fd90a547e336817264c6798214338146f8ac94b4a57f96ee8c9ec4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "psycopg",
+      "version": "3.3.4",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/db/2f/cb91e5502ec9de1de6f1b76cfbf69531932725361168bb06963620c77e2e/psycopg-3.3.4.tar.gz",
+        "sha256": "e21207764952cff81b6b8bdacad9a3939f2793367fdac2987b3aac36a651b5bc",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/psycopg-3.3.4.dist-info/METADATA",
+          "license_expression": "LGPL-3.0-only",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/psycopg-3.3.4.dist-info/licenses/LICENSE.txt",
+              "file": "licenses/e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118.txt",
+              "sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/psycopg-3.3.4.dist-info/METADATA",
+          "license_expression": "LGPL-3.0-only",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/psycopg-3.3.4.dist-info/licenses/LICENSE.txt",
+              "file": "licenses/e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118.txt",
+              "sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/psycopg-3.3.4.dist-info/METADATA",
+          "license_expression": "LGPL-3.0-only",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/psycopg-3.3.4.dist-info/licenses/LICENSE.txt",
+              "file": "licenses/e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118.txt",
+              "sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "psycopg-binary",
+      "version": "3.3.4",
+      "source_archive": null,
+      "review_gaps": [
+        "locked_distribution_has_no_sdist"
+      ],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/psycopg_binary-3.3.4.dist-info/METADATA",
+          "license_expression": "LGPL-3.0-only",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/psycopg_binary-3.3.4.dist-info/licenses/LICENSE.txt",
+              "file": "licenses/e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118.txt",
+              "sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/psycopg_binary-3.3.4.dist-info/METADATA",
+          "license_expression": "LGPL-3.0-only",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/psycopg_binary-3.3.4.dist-info/licenses/LICENSE.txt",
+              "file": "licenses/e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118.txt",
+              "sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/psycopg_binary-3.3.4.dist-info/METADATA",
+          "license_expression": "LGPL-3.0-only",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/psycopg_binary-3.3.4.dist-info/licenses/LICENSE.txt",
+              "file": "licenses/7d3a95e5e06978064ed3f8e2b7c8f845e7fd8a405294727cc708f94cb83b8059.txt",
+              "sha256": "7d3a95e5e06978064ed3f8e2b7c8f845e7fd8a405294727cc708f94cb83b8059"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pycparser",
+      "version": "3.0",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/1b/7d/92392ff7815c21062bea51aa7b87d45576f649f16458d78b7cf94b9ab2e6/pycparser-3.0.tar.gz",
+        "sha256": "600f49d217304a5902ac3c37e1281c9fe94e4d0489de643a9504c5cdfdfc6b29",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/pycparser-3.0.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/pycparser-3.0.dist-info/licenses/LICENSE",
+              "file": "licenses/0c846399369ea76ddd7b5c44fe6d16497415fcf015f5cbb508c24bf98b81c5b1.txt",
+              "sha256": "0c846399369ea76ddd7b5c44fe6d16497415fcf015f5cbb508c24bf98b81c5b1"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/pycparser-3.0.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/pycparser-3.0.dist-info/licenses/LICENSE",
+              "file": "licenses/0c846399369ea76ddd7b5c44fe6d16497415fcf015f5cbb508c24bf98b81c5b1.txt",
+              "sha256": "0c846399369ea76ddd7b5c44fe6d16497415fcf015f5cbb508c24bf98b81c5b1"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/pycparser-3.0.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/pycparser-3.0.dist-info/licenses/LICENSE",
+              "file": "licenses/0c846399369ea76ddd7b5c44fe6d16497415fcf015f5cbb508c24bf98b81c5b1.txt",
+              "sha256": "0c846399369ea76ddd7b5c44fe6d16497415fcf015f5cbb508c24bf98b81c5b1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pydantic",
+      "version": "2.13.4",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/18/a5/b60d21ac674192f8ab0ba4e9fd860690f9b4a6e51ca5df118733b487d8d6/pydantic-2.13.4.tar.gz",
+        "sha256": "c40756b57adaa8b1efeeced5c196f3f3b7c435f90e84ea7f443901bec8099ef6",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/pydantic-2.13.4.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/pydantic-2.13.4.dist-info/licenses/LICENSE",
+              "file": "licenses/a9e186f3ca16b5eef84318e7a701721351a00cb7b8ae3a4394b67b49e3529ef3.txt",
+              "sha256": "a9e186f3ca16b5eef84318e7a701721351a00cb7b8ae3a4394b67b49e3529ef3"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/pydantic-2.13.4.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/pydantic-2.13.4.dist-info/licenses/LICENSE",
+              "file": "licenses/a9e186f3ca16b5eef84318e7a701721351a00cb7b8ae3a4394b67b49e3529ef3.txt",
+              "sha256": "a9e186f3ca16b5eef84318e7a701721351a00cb7b8ae3a4394b67b49e3529ef3"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/pydantic-2.13.4.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/pydantic-2.13.4.dist-info/licenses/LICENSE",
+              "file": "licenses/a9e186f3ca16b5eef84318e7a701721351a00cb7b8ae3a4394b67b49e3529ef3.txt",
+              "sha256": "a9e186f3ca16b5eef84318e7a701721351a00cb7b8ae3a4394b67b49e3529ef3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pydantic-core",
+      "version": "2.46.4",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/9d/56/921726b776ace8d8f5db44c4ef961006580d91dc52b803c489fafd1aa249/pydantic_core-2.46.4.tar.gz",
+        "sha256": "62f875393d7f270851f20523dd2e29f082bcc82292d66db2b64ea71f64b6e1c1",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/pydantic_core-2.46.4.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/pydantic_core-2.46.4.dist-info/licenses/LICENSE",
+              "file": "licenses/2afdd30d54b4d62b6f488a6bcc1546e84ec5061f13f4209c03d012348783795a.txt",
+              "sha256": "2afdd30d54b4d62b6f488a6bcc1546e84ec5061f13f4209c03d012348783795a"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/pydantic_core-2.46.4.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/pydantic_core-2.46.4.dist-info/licenses/LICENSE",
+              "file": "licenses/2afdd30d54b4d62b6f488a6bcc1546e84ec5061f13f4209c03d012348783795a.txt",
+              "sha256": "2afdd30d54b4d62b6f488a6bcc1546e84ec5061f13f4209c03d012348783795a"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/pydantic_core-2.46.4.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/pydantic_core-2.46.4.dist-info/licenses/LICENSE",
+              "file": "licenses/fbe7f615f18d135c07000e5a86325db27f42c7729699ef166ac1f7a3f4586bf4.txt",
+              "sha256": "fbe7f615f18d135c07000e5a86325db27f42c7729699ef166ac1f7a3f4586bf4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pydantic-settings",
+      "version": "2.14.1",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/07/60/1d1e59c9c90d54591469ada7d268251f71c24bdb765f1a8a832cee8c6653/pydantic_settings-2.14.1.tar.gz",
+        "sha256": "e874d3bec7e787b0c9958277956ed9b4dd5de6a80e162188fdaff7c5e26fd5fa",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/pydantic_settings-2.14.1.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/pydantic_settings-2.14.1.dist-info/licenses/LICENSE",
+              "file": "licenses/eb355a753e020346d33d83bf9769135b89fc610568ac531a01c295bcee7fd998.txt",
+              "sha256": "eb355a753e020346d33d83bf9769135b89fc610568ac531a01c295bcee7fd998"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/pydantic_settings-2.14.1.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/pydantic_settings-2.14.1.dist-info/licenses/LICENSE",
+              "file": "licenses/eb355a753e020346d33d83bf9769135b89fc610568ac531a01c295bcee7fd998.txt",
+              "sha256": "eb355a753e020346d33d83bf9769135b89fc610568ac531a01c295bcee7fd998"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/pydantic_settings-2.14.1.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/pydantic_settings-2.14.1.dist-info/licenses/LICENSE",
+              "file": "licenses/eb355a753e020346d33d83bf9769135b89fc610568ac531a01c295bcee7fd998.txt",
+              "sha256": "eb355a753e020346d33d83bf9769135b89fc610568ac531a01c295bcee7fd998"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "python-dotenv",
+      "version": "1.2.2",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/82/ed/0301aeeac3e5353ef3d94b6ec08bbcabd04a72018415dcb29e588514bba8/python_dotenv-1.2.2.tar.gz",
+        "sha256": "2c371a91fbd7ba082c2c1dc1f8bf89ca22564a087c2c287cd9b662adde799cf3",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/python_dotenv-1.2.2.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "BSD-3-Clause",
+          "notices": [
+            {
+              "original_path": "_internal/python_dotenv-1.2.2.dist-info/licenses/LICENSE",
+              "file": "licenses/80619b7049f08c81683ad0e01f08f257a840652dd71ee83146d36658c7d2c2b9.txt",
+              "sha256": "80619b7049f08c81683ad0e01f08f257a840652dd71ee83146d36658c7d2c2b9"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/python_dotenv-1.2.2.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "BSD-3-Clause",
+          "notices": [
+            {
+              "original_path": "_internal/python_dotenv-1.2.2.dist-info/licenses/LICENSE",
+              "file": "licenses/80619b7049f08c81683ad0e01f08f257a840652dd71ee83146d36658c7d2c2b9.txt",
+              "sha256": "80619b7049f08c81683ad0e01f08f257a840652dd71ee83146d36658c7d2c2b9"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/python_dotenv-1.2.2.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "BSD-3-Clause",
+          "notices": [
+            {
+              "original_path": "_internal/python_dotenv-1.2.2.dist-info/licenses/LICENSE",
+              "file": "licenses/80619b7049f08c81683ad0e01f08f257a840652dd71ee83146d36658c7d2c2b9.txt",
+              "sha256": "80619b7049f08c81683ad0e01f08f257a840652dd71ee83146d36658c7d2c2b9"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pyyaml",
+      "version": "6.0.3",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/05/8e/961c0007c59b8dd7729d542c61a4d537767a59645b82a0b521206e1e25c2/pyyaml-6.0.3.tar.gz",
+        "sha256": "d76623373421df22fb4cf8817020cbb7ef15c725b9d5e45f17e189bfc384190f",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/pyyaml-6.0.3.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "MIT",
+          "notices": [
+            {
+              "original_path": "_internal/pyyaml-6.0.3.dist-info/licenses/LICENSE",
+              "file": "licenses/8d3928f9dc4490fd635707cb88eb26bd764102a7282954307d3e5167a577e8a4.txt",
+              "sha256": "8d3928f9dc4490fd635707cb88eb26bd764102a7282954307d3e5167a577e8a4"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/pyyaml-6.0.3.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "MIT",
+          "notices": [
+            {
+              "original_path": "_internal/pyyaml-6.0.3.dist-info/licenses/LICENSE",
+              "file": "licenses/8d3928f9dc4490fd635707cb88eb26bd764102a7282954307d3e5167a577e8a4.txt",
+              "sha256": "8d3928f9dc4490fd635707cb88eb26bd764102a7282954307d3e5167a577e8a4"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/pyyaml-6.0.3.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "MIT",
+          "notices": [
+            {
+              "original_path": "_internal/pyyaml-6.0.3.dist-info/licenses/LICENSE",
+              "file": "licenses/8d3928f9dc4490fd635707cb88eb26bd764102a7282954307d3e5167a577e8a4.txt",
+              "sha256": "8d3928f9dc4490fd635707cb88eb26bd764102a7282954307d3e5167a577e8a4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sqlalchemy",
+      "version": "2.0.50",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/57/da/6fbf010c8ebb347679d0d100b22fe9ba5e13fd04046c5df7280d2f0bf706/sqlalchemy-2.0.50.tar.gz",
+        "sha256": "af5607d11ef90fd6a5c0549fe0045dce1663d427426bcfb506dcb5346a85a3b9",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/sqlalchemy-2.0.50.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "MIT",
+          "notices": [
+            {
+              "original_path": "_internal/sqlalchemy-2.0.50.dist-info/licenses/LICENSE",
+              "file": "licenses/e862bb5b904fb5513c3e14288d7a25a12eb0ecc7847a0a965d310e9a955e7cb9.txt",
+              "sha256": "e862bb5b904fb5513c3e14288d7a25a12eb0ecc7847a0a965d310e9a955e7cb9"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/sqlalchemy-2.0.50.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "MIT",
+          "notices": [
+            {
+              "original_path": "_internal/sqlalchemy-2.0.50.dist-info/licenses/LICENSE",
+              "file": "licenses/e862bb5b904fb5513c3e14288d7a25a12eb0ecc7847a0a965d310e9a955e7cb9.txt",
+              "sha256": "e862bb5b904fb5513c3e14288d7a25a12eb0ecc7847a0a965d310e9a955e7cb9"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/sqlalchemy-2.0.50.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "MIT",
+          "notices": [
+            {
+              "original_path": "_internal/sqlalchemy-2.0.50.dist-info/licenses/LICENSE",
+              "file": "licenses/9bb754071e711cf75728b9051b170bfb8f9e3b879c08386c96a36989c42cd5f1.txt",
+              "sha256": "9bb754071e711cf75728b9051b170bfb8f9e3b879c08386c96a36989c42cd5f1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "starlette",
+      "version": "1.1.0",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/95/66/4d20cdf39a8d6a51e663b7038e3b828ff211d3891a43a713fe7e4643f3a8/starlette-1.1.0.tar.gz",
+        "sha256": "e83c7fe0ddecd8719c5b840080325aec0260acec86e9832899e377b91d65e90f",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/starlette-1.1.0.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/starlette-1.1.0.dist-info/licenses/LICENSE.md",
+              "file": "licenses/dcb95677a02240243187e964f941847d19b17821cf99e5afae684fab328c19bf.txt",
+              "sha256": "dcb95677a02240243187e964f941847d19b17821cf99e5afae684fab328c19bf"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/starlette-1.1.0.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/starlette-1.1.0.dist-info/licenses/LICENSE.md",
+              "file": "licenses/dcb95677a02240243187e964f941847d19b17821cf99e5afae684fab328c19bf.txt",
+              "sha256": "dcb95677a02240243187e964f941847d19b17821cf99e5afae684fab328c19bf"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/starlette-1.1.0.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/starlette-1.1.0.dist-info/licenses/LICENSE.md",
+              "file": "licenses/dcb95677a02240243187e964f941847d19b17821cf99e5afae684fab328c19bf.txt",
+              "sha256": "dcb95677a02240243187e964f941847d19b17821cf99e5afae684fab328c19bf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.15.0",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/72/94/1a15dd82efb362ac84269196e94cf00f187f7ed21c242792a923cdb1c61f/typing_extensions-4.15.0.tar.gz",
+        "sha256": "0cea48d173cc12fa28ecabc3b837ea3cf6f38c6d1136f85cbaaf598984861466",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/typing_extensions-4.15.0.dist-info/METADATA",
+          "license_expression": "PSF-2.0",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/typing_extensions-4.15.0.dist-info/licenses/LICENSE",
+              "file": "licenses/3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf.txt",
+              "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/typing_extensions-4.15.0.dist-info/METADATA",
+          "license_expression": "PSF-2.0",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/typing_extensions-4.15.0.dist-info/licenses/LICENSE",
+              "file": "licenses/3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf.txt",
+              "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/typing_extensions-4.15.0.dist-info/METADATA",
+          "license_expression": "PSF-2.0",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/typing_extensions-4.15.0.dist-info/licenses/LICENSE",
+              "file": "licenses/3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf.txt",
+              "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.2",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/55/e3/70399cb7dd41c10ac53367ae42139cf4b1ca5f36bb3dc6c9d33acdb43655/typing_inspection-0.4.2.tar.gz",
+        "sha256": "ba561c48a67c5958007083d386c3295464928b01faa735ab8547c5692e87f464",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/typing_inspection-0.4.2.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/typing_inspection-0.4.2.dist-info/licenses/LICENSE",
+              "file": "licenses/804b59b25f2c31bd278f9202a19ae49a3945aa2664387e2d0a128c7cacc61ec3.txt",
+              "sha256": "804b59b25f2c31bd278f9202a19ae49a3945aa2664387e2d0a128c7cacc61ec3"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/typing_inspection-0.4.2.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/typing_inspection-0.4.2.dist-info/licenses/LICENSE",
+              "file": "licenses/804b59b25f2c31bd278f9202a19ae49a3945aa2664387e2d0a128c7cacc61ec3.txt",
+              "sha256": "804b59b25f2c31bd278f9202a19ae49a3945aa2664387e2d0a128c7cacc61ec3"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/typing_inspection-0.4.2.dist-info/METADATA",
+          "license_expression": "MIT",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/typing_inspection-0.4.2.dist-info/licenses/LICENSE",
+              "file": "licenses/804b59b25f2c31bd278f9202a19ae49a3945aa2664387e2d0a128c7cacc61ec3.txt",
+              "sha256": "804b59b25f2c31bd278f9202a19ae49a3945aa2664387e2d0a128c7cacc61ec3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.3",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/92/ff/5a28bdfd8c3ebec42564ac7d0e54ca3db65044a9314a97f9564fa7a1e926/tzdata-2026.3.tar.gz",
+        "sha256": "4a1518b8993086a7982523e071643f3c0e5f213e75b21318e78bcabfff9d1415",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/tzdata-2026.3.dist-info/METADATA",
+          "license_expression": "",
+          "license_declaration": "Apache-2.0",
+          "notices": [
+            {
+              "original_path": "_internal/tzdata-2026.3.dist-info/licenses/LICENSE",
+              "file": "licenses/df58f69ea88683035d720b5375bcef0cf5aeaa98a1d098d572e0992c378deb46.txt",
+              "sha256": "df58f69ea88683035d720b5375bcef0cf5aeaa98a1d098d572e0992c378deb46"
+            },
+            {
+              "original_path": "_internal/tzdata-2026.3.dist-info/licenses/licenses/LICENSE_APACHE",
+              "file": "licenses/c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4.txt",
+              "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "uvicorn",
+      "version": "0.48.0",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/e6/bf/f6544ba992ddb9a6077343a576f9844f7f8f06ab819aefd00206e9255f18/uvicorn-0.48.0.tar.gz",
+        "sha256": "a5504207195d08c2511bf9125ede5ac4a4b71725d519e758d01dcf0bc2d31c37",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/uvicorn-0.48.0.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/uvicorn-0.48.0.dist-info/licenses/LICENSE.md",
+              "file": "licenses/efe1acf3e62fb99c288b0ec73e5a773b7268ef4320fe757ea994214e4b63c371.txt",
+              "sha256": "efe1acf3e62fb99c288b0ec73e5a773b7268ef4320fe757ea994214e4b63c371"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/uvicorn-0.48.0.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/uvicorn-0.48.0.dist-info/licenses/LICENSE.md",
+              "file": "licenses/efe1acf3e62fb99c288b0ec73e5a773b7268ef4320fe757ea994214e4b63c371.txt",
+              "sha256": "efe1acf3e62fb99c288b0ec73e5a773b7268ef4320fe757ea994214e4b63c371"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/uvicorn-0.48.0.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/uvicorn-0.48.0.dist-info/licenses/LICENSE.md",
+              "file": "licenses/efe1acf3e62fb99c288b0ec73e5a773b7268ef4320fe757ea994214e4b63c371.txt",
+              "sha256": "efe1acf3e62fb99c288b0ec73e5a773b7268ef4320fe757ea994214e4b63c371"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "websockets",
+      "version": "16.0",
+      "source_archive": {
+        "url": "https://files.pythonhosted.org/packages/04/24/4b2031d72e840ce4c1ccb255f693b15c334757fc50023e4db9537080b8c4/websockets-16.0.tar.gz",
+        "sha256": "5f6261a5e56e8d5c42a4497b364ea24d94d9563e8fbd44e78ac40879c60179b5",
+        "status": "locked_reference_only_not_downloaded_or_verified"
+      },
+      "review_gaps": [],
+      "evidence": [
+        {
+          "platform": "Darwin",
+          "metadata_path": "_internal/websockets-16.0.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/websockets-16.0.dist-info/licenses/LICENSE",
+              "file": "licenses/3d6a0c050d8bec52fabad502e45fb25bd02bcadbd70dea34d447b6a0ff4e6da8.txt",
+              "sha256": "3d6a0c050d8bec52fabad502e45fb25bd02bcadbd70dea34d447b6a0ff4e6da8"
+            }
+          ]
+        },
+        {
+          "platform": "Linux",
+          "metadata_path": "_internal/websockets-16.0.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/websockets-16.0.dist-info/licenses/LICENSE",
+              "file": "licenses/3d6a0c050d8bec52fabad502e45fb25bd02bcadbd70dea34d447b6a0ff4e6da8.txt",
+              "sha256": "3d6a0c050d8bec52fabad502e45fb25bd02bcadbd70dea34d447b6a0ff4e6da8"
+            }
+          ]
+        },
+        {
+          "platform": "Windows",
+          "metadata_path": "_internal/websockets-16.0.dist-info/METADATA",
+          "license_expression": "BSD-3-Clause",
+          "license_declaration": "",
+          "notices": [
+            {
+              "original_path": "_internal/websockets-16.0.dist-info/licenses/LICENSE",
+              "file": "licenses/0f44514998aca209d3482d10204a8adf2aa4296ff157a36a5c0922f2280632d3.txt",
+              "sha256": "0f44514998aca209d3482d10204a8adf2aa4296ff157a36a5c0922f2280632d3"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "license_texts": [
+    {
+      "file": "licenses/0c846399369ea76ddd7b5c44fe6d16497415fcf015f5cbb508c24bf98b81c5b1.txt",
+      "sha256": "0c846399369ea76ddd7b5c44fe6d16497415fcf015f5cbb508c24bf98b81c5b1"
+    },
+    {
+      "file": "licenses/0f44514998aca209d3482d10204a8adf2aa4296ff157a36a5c0922f2280632d3.txt",
+      "sha256": "0f44514998aca209d3482d10204a8adf2aa4296ff157a36a5c0922f2280632d3"
+    },
+    {
+      "file": "licenses/1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04.txt",
+      "sha256": "1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04"
+    },
+    {
+      "file": "licenses/2afdd30d54b4d62b6f488a6bcc1546e84ec5061f13f4209c03d012348783795a.txt",
+      "sha256": "2afdd30d54b4d62b6f488a6bcc1546e84ec5061f13f4209c03d012348783795a"
+    },
+    {
+      "file": "licenses/2eee60f52d4e11357bf89e72b034d050e285e47fda1361e5662fb322ee27d771.txt",
+      "sha256": "2eee60f52d4e11357bf89e72b034d050e285e47fda1361e5662fb322ee27d771"
+    },
+    {
+      "file": "licenses/37db5bb85926db28a427a25867f10b1232003aea1be69ccb851138adb8e6f361.txt",
+      "sha256": "37db5bb85926db28a427a25867f10b1232003aea1be69ccb851138adb8e6f361"
+    },
+    {
+      "file": "licenses/3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf.txt",
+      "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+    },
+    {
+      "file": "licenses/3d6a0c050d8bec52fabad502e45fb25bd02bcadbd70dea34d447b6a0ff4e6da8.txt",
+      "sha256": "3d6a0c050d8bec52fabad502e45fb25bd02bcadbd70dea34d447b6a0ff4e6da8"
+    },
+    {
+      "file": "licenses/3e0c7c091a948b82533ba98fd7cbb40432d6f1a9acbf85f5922d2f99a93ae6bb.txt",
+      "sha256": "3e0c7c091a948b82533ba98fd7cbb40432d6f1a9acbf85f5922d2f99a93ae6bb"
+    },
+    {
+      "file": "licenses/458502e12d97bbf64438606a20044aa85eb05fb0a8a807bb35dbec253fd1fc04.txt",
+      "sha256": "458502e12d97bbf64438606a20044aa85eb05fb0a8a807bb35dbec253fd1fc04"
+    },
+    {
+      "file": "licenses/4631ec0db5fd90a547e336817264c6798214338146f8ac94b4a57f96ee8c9ec4.txt",
+      "sha256": "4631ec0db5fd90a547e336817264c6798214338146f8ac94b4a57f96ee8c9ec4"
+    },
+    {
+      "file": "licenses/489a8e1108509ed98a37bb983e11e0f7e1d31f0bd8f99a79c8448e7ff37d07ea.txt",
+      "sha256": "489a8e1108509ed98a37bb983e11e0f7e1d31f0bd8f99a79c8448e7ff37d07ea"
+    },
+    {
+      "file": "licenses/4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e.txt",
+      "sha256": "4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e"
+    },
+    {
+      "file": "licenses/5361ac9dc58f2ef5fd2e9b09c68297c17f04950909bbc8023bdb82eacf22c2b0.txt",
+      "sha256": "5361ac9dc58f2ef5fd2e9b09c68297c17f04950909bbc8023bdb82eacf22c2b0"
+    },
+    {
+      "file": "licenses/5ba24ddc57067f9249add644c3afc41a5d6dc37e23433ef759d95df370b0af63.txt",
+      "sha256": "5ba24ddc57067f9249add644c3afc41a5d6dc37e23433ef759d95df370b0af63"
+    },
+    {
+      "file": "licenses/602c4c7482de6479dd2e9793cda275e5e63d773dacd1eca689232ab7008fb4fb.txt",
+      "sha256": "602c4c7482de6479dd2e9793cda275e5e63d773dacd1eca689232ab7008fb4fb"
+    },
+    {
+      "file": "licenses/68d7064e53e3ffa8e9f420a9e604bd2e2059d9c330492fa6ebd4eb3d48111689.txt",
+      "sha256": "68d7064e53e3ffa8e9f420a9e604bd2e2059d9c330492fa6ebd4eb3d48111689"
+    },
+    {
+      "file": "licenses/69efa689cc7aec7736236d3039c1d665e4b0c734a5bfea5abf633023abb2fff4.txt",
+      "sha256": "69efa689cc7aec7736236d3039c1d665e4b0c734a5bfea5abf633023abb2fff4"
+    },
+    {
+      "file": "licenses/6e68d94a03a0e3e327ddf3e86d1ebedc14eece3922022618fc246a36296fd0cc.txt",
+      "sha256": "6e68d94a03a0e3e327ddf3e86d1ebedc14eece3922022618fc246a36296fd0cc"
+    },
+    {
+      "file": "licenses/769831d6e5dfaf2c20802faccff1fafb4c2025dd8f6253dfa47fcad59d4d0979.txt",
+      "sha256": "769831d6e5dfaf2c20802faccff1fafb4c2025dd8f6253dfa47fcad59d4d0979"
+    },
+    {
+      "file": "licenses/7d3a95e5e06978064ed3f8e2b7c8f845e7fd8a405294727cc708f94cb83b8059.txt",
+      "sha256": "7d3a95e5e06978064ed3f8e2b7c8f845e7fd8a405294727cc708f94cb83b8059"
+    },
+    {
+      "file": "licenses/804b59b25f2c31bd278f9202a19ae49a3945aa2664387e2d0a128c7cacc61ec3.txt",
+      "sha256": "804b59b25f2c31bd278f9202a19ae49a3945aa2664387e2d0a128c7cacc61ec3"
+    },
+    {
+      "file": "licenses/80619b7049f08c81683ad0e01f08f257a840652dd71ee83146d36658c7d2c2b9.txt",
+      "sha256": "80619b7049f08c81683ad0e01f08f257a840652dd71ee83146d36658c7d2c2b9"
+    },
+    {
+      "file": "licenses/8d3928f9dc4490fd635707cb88eb26bd764102a7282954307d3e5167a577e8a4.txt",
+      "sha256": "8d3928f9dc4490fd635707cb88eb26bd764102a7282954307d3e5167a577e8a4"
+    },
+    {
+      "file": "licenses/9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d.txt",
+      "sha256": "9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d"
+    },
+    {
+      "file": "licenses/9bb754071e711cf75728b9051b170bfb8f9e3b879c08386c96a36989c42cd5f1.txt",
+      "sha256": "9bb754071e711cf75728b9051b170bfb8f9e3b879c08386c96a36989c42cd5f1"
+    },
+    {
+      "file": "licenses/a9e186f3ca16b5eef84318e7a701721351a00cb7b8ae3a4394b67b49e3529ef3.txt",
+      "sha256": "a9e186f3ca16b5eef84318e7a701721351a00cb7b8ae3a4394b67b49e3529ef3"
+    },
+    {
+      "file": "licenses/aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe.txt",
+      "sha256": "aac73b3148f6d1d7111dbca32099f68d26c644c6813ae1e4f05f6579aa2663fe"
+    },
+    {
+      "file": "licenses/ab977b654605670319509481ece49198f405a129372ac38c96f51cd96c2f452e.txt",
+      "sha256": "ab977b654605670319509481ece49198f405a129372ac38c96f51cd96c2f452e"
+    },
+    {
+      "file": "licenses/c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4.txt",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "file": "licenses/cac35c02686e5d04a5a7140bfb3b36e73aed496656e891102e428886d7930318.txt",
+      "sha256": "cac35c02686e5d04a5a7140bfb3b36e73aed496656e891102e428886d7930318"
+    },
+    {
+      "file": "licenses/dcb95677a02240243187e964f941847d19b17821cf99e5afae684fab328c19bf.txt",
+      "sha256": "dcb95677a02240243187e964f941847d19b17821cf99e5afae684fab328c19bf"
+    },
+    {
+      "file": "licenses/df58f69ea88683035d720b5375bcef0cf5aeaa98a1d098d572e0992c378deb46.txt",
+      "sha256": "df58f69ea88683035d720b5375bcef0cf5aeaa98a1d098d572e0992c378deb46"
+    },
+    {
+      "file": "licenses/e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118.txt",
+      "sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118"
+    },
+    {
+      "file": "licenses/e5ff3c23c110e494cd7d736c10fd96d462457bafeca310840db6527298c7d46b.txt",
+      "sha256": "e5ff3c23c110e494cd7d736c10fd96d462457bafeca310840db6527298c7d46b"
+    },
+    {
+      "file": "licenses/e862bb5b904fb5513c3e14288d7a25a12eb0ecc7847a0a965d310e9a955e7cb9.txt",
+      "sha256": "e862bb5b904fb5513c3e14288d7a25a12eb0ecc7847a0a965d310e9a955e7cb9"
+    },
+    {
+      "file": "licenses/eb355a753e020346d33d83bf9769135b89fc610568ac531a01c295bcee7fd998.txt",
+      "sha256": "eb355a753e020346d33d83bf9769135b89fc610568ac531a01c295bcee7fd998"
+    },
+    {
+      "file": "licenses/efe1acf3e62fb99c288b0ec73e5a773b7268ef4320fe757ea994214e4b63c371.txt",
+      "sha256": "efe1acf3e62fb99c288b0ec73e5a773b7268ef4320fe757ea994214e4b63c371"
+    },
+    {
+      "file": "licenses/fbe7f615f18d135c07000e5a86325db27f42c7729699ef166ac1f7a3f4586bf4.txt",
+      "sha256": "fbe7f615f18d135c07000e5a86325db27f42c7729699ef166ac1f7a3f4586bf4"
+    },
+    {
+      "file": "licenses/fe1049884b1a0d9342901e88e07f32925d24b3121d9972b6a6805fb9824b095d.txt",
+      "sha256": "fe1049884b1a0d9342901e88e07f32925d24b3121d9972b6a6805fb9824b095d"
+    },
+    {
+      "file": "licenses/fff170779a6acbf65abdb405c087f1cee1786691e4a96a4034517e4a504a0cdf.txt",
+      "sha256": "fff170779a6acbf65abdb405c087f1cee1786691e4a96a4034517e4a504a0cdf"
+    }
+  ],
+  "review_gaps": [
+    "source_references_not_fulfilled_corresponding_source",
+    "native_interpreter_installer_frontend_rust_asset_review",
+    "human_review_and_distribution_approval"
+  ]
+}

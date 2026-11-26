@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "source_head_commit": "92dac1e0169d7d0168633f1e4d3017b4c1c61aba",
+  "build_merge_commit": "ae8afc160a6f69821d74210eaaea3ab0076d2b49",
+  "reports": {
+    "Linux": {
+      "run_url": "https://github.com/stt-development/something-to-tell/actions/runs/45478744058",
+      "sha256": "1342a37bd01f1de8ac13c3160d9ecb610d48da0bceb7f93d573e3c8e19c4492c"
+    },
+    "Windows": {
+      "run_url": "https://github.com/stt-development/something-to-tell/actions/runs/45478744282",
+      "sha256": "0266556c298909cc1742b5d5a5cd91d5cd947a9e0cec01bec5389e42bbb67469"
+    },
+    "Darwin": {
+      "run_url": "https://github.com/stt-development/something-to-tell/actions/runs/45478743833",
+      "sha256": "1795de7ab68bb76d1b694372cd3f8c086f7e02cc9c6a3311ed57aeb628b435f5"
+    }
+  }
+}

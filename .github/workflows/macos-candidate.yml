@@ -86,14 +86,14 @@ jobs:
           ln -s /Applications "$RUNNER_TEMP/dmg-root/Applications"
           hdiutil create -fs HFS+ -volname "Something To Tell Engine" -srcfolder "$RUNNER_TEMP/dmg-root" -format UDZO "$destination/SomethingToTellEngine-arm64.dmg"
           mount=$(mktemp -d "$RUNNER_TEMP/stt-dmg-mount.XXXXXX")
-          trap 'hdiutil detach "$mount" || true' EXIT
+          trap 'bash tools/detach-macos-image.sh "$mount" || true' EXIT
           hdiutil attach -readonly -nobrowse -mountpoint "$mount" "$destination/SomethingToTellEngine-arm64.dmg"
           runtime="$mount/Something To Tell Engine.app/Contents/Resources/runtime"
           manifest=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).manifest' "$RUNNER_TEMP/finalized.json")
           node --input-type=module -e 'import fs from "node:fs"; import {verifyCandidate} from "./tools/desktop-runtime-resources.mjs"; verifyCandidate(process.argv[1], JSON.parse(fs.readFileSync(process.argv[2])));' "$runtime" "$manifest"
           uv run python tools/macos_candidate.py verify "$runtime" --app "$mount/Something To Tell Engine.app"
           env PATH=/nonexistent "$runtime/stt-runtime" --self-check
-          hdiutil detach "$mount"
+          bash tools/detach-macos-image.sh "$mount"
           trap - EXIT
           # Upload only build evidence. Future binary distribution requires reviewed notices.
           cp "$manifest" "$RUNNER_TEMP/runtime-manifest.json"
