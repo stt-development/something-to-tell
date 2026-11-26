@@ -58,6 +58,7 @@ jobs:
           uv run --group build python -m services.runtime.scripts.runtime_notice_evidence "$raw" "$(dirname "$raw")/manifest.json" > "$RUNNER_TEMP/runtime-notice-evidence.json"
           toc=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).collection_toc' "$RUNNER_TEMP/runtime-build.json")
           uv run --group build python -m services.runtime.scripts.runtime_native_provenance "$raw" "$(dirname "$raw")/manifest.json" --collection-toc "$toc" > "$RUNNER_TEMP/runtime-native-provenance.json"
+          uv run --group build python -m services.runtime.scripts.runtime_build_notices "$raw" "$(dirname "$raw")/manifest.json" > "$RUNNER_TEMP/runtime-build-notices.json"
           staged=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).manifest' "$RUNNER_TEMP/runtime-stage.json")
           configuration=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).configuration' "$RUNNER_TEMP/runtime-stage.json")
           printf 'STT_TEST_DESKTOP_RUNTIME_EXECUTABLE=%s\nSTT_STAGED_MANIFEST=%s\nSTT_RUNTIME_CONFIGURATION=%s\n' "$raw/stt-runtime" "$staged" "$configuration" >> "$GITHUB_ENV"
@@ -146,5 +147,6 @@ jobs:
             ${{ runner.temp }}/package-verification.json
             ${{ runner.temp }}/runtime-notice-evidence.json
             ${{ runner.temp }}/runtime-native-provenance.json
+            ${{ runner.temp }}/runtime-build-notices.json
             ${{ runner.temp }}/package-SHA256SUMS
           retention-days: 7

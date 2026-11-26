@@ -23,6 +23,7 @@ def test_native_verification_can_upload_only_explicit_diagnostic_files(platform)
         "package-verification.json", "package-SHA256SUMS", "appimage-ldd.txt", "deb-ldd.txt",
         "runtime-notice-evidence.json",
         "runtime-native-provenance.json",
+        "runtime-build-notices.json",
     }
     paths = uploads[0]["with"]["path"].splitlines()
     assert paths
@@ -72,3 +73,20 @@ def test_native_attribution_uses_raw_candidate_before_packaging_and_uploads_only
         assert ".collection_toc'" in script
     upload = next(step for step in steps if step.get("uses") == "actions/upload-artifact@v4")
     assert "${{ runner.temp }}/runtime-native-provenance.json" in upload["with"]["path"].splitlines()
+
+
+@pytest.mark.parametrize("platform", ["windows", "macos", "linux"])
+def test_interpreter_freezer_notice_inputs_are_collected_before_packaging(platform):
+    workflow = yaml.load((ROOT / f".github/workflows/{platform}-candidate.yml").read_text(), Loader=yaml.BaseLoader)
+    steps = workflow["jobs"][f"{platform}-candidate"]["steps"]
+    script = "\n".join(step.get("run", "") for step in steps)
+    command = next(line for line in script.splitlines() if "scripts.runtime_build_notices" in line)
+    package = "tauri.js build" if platform == "windows" else "tauri build"
+    assert script.index("scripts.runtime_native_provenance") < script.index("scripts.runtime_build_notices") < script.index(package)
+    if platform == "windows":
+        assert "$built.candidate $built.manifest" in command
+        assert "throw 'runtime build notices failed'" in script
+    else:
+        assert '\"$raw\" \"$(dirname \"$raw\")/manifest.json\"' in command
+    upload = next(step for step in steps if step.get("uses") == "actions/upload-artifact@v4")
+    assert "${{ runner.temp }}/runtime-build-notices.json" in upload["with"]["path"].splitlines()
