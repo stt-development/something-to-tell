@@ -98,6 +98,26 @@ def test_windows_metadata_is_scoped_to_selected_system_or_sdk_dlls(tmp_path, mon
     assert records[0][2]["version_resource"]["file_version"] == [1, 2, 3, 4]
 
 
+def test_windows_component_store_is_a_separate_known_os_scope(tmp_path, monkeypatch):
+    root = tmp_path / "Windows"
+    dll = root / "WinSxS/component/api-ms-fixture.dll"
+    dll.parent.mkdir(parents=True)
+    dll.write_bytes(b"DLL fixture")
+    monkeypatch.setenv("SystemRoot", str(root))
+    monkeypatch.setattr(systems, "windows_file_version", lambda _: {"status": "version_resource_unavailable"})
+    records = list(systems.system_files([dll], "Windows"))
+    assert records[0][2]["scope"] == "windows_component_store"
+    assert systems.source_scope(dll) == "windows_installation"
+    assert str(tmp_path) not in str(records[0][2])
+
+
+def test_unresolved_diagnostics_export_only_fixed_scope_labels(tmp_path, monkeypatch):
+    monkeypatch.setenv("RUNNER_TOOL_CACHE", str(tmp_path / "private-tools"))
+    assert systems.source_scope(tmp_path / "private-tools/input.dll") == "runner_toolcache"
+    assert systems.source_scope(tmp_path / "unknown-input.dll") == "other_unattributed_input"
+    assert systems.source_scope(None) is None
+
+
 def test_windows_fixed_version_signature_and_numbers():
     info = systems.FixedVersion(signature=0xFEEF04BD, file_ms=(1 << 16) + 2, file_ls=(3 << 16) + 4)
     assert systems.version_numbers(info)["file_version"] == [1, 2, 3, 4]

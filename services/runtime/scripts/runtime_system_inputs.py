@@ -99,6 +99,7 @@ def system_files(sources, system: str):
     elif system == "Windows":
         if os.environ.get("SystemRoot"):
             roots.append((Path(os.environ["SystemRoot"]) / "System32", "windows_system32"))
+            roots.append((Path(os.environ["SystemRoot"]) / "WinSxS", "windows_component_store"))
         if os.environ.get("ProgramFiles(x86)"):
             roots.append((Path(os.environ["ProgramFiles(x86)"]) / "Windows Kits", "windows_sdk_redist"))
     for source in sorted(set(sources)):
@@ -116,3 +117,16 @@ def system_files(sources, system: str):
                 owner["version_resource"] = windows_file_version(source)
             yield root, relative, owner
             break
+
+
+def source_scope(source: Path | None) -> str | None:
+    """Coarse diagnostics for unresolved inputs, never absolute host paths."""
+    if source is None:
+        return None
+    for variable, label in (("SystemRoot", "windows_installation"), ("ProgramFiles", "program_files"),
+                            ("ProgramFiles(x86)", "program_files_x86"), ("RUNNER_TOOL_CACHE", "runner_toolcache"),
+                            ("LOCALAPPDATA", "local_machine_cache"), ("RUNNER_TEMP", "temporary_build_input"),
+                            ("GITHUB_WORKSPACE", "repository_build_input")):
+        if os.environ.get(variable) and source.is_relative_to(Path(os.environ[variable]).resolve()):
+            return label
+    return "other_unattributed_input"

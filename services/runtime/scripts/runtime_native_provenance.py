@@ -126,6 +126,7 @@ def collect_provenance(candidate: Path, manifest: Path, collection_toc: Path | N
                        for origin in source["origins"]):
                 raise ValueError("native_executable_bootloader_owner_invalid")
         records.append({**item, "origins": origins, "collection_input": source,
+                        "unattributed_source_scope": runtime_system_inputs.source_scope(links.get(item["path"])) if source is None else None,
                         "status": "exact_build_input_match" if origins else "unmatched_or_transformed"})
     return {"schema_version": 1, "scope": "native_build_input_attribution_only", "distribution_approved": False,
             "collector_sha256": sha256(Path(__file__).read_bytes()).hexdigest(),
