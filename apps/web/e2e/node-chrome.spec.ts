@@ -45,6 +45,8 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 1024, height: 768
     await page.getByRole("button", { name: "Flow", exact: true }).click();
     await expect(shells).toHaveCount(0);
     await page.getByRole("button", { name: "Graph", exact: true }).click();
+    // The projection may Fit all nodes; establish the offscreen-card precondition again.
+    await page.getByRole("button", { name: "Quest: Smuggler Route", exact: true }).click();
     await expect.poll(() => shells.count()).toBeGreaterThan(0);
     await openSettings();
     await checkbox.uncheck();

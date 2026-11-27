@@ -39,10 +39,26 @@ test("persists Russian project UI locale and exposes an immediate localized tool
   await page.getByRole("button", { name: "Граф", exact: true }).click();
   await page.getByRole("button", { name: "Создать первую сцену" }).click();
   await expect(page.getByTestId(/rf__node-/).first()).toBeVisible();
+  // Bootstrap completes in Flow; test canonical node creation in an explicit Graph view.
+  await expect(page.getByRole("button", { name: "Поток", exact: true })).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("button", { name: "Граф", exact: true }).click();
+  await expect(page.locator(".workspace-stage > .react-flow")).not.toHaveClass(/flow-canvas/);
 
   // The context menu is the shortest real-UI assertion that covers every
   // canonical node kind, including the two translated frame variants.
-  await page.locator(".react-flow__pane").click({ button: "right", position: { x: 500, y: 350 } });
+  const pane = page.locator(".workspace-stage > .react-flow .react-flow__pane");
+  // Frames move during Fit; a fixed coordinate can open the node's impact menu.
+  const emptyPoint = await pane.evaluate((element) => {
+    const bounds = element.getBoundingClientRect();
+    for (const y of [16, bounds.height - 16, bounds.height / 2]) {
+      for (const x of [bounds.width - 16, bounds.width * 0.75, bounds.width / 2]) {
+        if (document.elementFromPoint(bounds.left + x, bounds.top + y) === element) return { x, y };
+      }
+    }
+    return null;
+  });
+  expect(emptyPoint, "Node creation must right-click empty canvas, not a Scene or overlay").not.toBeNull();
+  await pane.click({ button: "right", position: emptyPoint! });
   const nodeMenu = page.getByRole("menu", { name: "Создать узел" });
   await expect(nodeMenu).toBeVisible();
   for (const label of [
