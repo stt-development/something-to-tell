@@ -48,3 +48,28 @@ def collection_records(path: Path, native_paths: set[str], all_paths: set[str]) 
     return records, {"sha256": sha256(data).hexdigest(),
                      "parser_sha256": sha256(Path(__file__).read_bytes()).hexdigest(),
                      "relationship": "builder_collection_record_not_semantic_transformation_proof"}
+
+
+def bootloader_record(toc: Path, links: dict) -> tuple[str, Path, str] | None:
+    """Link the recipe's generated executable to its recorded bootloader input."""
+    executable = next((name for name in ("stt-runtime", "stt-runtime.exe") if name in links), None)
+    if executable is None:
+        return None
+    with toc.with_name("EXE-00.toc").open("rb") as stream:
+        data = stream.read(MAX_TOC_BYTES + 1)
+    if len(data) > MAX_TOC_BYTES:
+        raise ValueError("native_executable_record_limit")
+    try:
+        record = ast.literal_eval(data.decode("utf-8"))
+    except (SyntaxError, ValueError, UnicodeError, RecursionError) as error:
+        raise ValueError("native_executable_record_invalid") from error
+    # Pinned PyInstaller6.22.3 EXE._GUTS: name at0, selected bootloader records at20.
+    if not isinstance(record, tuple) or len(record) != 22 or not isinstance(record[0], str) or Path(record[0]).resolve() != links[executable]:
+        raise ValueError("native_executable_record_link_changed")
+    entries = record[20]
+    if not isinstance(entries, list) or len(entries) != 1 or not isinstance(entries[0], tuple) or len(entries[0]) != 3:
+        raise ValueError("native_executable_record_shape")
+    name, source, kind = entries[0]
+    if not isinstance(name, str) or name not in {"run", "run.exe"} or kind != "EXECUTABLE" or not isinstance(source, str) or not Path(source).is_absolute():
+        raise ValueError("native_executable_bootloader_invalid")
+    return executable, Path(source).resolve(), sha256(data).hexdigest()

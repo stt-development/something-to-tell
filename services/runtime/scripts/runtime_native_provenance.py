@@ -9,8 +9,10 @@ import re
 import sys
 import sysconfig
 
+from packaging.utils import canonicalize_name
+
 from services.runtime.scripts.runtime_notice_evidence import collect_evidence
-from services.runtime.scripts.runtime_collection_record import collection_records
+from services.runtime.scripts.runtime_collection_record import bootloader_record, collection_records
 
 MAX_FILE_BYTES = 256 * 1024 * 1024
 MAX_SOURCE_BYTES = 1024 * 1024 * 1024
@@ -33,7 +35,8 @@ def input_files():
             # Windows. They are not native package inputs within this owner root.
             if PurePosixPath(relative).is_absolute() or ".." in PurePosixPath(relative).parts:
                 continue
-            if native_name(PurePosixPath(relative).name):
+            bootloader = relative.startswith("PyInstaller/bootloader/") and PurePosixPath(relative).name in {"run", "run.exe"}
+            if native_name(PurePosixPath(relative).name) or bootloader:
                 yield root, relative, {"kind": "installed_distribution", "name": name, "version": version}
     # Only known interpreter directories, not a recursive scan of the host disk.
     prefix = Path(sys.base_prefix).resolve()
@@ -65,11 +68,20 @@ def collect_provenance(candidate: Path, manifest: Path, collection_toc: Path | N
     evidence = collect_evidence(candidate, manifest)
     files = [item for item in evidence["native_files"] if "symlink" not in item]
     links, collection = {}, None
+    bootloader_output = None
     if collection_toc is not None:
         # Read the original manifest's full path inventory; the preceding evidence
         # gate has already compared its bytes with the actual raw candidate.
         all_paths = {item["path"] for item in json.loads(manifest.read_bytes())["files"]}
         links, collection = collection_records(collection_toc, {item["path"] for item in files}, all_paths)
+        bootloader = bootloader_record(collection_toc, links)
+        if bootloader is not None:
+            output, source, receipt = bootloader
+            bootloader_output = output
+            links[output] = source
+            collection["executable_record_sha256"] = receipt
+            collection["generated_executable"] = output
+            collection["executable_relationship"] = "bootloader_contribution_not_full_executable_source"
     requested = set(links.values())
     sizes = {item["bytes"] for item in files}
     matches: dict[tuple[int, str], list[dict]] = {}
@@ -103,6 +115,14 @@ def collect_provenance(candidate: Path, manifest: Path, collection_toc: Path | N
             raise ValueError("native_provenance_candidate_changed")
         origins = sorted(matches.get((item["bytes"], item["sha256"]), []), key=lambda item: json.dumps(item, sort_keys=True))
         source = source_inputs.get(links.get(item["path"]))
+        if item["path"] == bootloader_output and source is not None:
+            if not any(origin["kind"] == "installed_distribution"
+                       and canonicalize_name(origin.get("name", "")) == "pyinstaller"
+                       and origin.get("version") == evidence["runtime"]["pyinstaller"]
+                       and origin["relative_path"].startswith("PyInstaller/bootloader/")
+                       and PurePosixPath(origin["relative_path"]).name in {"run", "run.exe"}
+                       for origin in source["origins"]):
+                raise ValueError("native_executable_bootloader_owner_invalid")
         records.append({**item, "origins": origins, "collection_input": source,
                         "status": "exact_build_input_match" if origins else "unmatched_or_transformed"})
     return {"schema_version": 1, "scope": "native_build_input_attribution_only", "distribution_approved": False,

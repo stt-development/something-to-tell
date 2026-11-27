@@ -60,3 +60,32 @@ def test_literal_parser_never_executes_calls_and_enforces_size(tmp_path, monkeyp
     monkeypatch.setattr(records, "MAX_TOC_BYTES", 1)
     with pytest.raises(ValueError, match="record_limit"):
         records.collection_records(toc, set(), set())
+
+
+def test_executable_record_binds_both_tocs_to_one_bootloader_without_reading_it(tmp_path):
+    source = tmp_path / "generated-runtime"
+    bootloader = tmp_path / "absent-bootloader"
+    toc = tmp_path / "COLLECT-00.toc"
+    value = [None] * 22
+    value[0], value[20] = str(source), [("run", str(bootloader), "EXECUTABLE")]
+    toc.with_name("EXE-00.toc").write_text(repr(tuple(value)))
+    result = records.bootloader_record(toc, {"stt-runtime": source})
+    assert result[0:2] == ("stt-runtime", bootloader)
+    assert len(result[2]) == 64
+    assert not bootloader.exists()
+    with pytest.raises(ValueError, match="link_changed"):
+        records.bootloader_record(toc, {"stt-runtime": tmp_path / "other"})
+
+
+def test_executable_record_rejects_ambiguous_bootloaders_and_exec_code(tmp_path):
+    toc = tmp_path / "COLLECT-00.toc"
+    exe = toc.with_name("EXE-00.toc")
+    output = tmp_path / "runtime"
+    value = [None] * 22
+    value[0], value[20] = str(output), []
+    exe.write_text(repr(tuple(value)))
+    with pytest.raises(ValueError, match="record_shape"):
+        records.bootloader_record(toc, {"stt-runtime": output})
+    exe.write_text("__import__('os').getcwd()")
+    with pytest.raises(ValueError, match="record_invalid"):
+        records.bootloader_record(toc, {"stt-runtime": output})

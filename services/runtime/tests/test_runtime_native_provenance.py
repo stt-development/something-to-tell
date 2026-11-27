@@ -161,3 +161,31 @@ def test_collection_source_is_not_read_unless_independently_in_input_inventory(c
     toc.write_text(repr(([('module.so', str(case.source / 'must-not-read'), 'EXECUTABLE')],)))
     report = provenance.collect_provenance(case.candidate, case.manifest, toc)
     assert report["files"][0]["collection_input"] is None
+
+
+@pytest.mark.parametrize("owner_valid", [True, False])
+def test_generated_executable_records_only_pinned_pyinstaller_bootloader_contribution(case, owner_valid):
+    item = case.evidence["native_files"][0]
+    (case.candidate / "module.so").rename(case.candidate / "stt-runtime")
+    item["path"] = "stt-runtime"
+    case.evidence["runtime"]["pyinstaller"] = "6.22.3"
+    relative = "PyInstaller/bootloader/Test/run"
+    bootloader = case.source / relative
+    bootloader.parent.mkdir(parents=True)
+    bootloader.write_bytes(b"bootloader contribution, not full executable")
+    case.inputs[:] = [(case.source, relative, {"kind": "installed_distribution", "name": "pyinstaller" if owner_valid else "other", "version": "6.22.3"})]
+    generated = case.source / "generated-runtime"
+    toc = case.source / "COLLECT-00.toc"
+    toc.write_text(repr(([('stt-runtime', str(generated), 'EXECUTABLE')],)))
+    exe = [None] * 22
+    exe[0], exe[20] = str(generated), [("run", str(bootloader), "EXECUTABLE")]
+    toc.with_name("EXE-00.toc").write_text(repr(tuple(exe)))
+    case.manifest.write_text(json.dumps({"files": case.evidence["native_files"]}))
+    if not owner_valid:
+        with pytest.raises(ValueError, match="bootloader_owner_invalid"):
+            provenance.collect_provenance(case.candidate, case.manifest, toc)
+        return
+    report = provenance.collect_provenance(case.candidate, case.manifest, toc)
+    assert report["files"][0]["origins"] == []
+    assert report["files"][0]["collection_input"]["sha256"] == sha256(bootloader.read_bytes()).hexdigest()
+    assert report["collection_record"]["executable_relationship"] == "bootloader_contribution_not_full_executable_source"
