@@ -3,6 +3,7 @@
 import argparse
 from hashlib import sha256
 from importlib import metadata
+from itertools import chain
 import json
 from pathlib import Path, PurePosixPath
 import re
@@ -13,6 +14,7 @@ from packaging.utils import canonicalize_name
 
 from services.runtime.scripts.runtime_notice_evidence import collect_evidence
 from services.runtime.scripts.runtime_collection_record import bootloader_record, collection_records
+from services.runtime.scripts import runtime_system_inputs
 
 MAX_FILE_BYTES = 256 * 1024 * 1024
 MAX_SOURCE_BYTES = 1024 * 1024 * 1024
@@ -88,7 +90,7 @@ def collect_provenance(candidate: Path, manifest: Path, collection_toc: Path | N
     hashed: dict[Path, str] = {}
     source_inputs: dict[Path, dict] = {}
     total = 0
-    for root, relative, owner in input_files():
+    for root, relative, owner in chain(input_files(), runtime_system_inputs.system_files(requested, evidence["runtime"].get("system", ""))):
         name = PurePosixPath(relative)
         if name.is_absolute() or ".." in name.parts or ":" in relative or any(ord(c) < 32 for c in relative):
             raise ValueError("native_provenance_source_path_invalid")
@@ -127,9 +129,11 @@ def collect_provenance(candidate: Path, manifest: Path, collection_toc: Path | N
                         "status": "exact_build_input_match" if origins else "unmatched_or_transformed"})
     return {"schema_version": 1, "scope": "native_build_input_attribution_only", "distribution_approved": False,
             "collector_sha256": sha256(Path(__file__).read_bytes()).hexdigest(),
+            "system_collector_sha256": sha256(Path(runtime_system_inputs.__file__).read_bytes()).hexdigest(),
             "manifest_sha256": evidence["manifest_sha256"], "runtime": evidence["runtime"], "files": records,
             "collection_record": collection,
             "review_gaps": ["origin_match_is_not_embedded_component_version_or_source_proof",
+                            "system_metadata_and_installed_copyright_not_complete_source_or_terms_review",
                             "unmatched_transformed_and_system_library_provenance",
                             "static_components_interpreter_bootloader_installer_and_notice_review",
                             "human_review_and_distribution_approval"]}
