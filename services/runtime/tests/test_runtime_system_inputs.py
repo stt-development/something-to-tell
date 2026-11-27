@@ -118,6 +118,37 @@ def test_unresolved_diagnostics_export_only_fixed_scope_labels(tmp_path, monkeyp
     assert systems.source_scope(None) is None
 
 
+def test_windows_toolcache_reads_only_selected_dll_metadata(tmp_path, monkeypatch):
+    cache = tmp_path / "tools"
+    dll = cache / "Python/3.13.17/x64/runtime/api-ms-fixture.dll"
+    dll.parent.mkdir(parents=True)
+    dll.write_bytes(b"DLL fixture")
+    (cache / "unselected.dll").write_bytes(b"must not scan")
+    monkeypatch.setenv("RUNNER_TOOL_CACHE", str(cache))
+    calls = []
+    def version(path):
+        calls.append(path)
+        return {"status": "version_resource", "file_version": [10, 0, 1, 0]}
+    monkeypatch.setattr(systems, "windows_file_version", version)
+    records = list(systems.system_files([dll], "Windows"))
+    assert calls == [dll]
+    assert records[0][1] == "Python/3.13.17/x64/runtime/api-ms-fixture.dll"
+    assert records[0][2]["scope"] == "windows_toolcache_runtime"
+    assert str(tmp_path) not in str(records[0][2])
+    assert list(systems.system_files([dll], "Darwin")) == []
+
+
+def test_toolcache_source_cannot_escape_through_traversal_or_symlink(tmp_path, monkeypatch):
+    cache = tmp_path / "tools"
+    cache.mkdir()
+    outside = tmp_path / "outside.dll"
+    outside.write_bytes(b"not a toolcache input")
+    (cache / "alias.dll").symlink_to(outside)
+    monkeypatch.setenv("RUNNER_TOOL_CACHE", str(cache))
+    monkeypatch.setattr(systems, "windows_file_version", lambda _: pytest.fail("outside input read"))
+    assert list(systems.system_files([cache / "../outside.dll", cache / "alias.dll"], "Windows")) == []
+
+
 def test_windows_fixed_version_signature_and_numbers():
     info = systems.FixedVersion(signature=0xFEEF04BD, file_ms=(1 << 16) + 2, file_ls=(3 << 16) + 4)
     assert systems.version_numbers(info)["file_version"] == [1, 2, 3, 4]
