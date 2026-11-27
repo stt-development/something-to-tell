@@ -83,7 +83,8 @@ def main() -> None:
     candidate = destination / "stt-runtime"
     report = artifact_manifest(candidate)
     (destination / "manifest.json").write_text(json.dumps(report, indent=2) + "\n")
-    print(json.dumps({"candidate": str(candidate), "manifest": str(destination / 'manifest.json')}))
+    print(json.dumps({"candidate": str(candidate), "manifest": str(destination / 'manifest.json'),
+                      "collection_toc": str(workspace / "work/stt-runtime/COLLECT-00.toc")}))
 
 
 if __name__ == "__main__":

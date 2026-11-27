@@ -58,6 +58,9 @@ jobs:
           raw=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).candidate' "$RUNNER_TEMP/runtime-build.json")
           node tools/desktop-runtime-resources.mjs "$raw" > "$RUNNER_TEMP/runtime-stage.json"
           uv run --group build python -m services.runtime.scripts.runtime_notice_evidence "$raw" "$(dirname "$raw")/manifest.json" > "$RUNNER_TEMP/runtime-notice-evidence.json"
+          toc=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).collection_toc' "$RUNNER_TEMP/runtime-build.json")
+          uv run --group build python -m services.runtime.scripts.runtime_native_provenance "$raw" "$(dirname "$raw")/manifest.json" --collection-toc "$toc" > "$RUNNER_TEMP/runtime-native-provenance.json"
+          uv run --group build python -m services.runtime.scripts.runtime_build_notices "$raw" "$(dirname "$raw")/manifest.json" > "$RUNNER_TEMP/runtime-build-notices.json"
           configuration=$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1])).configuration' "$RUNNER_TEMP/runtime-stage.json")
           node -e 'const fs=require("fs"), path=process.argv[1], config=JSON.parse(fs.readFileSync(path)); config.bundle.macOS={minimumSystemVersion:"15.0"}; fs.writeFileSync(path, JSON.stringify(config));' "$configuration"
           # The finalizer, not Tauri's resource materializer, owns inner/outer signing.
@@ -114,5 +117,7 @@ jobs:
             ${{ runner.temp }}/staged-runtime-manifest.json
             ${{ runner.temp }}/package-verification.json
             ${{ runner.temp }}/runtime-notice-evidence.json
+            ${{ runner.temp }}/runtime-native-provenance.json
+            ${{ runner.temp }}/runtime-build-notices.json
             ${{ runner.temp }}/package-SHA256SUMS
           retention-days: 7
