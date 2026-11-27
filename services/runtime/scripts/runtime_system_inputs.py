@@ -102,7 +102,11 @@ def system_files(sources, system: str):
             roots.append((Path(os.environ["SystemRoot"]) / "WinSxS", "windows_component_store"))
         if os.environ.get("ProgramFiles(x86)"):
             roots.append((Path(os.environ["ProgramFiles(x86)"]) / "Windows Kits", "windows_sdk_redist"))
+        # Hosted Python/SDK inputs also live in the runner's explicit toolcache.
+        if os.environ.get("RUNNER_TOOL_CACHE"):
+            roots.append((Path(os.environ["RUNNER_TOOL_CACHE"]), "windows_toolcache_runtime"))
     for source in sorted(set(sources)):
+        source = source.resolve()
         for root, scope in roots:
             root = root.resolve()
             if not source.is_relative_to(root) or not source.is_file():
